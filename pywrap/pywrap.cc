@@ -44,6 +44,62 @@ py::class_<apfel::QGrid<T>> bind_qgrid(py::module_& m, char const* name)
   .def(py::self != py::self);
 }
 
+// Helper that registers the common interface of the TabulateObject<T>
+// template (its four constructors) for a given specialisation. The
+// interpolation/evaluation methods are inherited from the QGrid<T> base,
+// while specialisation-specific evaluators (EvaluatexQ, ...) can be
+// chained onto the returned object at the call site.
+template <typename T>
+py::class_<apfel::TabulateObject<T>, apfel::QGrid<T>> bind_tabulateobject(py::module_& m, char const* name, char const* doc)
+{
+  return py::class_<apfel::TabulateObject<T>, apfel::QGrid<T>>(m, name, doc)
+  .def(py::init<apfel::MatchedEvolution<T>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
+  .def(py::init<std::function<T(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
+  .def(py::init<std::function<T(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
+  .def(py::init<std::function<T(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
+}
+
+// Trampoline class template for the virtual MatchedEvolution<T> base,
+// enabling Python subclasses to override the evolution/matching methods.
+template <typename T>
+class PyMatchedEvolution: public apfel::MatchedEvolution<T>
+{
+public:
+  using apfel::MatchedEvolution<T>::MatchedEvolution;
+  T EvolveObject(int const& nf, double const& mu02, double const& mu2, T const& Obj0) const override
+  {
+    PYBIND11_OVERRIDE(T, apfel::MatchedEvolution<T>, EvolveObject, nf, mu02, mu2, Obj0);
+  };
+  T MatchObject(bool const& Up, int const& nf, T const& Obj) const override
+  {
+    PYBIND11_OVERRIDE_PURE(T, apfel::MatchedEvolution<T>, MatchObject, Up, nf, Obj);
+  };
+  T Derivative(int const& nf, double const& Mu, T const& Obj) const override
+  {
+    PYBIND11_OVERRIDE_PURE(T, apfel::MatchedEvolution<T>, Derivative, nf, Mu, Obj);
+  };
+};
+
+// Helper that registers the common interface of the MatchedEvolution<T>
+// template for a given specialisation, using the trampoline above.
+template <typename T>
+py::class_<apfel::MatchedEvolution<T>, PyMatchedEvolution<T>> bind_matchedevolution(py::module_& m, char const* name, char const* doc)
+{
+  return py::class_<apfel::MatchedEvolution<T>, PyMatchedEvolution<T>>(m, name, doc)
+  .def(py::init<T const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
+  .def("EvolveObject", &apfel::MatchedEvolution<T>::EvolveObject, "Evolve the object with nf flavours from scale mu02 to mu2.", "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
+  .def("MatchObject", &apfel::MatchedEvolution<T>::MatchObject, "Match the object across a threshold (Up = increasing the number of flavours).", "Up"_a, "nf"_a, "Obj"_a)
+  .def("Derivative", &apfel::MatchedEvolution<T>::Derivative, "Return the right-hand side of the evolution equation at scale Mu.", "nf"_a, "Mu"_a, "Obj"_a)
+  .def("Evaluate", &apfel::MatchedEvolution<T>::Evaluate, "Return the evolved object at scale mu.", "mu"_a)
+  .def("GetObjectRef", &apfel::MatchedEvolution<T>::GetObjectRef, "Return the reference object.")
+  .def("GetMuRef", &apfel::MatchedEvolution<T>::GetMuRef, "Return the reference scale.")
+  .def("GetThresholds", &apfel::MatchedEvolution<T>::GetThresholds, "Return the matching thresholds.")
+  .def("GetNumberOfSteps", &apfel::MatchedEvolution<T>::GetNumberOfSteps, "Return the number of Runge-Kutta steps.")
+  .def("SetObjectRef", &apfel::MatchedEvolution<T>::SetObjectRef, "Set the reference object.", "ObjRef"_a)
+  .def("SetMuRef", &apfel::MatchedEvolution<T>::SetMuRef, "Set the reference scale.", "MuRef"_a)
+  .def("SetNumberOfSteps", &apfel::MatchedEvolution<T>::SetNumberOfSteps, "Set the number of Runge-Kutta steps.", "nsteps"_a);
+}
+
 PYBIND11_MODULE(apfelpy, m)
 {
   // Documentation
@@ -741,261 +797,15 @@ PYBIND11_MODULE(apfelpy, m)
   bind_qgrid<apfel::Set<apfel::DoubleObject<apfel::Distribution, apfel::Operator>>>(m, "QGridSetDO");
 
   // Wrappers of "matchedevolution.h"
-  // Trampoline class for virtual class
-  class PyMatchedEvolution: public apfel::MatchedEvolution<double>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    double EvolveObject(int const& nf, double const& mu02, double const& mu2, double const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(double, MatchedEvolution<double>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    double MatchObject(bool const& Up, int const& nf, double const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(double, MatchedEvolution<double>, MatchObject, Up, nf, Obj);
-    };
-    double Derivative(int const& nf, double const& Mu, double const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(double, MatchedEvolution<double>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<double>, PyMatchedEvolution>(m, "MatchedEvolution", "Mother class for objects evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<double const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<double>::EvolveObject, "Evolve the object with nf flavours from scale mu02 to mu2.", "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<double>::MatchObject, "Match the object across a threshold (Up = increasing the number of flavours).", "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<double>::Derivative, "Return the right-hand side of the evolution equation at scale Mu.", "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<double>::Evaluate, "Return the evolved object at scale mu.", "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<double>::GetObjectRef, "Return the reference object.")
-  .def("GetMuRef", &apfel::MatchedEvolution<double>::GetMuRef, "Return the reference scale.")
-  .def("GetThresholds", &apfel::MatchedEvolution<double>::GetThresholds, "Return the matching thresholds.")
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<double>::GetNumberOfSteps, "Return the number of Runge-Kutta steps.")
-  .def("SetObjectRef", &apfel::MatchedEvolution<double>::SetObjectRef, "Set the reference object.", "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<double>::SetMuRef, "Set the reference scale.", "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<double>::SetNumberOfSteps, "Set the number of Runge-Kutta steps.", "nsteps"_a);
-
-  // Trampoline class for virtual class
-  class PyMatchedEvolutionMatrix: public apfel::MatchedEvolution<apfel::matrix<double>>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    apfel::matrix<double> EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::matrix<double> const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(apfel::matrix<double>, MatchedEvolution<apfel::matrix<double>>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    apfel::matrix<double> MatchObject(bool const& Up, int const& nf, apfel::matrix<double> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::matrix<double>, MatchedEvolution<apfel::matrix<double>>, MatchObject, Up, nf, Obj);
-    };
-    apfel::matrix<double> Derivative(int const& nf, double const& Mu, apfel::matrix<double> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::matrix<double>, MatchedEvolution<apfel::matrix<double>>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<apfel::matrix<double>>, PyMatchedEvolutionMatrix>(m, "MatchedEvolutionMatrix", "Object evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<apfel::matrix<double> const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<apfel::matrix<double>>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<apfel::matrix<double>>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<apfel::matrix<double>>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<apfel::matrix<double>>::Evaluate, "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<apfel::matrix<double>>::GetObjectRef)
-  .def("GetMuRef", &apfel::MatchedEvolution<apfel::matrix<double>>::GetMuRef)
-  .def("GetThresholds", &apfel::MatchedEvolution<apfel::matrix<double>>::GetThresholds)
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::matrix<double>>::GetNumberOfSteps)
-  .def("SetObjectRef", &apfel::MatchedEvolution<apfel::matrix<double>>::SetObjectRef, "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<apfel::matrix<double>>::SetMuRef, "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::matrix<double>>::SetNumberOfSteps, "nsteps"_a);
-
-  // Trampoline class for virtual class
-  class PyMatchedEvolutionD: public apfel::MatchedEvolution<apfel::Distribution>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    apfel::Distribution EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::Distribution const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(apfel::Distribution, MatchedEvolution<apfel::Distribution>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    apfel::Distribution MatchObject(bool const& Up, int const& nf, apfel::Distribution const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Distribution, MatchedEvolution<apfel::Distribution>, MatchObject, Up, nf, Obj);
-    };
-    apfel::Distribution Derivative(int const& nf, double const& Mu, apfel::Distribution const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Distribution, MatchedEvolution<apfel::Distribution>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<apfel::Distribution>, PyMatchedEvolutionD>(m, "MatchedEvolutionD", "Object evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<apfel::Distribution const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<apfel::Distribution>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<apfel::Distribution>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<apfel::Distribution>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<apfel::Distribution>::Evaluate, "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<apfel::Distribution>::GetObjectRef)
-  .def("GetMuRef", &apfel::MatchedEvolution<apfel::Distribution>::GetMuRef)
-  .def("GetThresholds", &apfel::MatchedEvolution<apfel::Distribution>::GetThresholds)
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::Distribution>::GetNumberOfSteps)
-  .def("SetObjectRef", &apfel::MatchedEvolution<apfel::Distribution>::SetObjectRef, "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<apfel::Distribution>::SetMuRef, "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::Distribution>::SetNumberOfSteps, "nsteps"_a);
-
-  // Trampoline class for virtual class
-  class PyMatchedEvolutionSetD: public apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    apfel::Set<apfel::Distribution> EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::Set<apfel::Distribution> const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(apfel::Set<apfel::Distribution>, MatchedEvolution<apfel::Set<apfel::Distribution>>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    apfel::Set<apfel::Distribution> MatchObject(bool const& Up, int const& nf, apfel::Set<apfel::Distribution> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Set<apfel::Distribution>, MatchedEvolution<apfel::Set<apfel::Distribution>>, MatchObject, Up, nf, Obj);
-    };
-    apfel::Set<apfel::Distribution> Derivative(int const& nf, double const& Mu, apfel::Set<apfel::Distribution> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Set<apfel::Distribution>, MatchedEvolution<apfel::Set<apfel::Distribution>>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>, PyMatchedEvolutionSetD>(m, "MatchedEvolutionSetD", "Object evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<apfel::Set<apfel::Distribution> const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::Evaluate, "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::GetObjectRef)
-  .def("GetMuRef", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::GetMuRef)
-  .def("GetThresholds", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::GetThresholds)
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::GetNumberOfSteps)
-  .def("SetObjectRef", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::SetObjectRef, "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::SetMuRef, "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>::SetNumberOfSteps, "nsteps"_a);
-
-  // Trampoline class for virtual class
-  class PyMatchedEvolutionDD: public apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    apfel::DoubleObject<apfel::Distribution> EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::DoubleObject<apfel::Distribution> const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(apfel::DoubleObject<apfel::Distribution>, MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    apfel::DoubleObject<apfel::Distribution> MatchObject(bool const& Up, int const& nf, apfel::DoubleObject<apfel::Distribution> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::DoubleObject<apfel::Distribution>, MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>, MatchObject, Up, nf, Obj);
-    };
-    apfel::DoubleObject<apfel::Distribution> Derivative(int const& nf, double const& Mu, apfel::DoubleObject<apfel::Distribution> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::DoubleObject<apfel::Distribution>, MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>, PyMatchedEvolutionDD>(m, "MatchedEvolutionDD", "Object evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<apfel::DoubleObject<apfel::Distribution> const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::Evaluate, "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::GetObjectRef)
-  .def("GetMuRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::GetMuRef)
-  .def("GetThresholds", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::GetThresholds)
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::GetNumberOfSteps)
-  .def("SetObjectRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::SetObjectRef, "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::SetMuRef, "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>::SetNumberOfSteps, "nsteps"_a);
-
-  // Trampoline class for virtual class
-  class PyMatchedEvolutionO: public apfel::MatchedEvolution<apfel::Operator>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    apfel::Operator EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::Operator const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(apfel::Operator, MatchedEvolution<apfel::Operator>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    apfel::Operator MatchObject(bool const& Up, int const& nf, apfel::Operator const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Operator, MatchedEvolution<apfel::Operator>, MatchObject, Up, nf, Obj);
-    };
-    apfel::Operator Derivative(int const& nf, double const& Mu, apfel::Operator const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Operator, MatchedEvolution<apfel::Operator>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<apfel::Operator>, PyMatchedEvolutionO>(m, "MatchedEvolutionO", "Object evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<apfel::Operator const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<apfel::Operator>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<apfel::Operator>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<apfel::Operator>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<apfel::Operator>::Evaluate, "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<apfel::Operator>::GetObjectRef)
-  .def("GetMuRef", &apfel::MatchedEvolution<apfel::Operator>::GetMuRef)
-  .def("GetThresholds", &apfel::MatchedEvolution<apfel::Operator>::GetThresholds)
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::Operator>::GetNumberOfSteps)
-  .def("SetObjectRef", &apfel::MatchedEvolution<apfel::Operator>::SetObjectRef, "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<apfel::Operator>::SetMuRef, "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::Operator>::SetNumberOfSteps, "nsteps"_a);
-
-  // Trampoline class for virtual class
-  class PyMatchedEvolutionSetO: public apfel::MatchedEvolution<apfel::Set<apfel::Operator>>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    apfel::Set<apfel::Operator> EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::Set<apfel::Operator> const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(apfel::Set<apfel::Operator>, MatchedEvolution<apfel::Set<apfel::Operator>>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    apfel::Set<apfel::Operator> MatchObject(bool const& Up, int const& nf, apfel::Set<apfel::Operator> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Set<apfel::Operator>, MatchedEvolution<apfel::Set<apfel::Operator>>, MatchObject, Up, nf, Obj);
-    };
-    apfel::Set<apfel::Operator> Derivative(int const& nf, double const& Mu, apfel::Set<apfel::Operator> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::Set<apfel::Operator>, MatchedEvolution<apfel::Set<apfel::Operator>>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<apfel::Set<apfel::Operator>>, PyMatchedEvolutionSetO>(m, "MatchedEvolutionSetO", "Object evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<apfel::Set<apfel::Operator> const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::Evaluate, "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::GetObjectRef)
-  .def("GetMuRef", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::GetMuRef)
-  .def("GetThresholds", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::GetThresholds)
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::GetNumberOfSteps)
-  .def("SetObjectRef", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::SetObjectRef, "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::SetMuRef, "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::Set<apfel::Operator>>::SetNumberOfSteps, "nsteps"_a);
-
-  // Trampoline class for virtual class
-  class PyMatchedEvolutionOO: public apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>
-  {
-  public:
-    using MatchedEvolution::MatchedEvolution;
-    apfel::DoubleObject<apfel::Operator> EvolveObject(int const& nf, double const& mu02, double const& mu2, apfel::DoubleObject<apfel::Operator> const& Obj0) const override
-    {
-      PYBIND11_OVERRIDE(apfel::DoubleObject<apfel::Operator>, MatchedEvolution<apfel::DoubleObject<apfel::Operator>>, EvolveObject, nf, mu02, mu2, Obj0);
-    };
-    apfel::DoubleObject<apfel::Operator> MatchObject(bool const& Up, int const& nf, apfel::DoubleObject<apfel::Operator> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::DoubleObject<apfel::Operator>, MatchedEvolution<apfel::DoubleObject<apfel::Operator>>, MatchObject, Up, nf, Obj);
-    };
-    apfel::DoubleObject<apfel::Operator> Derivative(int const& nf, double const& Mu, apfel::DoubleObject<apfel::Operator> const& Obj) const override
-    {
-      PYBIND11_OVERRIDE_PURE(apfel::DoubleObject<apfel::Operator>, MatchedEvolution<apfel::DoubleObject<apfel::Operator>>, Derivative, nf, Mu, Obj);
-    };
-  };
-  py::class_<apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>, PyMatchedEvolutionOO>(m, "MatchedEvolutionOO", "Object evolved across heavy-quark thresholds via evolution and matching rules.")
-  .def(py::init<apfel::DoubleObject<apfel::Operator> const&, double const&, std::vector<double> const&, int const&>(), "ObjRef"_a, "MuRef"_a, "Thresholds"_a, "nsteps"_a = 10)
-  .def("EvolveObject", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::EvolveObject, "nf"_a, "mu02"_a, "mu2"_a, "Obj0"_a)
-  .def("MatchObject", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::MatchObject, "Up"_a, "nf"_a, "Obj"_a)
-  .def("Derivative", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::Derivative, "nf"_a, "Mu"_a, "Obj"_a)
-  .def("Evaluate", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::Evaluate, "mu"_a)
-  .def("GetObjectRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::GetObjectRef)
-  .def("GetMuRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::GetMuRef)
-  .def("GetThresholds", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::GetThresholds)
-  .def("GetNumberOfSteps", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::GetNumberOfSteps)
-  .def("SetObjectRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::SetObjectRef, "ObjRef"_a)
-  .def("SetMuRef", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::SetMuRef, "MuRef"_a)
-  .def("SetNumberOfSteps", &apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>::SetNumberOfSteps, "nsteps"_a);
+  constexpr char const* medoc = "Object evolved across heavy-quark thresholds via evolution and matching rules.";
+  bind_matchedevolution<double>(m, "MatchedEvolution", "Mother class for objects evolved across heavy-quark thresholds via evolution and matching rules.");
+  bind_matchedevolution<apfel::matrix<double>>(m, "MatchedEvolutionMatrix", medoc);
+  bind_matchedevolution<apfel::Distribution>(m, "MatchedEvolutionD", medoc);
+  bind_matchedevolution<apfel::Set<apfel::Distribution>>(m, "MatchedEvolutionSetD", medoc);
+  bind_matchedevolution<apfel::DoubleObject<apfel::Distribution>>(m, "MatchedEvolutionDD", medoc);
+  bind_matchedevolution<apfel::Operator>(m, "MatchedEvolutionO", medoc);
+  bind_matchedevolution<apfel::Set<apfel::Operator>>(m, "MatchedEvolutionSetO", medoc);
+  bind_matchedevolution<apfel::DoubleObject<apfel::Operator>>(m, "MatchedEvolutionOO", medoc);
 
   // Wrappers of "dglap.h"
   py::class_<apfel::Dglap<apfel::Distribution>, apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>>(m, "DglapD", "DGLAP evolution of a set of distributions across heavy-quark thresholds.")
@@ -1066,57 +876,19 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeDglapObjectsQCDTtrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDTtrans), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
 
   // Wrappers of "tabulateobject.h"
-  py::class_<apfel::TabulateObject<double>, apfel::QGrid<double>>(m, "TabulateObject", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<double>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<double(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<double(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<double(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
-
-  py::class_<apfel::TabulateObject<apfel::matrix<double>>, apfel::QGrid<apfel::matrix<double>>>(m, "TabulateObjectMatrix", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<apfel::matrix<double>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::matrix<double>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::matrix<double>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<apfel::matrix<double>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
-
-  py::class_<apfel::TabulateObject<apfel::Distribution>, apfel::QGrid<apfel::Distribution>>(m, "TabulateObjectD", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<apfel::Distribution>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Distribution(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Distribution(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<apfel::Distribution(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a)
+  constexpr char const* tabdoc = "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).";
+  bind_tabulateobject<double>(m, "TabulateObject", tabdoc);
+  bind_tabulateobject<apfel::matrix<double>>(m, "TabulateObjectMatrix", tabdoc);
+  bind_tabulateobject<apfel::Distribution>(m, "TabulateObjectD", tabdoc)
   .def("EvaluatexQ", py::overload_cast<double const&, double const&>(&apfel::TabulateObject<apfel::Distribution>::EvaluatexQ, py::const_), "Evaluate the tabulated distribution at (x, Q).", "x"_a, "Q"_a);
-
-  py::class_<apfel::TabulateObject<apfel::Set<apfel::Distribution>>, apfel::QGrid<apfel::Set<apfel::Distribution>>>(m, "TabulateObjectSetD", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<apfel::Set<apfel::Distribution>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Set<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Set<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<apfel::Set<apfel::Distribution>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a)
+  bind_tabulateobject<apfel::Set<apfel::Distribution>>(m, "TabulateObjectSetD", tabdoc)
   .def("EvaluatexQ", py::overload_cast<int const&, double const&, double const&>(&apfel::TabulateObject<apfel::Set<apfel::Distribution>>::EvaluatexQ, py::const_), "Evaluate the i-th tabulated distribution at (x, Q).", "i"_a, "x"_a, "Q"_a)
   .def("EvaluateMapxQ", py::overload_cast<double const&, double const&>(&apfel::TabulateObject<apfel::Set<apfel::Distribution>>::EvaluateMapxQ, py::const_), "Evaluate the full flavour map at (x, Q).", "x"_a, "Q"_a);
-
-  py::class_<apfel::TabulateObject<apfel::DoubleObject<apfel::Distribution>>, apfel::QGrid<apfel::DoubleObject<apfel::Distribution>>>(m, "TabulateObjectDD", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<apfel::DoubleObject<apfel::Distribution>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::DoubleObject<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::DoubleObject<apfel::Distribution>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<apfel::DoubleObject<apfel::Distribution>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a)
+  bind_tabulateobject<apfel::DoubleObject<apfel::Distribution>>(m, "TabulateObjectDD", tabdoc)
   .def("EvaluatexzQ", py::overload_cast<double const&, double const&, double const&>(&apfel::TabulateObject<apfel::DoubleObject<apfel::Distribution>>::EvaluatexzQ, py::const_), "Evaluate the tabulated double distribution at (x, z, Q).", "x"_a, "z"_a, "Q"_a);
-
-  py::class_<apfel::TabulateObject<apfel::Operator>, apfel::QGrid<apfel::Operator>>(m, "TabulateObjectO", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<apfel::Operator>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Operator(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Operator(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<apfel::Operator(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
-
-  py::class_<apfel::TabulateObject<apfel::Set<apfel::Operator>>, apfel::QGrid<apfel::Set<apfel::Operator>>>(m, "TabulateObjectSetO", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<apfel::Set<apfel::Operator>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Set<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::Set<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<apfel::Set<apfel::Operator>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
-
-  py::class_<apfel::TabulateObject<apfel::DoubleObject<apfel::Operator>>, apfel::QGrid<apfel::DoubleObject<apfel::Operator>>>(m, "TabulateObjectOO", "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).")
-  .def(py::init<apfel::MatchedEvolution<apfel::DoubleObject<apfel::Operator>>&, int const&, double const&, double const&, int const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::DoubleObject<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, double const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "Lambda"_a = 0.25)
-  .def(py::init<std::function<apfel::DoubleObject<apfel::Operator>(double const&)> const&, int const&, double const&, double const&, int const&, std::vector<double> const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&>(), "Object"_a, "nQ"_a, "QMin"_a, "QMax"_a, "InterDegree"_a, "Thresholds"_a, "TabFunc"_a, "InvTabFunc"_a)
-  .def(py::init<std::function<apfel::DoubleObject<apfel::Operator>(double const&)> const&, std::vector<double> const&, int const&>(), "Object"_a, "Qg"_a, "InterDegree"_a);
+  bind_tabulateobject<apfel::Operator>(m, "TabulateObjectO", tabdoc);
+  bind_tabulateobject<apfel::Set<apfel::Operator>>(m, "TabulateObjectSetO", tabdoc);
+  bind_tabulateobject<apfel::DoubleObject<apfel::Operator>>(m, "TabulateObjectOO", tabdoc);
 
   // Wrappers of "structurefunctionbuilder.h"
   py::class_<apfel::StructureFunctionObjects>(m, "StructureFunctionObjects", "Container of the coefficient functions and convolution basis needed to build a structure function.")
