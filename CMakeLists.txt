@@ -81,6 +81,13 @@ if(pybind11_FOUND)
     pybind11_add_module(apfelpy pywrap/pywrap.cc)
     target_link_libraries(apfelpy PRIVATE apfelxx)
 
+    # The installed module is placed in the Python site-packages directory,
+    # away from libapfelxx (installed in ${CMAKE_INSTALL_PREFIX}/lib), whose
+    # install name is @rpath/libapfelxx.dylib. Without an install RPATH the
+    # build-tree RPATH is stripped on install and the loader cannot resolve
+    # @rpath, so bake the library location into the installed module.
+    set_target_properties(apfelpy PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+
     execute_process(
         COMMAND "${Python_EXECUTABLE}" -c
         "import sysconfig; print('${CMAKE_INSTALL_PREFIX}' + sysconfig.get_path('purelib').replace(sysconfig.get_path('data'), ''), end = '')"
