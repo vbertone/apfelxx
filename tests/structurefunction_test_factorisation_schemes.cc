@@ -39,9 +39,20 @@ int main()
   const auto DglapObjMSb = InitializeDglapObjectsQCD(g, Thresholds);
   const auto DglapObjKrk = ChangeFactorisationSchemeMSbarToK(DglapObjMSb, KKrk);
 
+  // Sets of input PDFs
+  const apfel::Set<apfel::Distribution> SetLHToyPDFs{apfel::EvolutionBasisQCD{apfel::NF(mu0, Thresholds)}, DistributionMap(g, apfel::LHToyPDFs, mu0)};
+  const apfel::Set<apfel::Distribution> SetLHToyPDFsKrk = SetLHToyPDFs + as(mu0) / apfel::FourPi * ( KKrk.at(apfel::NF(mu0, Thresholds)).at(1) * SetLHToyPDFs );
+  const std::function<std::map<int, double>(double const&, double const&)> LHToyPDFsKrk = [=] (double const& x, double const&) -> std::map<int, double>
+  {
+    std::map<int, double> out;
+    for (auto const& d : SetLHToyPDFsKrk.GetObjects())
+      out.insert({d.first, d.second.Evaluate(x)});
+    return out;
+  };
+
   // Construct the DGLAP object
-  auto EvolvedPDFsMSb = BuildDglap(DglapObjMSb, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
-  auto EvolvedPDFsKrk = BuildDglap(DglapObjKrk, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);
+  auto EvolvedPDFsMSb = BuildDglap(DglapObjMSb, apfel::LHToyPDFs,    mu0, PerturbativeOrder, as);
+  auto EvolvedPDFsKrk = BuildDglap(DglapObjKrk,        LHToyPDFsKrk, mu0, PerturbativeOrder, as);
 
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFsMSb{*EvolvedPDFsMSb, 50, 1, 1000, 3};
