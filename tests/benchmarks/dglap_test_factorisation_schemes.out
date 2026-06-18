@@ -1,0 +1,63 @@
+
+       _/_/_/   _/_/_/_/  _/_/_/_/  _/_/_/_/  _/
+     _/    _/  _/    _/  _/        _/        _/        _/     _/
+    _/_/_/_/  _/_/_/_/  _/_/_/    _/_/_/    _/      _/_/_/ _/_/_/
+   _/    _/  _/        _/        _/        _/        _/     _/
+  _/    _/  _/        _/        _/_/_/_/  _/_/_/_/
+
+_____v4.10.0: A PDF evolution library in C++, arXiv:1708.00911
+     Author: V. Bertone
+
+Tabulating object...
+Initializing scheme-change kernels from MSbar to Krk for space-like QCD unpolarised evolution...
+[apfel::InitializeDglapObjectsQCD] Warning: N3LO corrections will not be initialised.
+Initializing DglapObjects for space-like QCD unpolarised evolution...
+Initializing DglapObjects for space-like QCD unpolarised evolution in the Krk scheme...
+Tabulating object...
+Tabulating object...
+Initializing scheme-change kernels from MSbar to PHYS for space-like QCD unpolarised evolution...
+[apfel::InitializeDglapObjectsQCD] Warning: N3LO corrections will not be initialised.
+Initializing DglapObjects for space-like QCD unpolarised evolution...
+Initializing DglapObjects for space-like QCD unpolarised evolution in the PHYS scheme...
+Tabulating object...
+Tabulating object...
+
+AlphaQCD(Q) = 5.214421e-02
+
+Ratio numerical/analytic (Krk):
+   x       u-ubar      d-dbar    2(ubr+dbr)    c+cbar       gluon   
+1.0e-05  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-04  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-03  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-02  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+3.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+5.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+7.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+9.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+
+Momentum sum rule: 9.9994e-01
+Total valence sum rule: 2.9085e+00
+V3 valence sum rule: 9.6949e-01
+V8 valence sum rule: 2.9085e+00
+d sum rule: 9.6949e-01
+u sum rule: 1.9390e+00
+
+Ratio numerical/analytic (PHYS):
+   x       u-ubar      d-dbar    2(ubr+dbr)    c+cbar       gluon   
+1.0e-05  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-04  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-03  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-02  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+1.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+3.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+5.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+7.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00  1.0000e+00
+9.0e-01  1.0000e+00  1.0000e+00  1.0000e+00  9.9999e-01  1.0000e+00
+
+Momentum sum rule: 9.9994e-01
+Total valence sum rule: 2.9737e+00
+V3 valence sum rule: 9.9124e-01
+V8 valence sum rule: 2.9737e+00
+d sum rule: 9.9124e-01
+u sum rule: 1.9825e+00
