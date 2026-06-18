@@ -7,6 +7,10 @@ var classapfel_1_1DoubleOperator =
     [ "DoubleOperator", "classapfel_1_1DoubleOperator.html#a7e196d994c3a47b380e2dc0123eb5aa7", null ],
     [ "DoubleOperator", "classapfel_1_1DoubleOperator.html#acbfb555186026355d6ed401936d34940", null ],
     [ "~DoubleOperator", "classapfel_1_1DoubleOperator.html#ab60c4c060a1029e69b5fa2e8ac08c170", null ],
+    [ "DoubleOperator", "classapfel_1_1DoubleOperator.html#a77e5a57e5c5c5b0719f4848591adeac5", null ],
+    [ "DoubleOperator", "classapfel_1_1DoubleOperator.html#a16e128b8b0685e26e1dbb0a1312d102f", null ],
+    [ "EmitDoubleOperatorBinary", "classapfel_1_1DoubleOperator.html#a6d2e078959e5c4219c84c593088284d9", null ],
+    [ "EmitDoubleOperatorBinary", "classapfel_1_1DoubleOperator.html#a476799fd3a97b6ec58abb9ffed2c9d57", null ],
     [ "GetDoubleExpressionName", "classapfel_1_1DoubleOperator.html#a42ab40fc8f089a5bf7f15c4710daae72", null ],
     [ "GetDoubleOperator", "classapfel_1_1DoubleOperator.html#a15f30b1621d0ba0e72abbdc62841fa12", null ],
     [ "GetFirstGrid", "classapfel_1_1DoubleOperator.html#a7e04014f9bf28690de20bae08421924a", null ],
@@ -29,5 +33,7 @@ var classapfel_1_1DoubleOperator =
     [ "_dOperator", "classapfel_1_1DoubleOperator.html#ad398d99a069efe9423e474643c4c811f", null ],
     [ "_eps", "classapfel_1_1DoubleOperator.html#ab5d8259111737e70c8c19934b7889df0", null ],
     [ "_grid1", "classapfel_1_1DoubleOperator.html#aff3a085356a9c976f208958b86409900", null ],
-    [ "_grid2", "classapfel_1_1DoubleOperator.html#acc2c17c84ea4ca408460a4c7567d59ae", null ]
+    [ "_grid1Owned", "classapfel_1_1DoubleOperator.html#a8d4f0100b1db9f3ac8e648771491a74b", null ],
+    [ "_grid2", "classapfel_1_1DoubleOperator.html#acc2c17c84ea4ca408460a4c7567d59ae", null ],
+    [ "_grid2Owned", "classapfel_1_1DoubleOperator.html#a4ce92f9a3a2fd13fc295ac56def6b193", null ]
 ];

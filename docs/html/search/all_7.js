@@ -102,7 +102,7 @@ var searchData=
   ['gpdsplittingfunctionstrans_5fsl_2eh_99',['gpdsplittingfunctionstrans_sl.h',['../gpdsplittingfunctionstrans__sl_8h.html',1,'']]],
   ['gpdsplittingfunctionsunp_5fsl_2eh_100',['gpdsplittingfunctionsunp_sl.h',['../gpdsplittingfunctionsunp__sl_8h.html',1,'']]],
   ['green_101',['green',['../namespaceapfel.html#a5abc361a0b89cb5f37460089e23b3a1da4a6d7b4e71c4e54ec30cf8dcd980cc7a',1,'apfel']]],
-  ['grid_102',['Grid',['../classapfel_1_1Grid.html',1,'apfel::Grid'],['../classapfel_1_1Grid.html#a8d0a7149e5dda7870cc7a7a9f312ef61',1,'apfel::Grid::Grid(std::vector&lt; SubGrid &gt; const &amp;grs)'],['../classapfel_1_1Grid.html#affd35100135c4b326eed02f3e7399ab4',1,'apfel::Grid::Grid(SubGrid const &amp;mgr, std::vector&lt; SubGridPars &gt; const &amp;sgpars)']]],
+  ['grid_102',['Grid',['../classapfel_1_1Grid.html',1,'apfel::Grid'],['../classapfel_1_1Grid.html#a8d0a7149e5dda7870cc7a7a9f312ef61',1,'apfel::Grid::Grid(std::vector&lt; SubGrid &gt; const &amp;grs)'],['../classapfel_1_1Grid.html#affd35100135c4b326eed02f3e7399ab4',1,'apfel::Grid::Grid(SubGrid const &amp;mgr, std::vector&lt; SubGridPars &gt; const &amp;sgpars)'],['../classapfel_1_1Grid.html#a5d2a64b019bb680cef455a9fab5c4881',1,'apfel::Grid::Grid(std::vector&lt; SubGrid &gt; const &amp;grs, Prelocked)']]],
   ['grid_2eh_103',['grid.h',['../grid_8h.html',1,'']]],
   ['gridparameters_104',['GridParameters',['../structapfel_1_1EvolutionSetup_1_1GridParameters.html',1,'apfel::EvolutionSetup::GridParameters'],['../structapfel_1_1EvolutionSetup.html#ad81d6dd6e1abb9aed8d0e3e784ac9941',1,'apfel::EvolutionSetup::GridParameters']]],
   ['gtmd_20matching_20functions_105',['GTMD matching functions',['../group__GTMDMatchingFunctions.html',1,'']]],

@@ -70,5 +70,5 @@ var searchData=
   ['gl1ns_67',['GL1ns',['../classapfel_1_1GL1ns.html#ab7e667c605f79b7483d5798811392e5a',1,'apfel::GL1ns']]],
   ['gluonanalyticevolutionfactor_68',['GluonAnalyticEvolutionFactor',['../namespaceapfel.html#a0314854b12a956e78b3cd97298b55f7e',1,'apfel']]],
   ['gluonevolutionfactor_69',['GluonEvolutionFactor',['../namespaceapfel.html#ac1f6a3f9282d39de9c090bd184182c9f',1,'apfel']]],
-  ['grid_70',['Grid',['../classapfel_1_1Grid.html#a8d0a7149e5dda7870cc7a7a9f312ef61',1,'apfel::Grid::Grid(std::vector&lt; SubGrid &gt; const &amp;grs)'],['../classapfel_1_1Grid.html#affd35100135c4b326eed02f3e7399ab4',1,'apfel::Grid::Grid(SubGrid const &amp;mgr, std::vector&lt; SubGridPars &gt; const &amp;sgpars)']]]
+  ['grid_70',['Grid',['../classapfel_1_1Grid.html#a8d0a7149e5dda7870cc7a7a9f312ef61',1,'apfel::Grid::Grid(std::vector&lt; SubGrid &gt; const &amp;grs)'],['../classapfel_1_1Grid.html#affd35100135c4b326eed02f3e7399ab4',1,'apfel::Grid::Grid(SubGrid const &amp;mgr, std::vector&lt; SubGridPars &gt; const &amp;sgpars)'],['../classapfel_1_1Grid.html#a5d2a64b019bb680cef455a9fab5c4881',1,'apfel::Grid::Grid(std::vector&lt; SubGrid &gt; const &amp;grs, Prelocked)']]]
 ];

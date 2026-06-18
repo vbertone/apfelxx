@@ -1,11 +1,14 @@
 <map id="/Users/vb262523/Codes/apfelxx/inc/apfel/disbasis.h" name="/Users/vb262523/Codes/apfelxx/inc/apfel/disbasis.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="49,5,266,50"/>
-<area shape="rect" id="Node000002" href="$apfelxx_8h.html" title=" " alt="" coords="5,283,214,328"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,62,99,79,87,99,79,123,76,148,79,199,90,246,103,283,97,283,84,247,73,200,70,148,74,122,82,97,94,76,114,58"/>
-<area shape="rect" id="Node000003" href="$structurefunctionbuilder_8h.html" title=" " alt="" coords="96,98,419,143"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,58,236,97,231,98,192,63"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="182,152,159,170,137,192,125,214,117,238,112,284,107,282,112,237,120,212,133,189,155,166,186,148"/>
-<area shape="rect" id="Node000004" href="$cffbuilder_8h.html" title=" " alt="" coords="146,191,369,235"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="259,156,260,192,255,189,256,160"/>
-<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="212,243,146,285,143,281,207,244"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,222,50"/>
+<area shape="rect" id="Node000002" href="$apfelxx_8h.html" title=" " alt="" coords="35,283,243,328"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,63,55,79,43,99,38,120,43,142,56,190,81,234,119,282,114,283,77,237,51,192,38,143,33,120,38,97,50,76,70,58"/>
+<area shape="rect" id="Node000003" href="$structurefunctionbuilder_8h.html" title=" " alt="" coords="52,98,375,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,58,192,97,187,98,149,63"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="132,152,112,170,93,192,87,215,93,239,105,262,121,283,116,283,101,264,88,240,82,215,88,189,108,166,136,148"/>
+<area shape="rect" id="Node000004" href="$cffbuilder_8h.html" title=" " alt="" coords="102,191,325,235"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="215,156,216,192,211,189,212,161"/>
+<area shape="rect" id="Node000005" href="$factorisationschemes_8h.html" title=" " alt="" coords="349,191,656,235"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="297,145,436,189,431,191,297,150"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="189,246,158,285,155,281,184,248"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="403,239,227,285,225,280,398,240"/>
 </map>

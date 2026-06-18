@@ -138,6 +138,8 @@ Collaboration diagram for apfel::Grid:</div>
 Classes</h2></td></tr>
 <tr class="memitem:SubGridPars" id="r_SubGridPars"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structapfel_1_1Grid_1_1SubGridPars.html">SubGridPars</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for the subgrid parameters which encapsulates lower value of the grid (xMin), density factor w.r.t. the previous grid (density), and interpolation degree (InterDegree).  <a href="structapfel_1_1Grid_1_1SubGridPars.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Prelocked" id="r_Prelocked"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structapfel_1_1Grid_1_1Prelocked.html">Prelocked</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag type selecting the "already locked" <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> constructor below.  <a href="structapfel_1_1Grid_1_1Prelocked.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -145,6 +147,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8d0a7149e5dda7870cc7a7a9f312ef61"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> constructor.  <br /></td></tr>
 <tr class="memitem:affd35100135c4b326eed02f3e7399ab4" id="r_affd35100135c4b326eed02f3e7399ab4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#affd35100135c4b326eed02f3e7399ab4">Grid</a> (<a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a> const &amp;mgr, std::vector&lt; <a class="el" href="structapfel_1_1Grid_1_1SubGridPars.html">SubGridPars</a> &gt; const &amp;sgpars)</td></tr>
 <tr class="memdesc:affd35100135c4b326eed02f3e7399ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> constructor.  <br /></td></tr>
+<tr class="memitem:a5d2a64b019bb680cef455a9fab5c4881" id="r_a5d2a64b019bb680cef455a9fab5c4881"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5d2a64b019bb680cef455a9fab5c4881">Grid</a> (std::vector&lt; <a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a> &gt; const &amp;grs, <a class="el" href="structapfel_1_1Grid_1_1Prelocked.html">Prelocked</a>)</td></tr>
+<tr class="memdesc:a5d2a64b019bb680cef455a9fab5c4881"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that assembles a <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> from subgrids that are already locked (i.e. each subgrid's lower bound already sits on a node of the previous one), skipping the locking step performed by the standard constructor. This is used to rebuild a <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> exactly from the descriptors returned by <a class="el" href="#a4eb3c2f2d6dd988b99dbbc6642a68910">GetSubGrids()</a>: those are the post-locking subgrids, and re-locking them (as the standard constructor would) is not idempotent and would shift the grid.  <br /></td></tr>
 <tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Getters</div></td></tr>
 <tr class="memitem:a633e5058782ac5f774fba183606fa478" id="r_a633e5058782ac5f774fba183606fa478"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a633e5058782ac5f774fba183606fa478">nGrids</a> () const</td></tr>
 <tr class="memitem:a22c6e167c0353c54456ae8b60fda308a" id="r_a22c6e167c0353c54456ae8b60fda308a"><td class="memItemLeft">std::vector&lt; std::pair&lt; int, int &gt; &gt; const &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a22c6e167c0353c54456ae8b60fda308a">SubToJointMap</a> () const</td></tr>
@@ -163,8 +167,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a8a12837ed78aa281b3cbba10be175092" id="r_a8a12837ed78aa281b3cbba10be175092"><td class="memItemLeft"><a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8a12837ed78aa281b3cbba10be175092">CreateJointGrid</a> ()</td></tr>
-<tr class="memdesc:a8a12837ed78aa281b3cbba10be175092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the joint grid object with the appropriate grid nodes.  <br /></td></tr>
+<tr class="memitem:a294ac0035da6ed00a9f2106ab3d891a7" id="r_a294ac0035da6ed00a9f2106ab3d891a7"><td class="memItemLeft"><a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a>&#160;</td><td class="memItemRight"><a class="el" href="#a294ac0035da6ed00a9f2106ab3d891a7">CreateJointGrid</a> (bool lock=true)</td></tr>
+<tr class="memdesc:a294ac0035da6ed00a9f2106ab3d891a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the joint grid object with the appropriate grid nodes.  <br /></td></tr>
 <tr class="memitem:a3d966d6c4483c0bf24a0c32b101796f7" id="r_a3d966d6c4483c0bf24a0c32b101796f7"><td class="memItemLeft">std::vector&lt; <a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3d966d6c4483c0bf24a0c32b101796f7">CreateSubGrids</a> (<a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a> const &amp;mgr, std::vector&lt; <a class="el" href="structapfel_1_1Grid_1_1SubGridPars.html">SubGridPars</a> &gt; const &amp;sgpars)</td></tr>
 <tr class="memdesc:a3d966d6c4483c0bf24a0c32b101796f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the joint grid object with the appropriate grid nodes.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -192,7 +196,7 @@ Friends</h2></td></tr>
 </dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8d0a7149e5dda7870cc7a7a9f312ef61" name="a8d0a7149e5dda7870cc7a7a9f312ef61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d0a7149e5dda7870cc7a7a9f312ef61">&#9670;&#160;</a></span>Grid() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0a7149e5dda7870cc7a7a9f312ef61">&#9670;&#160;</a></span>Grid() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -217,7 +221,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="affd35100135c4b326eed02f3e7399ab4" name="affd35100135c4b326eed02f3e7399ab4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affd35100135c4b326eed02f3e7399ab4">&#9670;&#160;</a></span>Grid() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#affd35100135c4b326eed02f3e7399ab4">&#9670;&#160;</a></span>Grid() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,9 +250,38 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a5d2a64b019bb680cef455a9fab5c4881" name="a5d2a64b019bb680cef455a9fab5c4881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d2a64b019bb680cef455a9fab5c4881">&#9670;&#160;</a></span>Grid() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">apfel::Grid::Grid </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a> &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>grs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structapfel_1_1Grid_1_1Prelocked.html">Prelocked</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor that assembles a <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> from subgrids that are already locked (i.e. each subgrid's lower bound already sits on a node of the previous one), skipping the locking step performed by the standard constructor. This is used to rebuild a <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> exactly from the descriptors returned by <a class="el" href="#a4eb3c2f2d6dd988b99dbbc6642a68910">GetSubGrids()</a>: those are the post-locking subgrids, and re-locking them (as the standard constructor would) is not idempotent and would shift the grid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">grs</td><td>vector of already-locked subgrids </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a8a12837ed78aa281b3cbba10be175092" name="a8a12837ed78aa281b3cbba10be175092"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a12837ed78aa281b3cbba10be175092">&#9670;&#160;</a></span>CreateJointGrid()</h2>
+<a id="a294ac0035da6ed00a9f2106ab3d891a7" name="a294ac0035da6ed00a9f2106ab3d891a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a294ac0035da6ed00a9f2106ab3d891a7">&#9670;&#160;</a></span>CreateJointGrid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -259,7 +292,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classapfel_1_1SubGrid.html">SubGrid</a> apfel::Grid::CreateJointGrid </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>lock</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -271,6 +304,12 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Fill in the joint grid object with the appropriate grid nodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>whether to lock the subgrids (snap each subgrid's lower bound onto a node of the previous one). <a class="el" href="classapfel_1_1Set.html" title="The Set template class allocates a collection of objects of type T along the ConvolutionMap and provi...">Set</a> to false when the subgrids are already locked, e.g. when rebuilding a <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> from <a class="el" href="#a4eb3c2f2d6dd988b99dbbc6642a68910">GetSubGrids()</a> descriptors. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>the joint grid </dd></dl>
 
 </div>

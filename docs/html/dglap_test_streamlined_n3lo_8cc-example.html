@@ -5,20 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APFEL: dglap_test_streamlined_n3lo.cc</title>
+<title>APFEL++: dglap_test_streamlined_n3lo.cc</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+const theme = 'default';
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="apfelxx.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -29,7 +34,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">APFEL<span id="projectnumber">&#160;4.10.0</span>
+   <div id="projectname">APFEL++<span id="projectnumber">&#160;4.10.0</span>
    </div>
    <div id="projectbrief">A PDF evolution library in C++</div>
   </td>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu('',false);
+  initMenu('',true);
   init_search();
 });
 </script>
@@ -78,6 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
   </ul>
 </div><!-- main-nav -->
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('dglap_test_streamlined_n3lo_8cc-example.html','',''); });
+</script>
+<div id="container">
 <div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -151,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n   x    &quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;   u-ubar   &quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;   d-dbar   &quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;  dbr-dbr   &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;  dbr-ubr   &quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot; 2(ubr+dbr) &quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;   s-sbar   &quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;   s+sbar   &quot;</span></div>
@@ -190,10 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="ttc" id="anamespaceapfel_html_a6fbb69d0eeaff6ae57ba41cc0bbc4248"><div class="ttname"><a href="namespaceapfel.html#a6fbb69d0eeaff6ae57ba41cc0bbc4248">apfel::QCDEvToPhys</a></div><div class="ttdeci">std::map&lt; int, double &gt; QCDEvToPhys(std::map&lt; int, double &gt; const &amp;QCDEvMap)</div><div class="ttdoc">Rotation from the QCD evolution to the physical basis.</div></div>
 <div class="ttc" id="astructapfel_1_1Grid_1_1SubGridPars_html"><div class="ttname"><a href="structapfel_1_1Grid_1_1SubGridPars.html">apfel::Grid::SubGridPars</a></div><div class="ttdoc">Structure for the subgrid parameters which encapsulates lower value of the grid (xMin),...</div><div class="ttdef"><b>Definition</b> grid.h:31</div></div>
 </div><!-- fragment --> </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on <span class="timestamp"></span> for APFEL by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on <span class="timestamp"></span> for APFEL++ by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

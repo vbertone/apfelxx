@@ -223,6 +223,6 @@ var searchData=
   ['concatenateandsortvectors_220',['ConcatenateAndSortVectors',['../namespaceapfel.html#a6f7f89d3dacb5cd1bfd2c27a590604ac',1,'apfel']]],
   ['convolutionmap_221',['ConvolutionMap',['../classapfel_1_1ConvolutionMap.html#a0f602872988c9ec3286bd30c66a92cf7',1,'apfel::ConvolutionMap']]],
   ['convolutionpair_222',['ConvolutionPair',['../structapfel_1_1Observable_1_1ConvolutionPair.html#ac2291b3989c15a3fe3723d6af10380bf',1,'apfel::Observable::ConvolutionPair']]],
-  ['createjointgrid_223',['CreateJointGrid',['../classapfel_1_1Grid.html#a8a12837ed78aa281b3cbba10be175092',1,'apfel::Grid']]],
+  ['createjointgrid_223',['CreateJointGrid',['../classapfel_1_1Grid.html#a294ac0035da6ed00a9f2106ab3d891a7',1,'apfel::Grid']]],
   ['createsubgrids_224',['CreateSubGrids',['../classapfel_1_1Grid.html#a3d966d6c4483c0bf24a0c32b101796f7',1,'apfel::Grid']]]
 ];

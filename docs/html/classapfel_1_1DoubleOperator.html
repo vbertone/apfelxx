@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classapfel_1_1
 <div class="dynheader">
 Collaboration diagram for apfel::DoubleOperator:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classapfel_1_1DoubleOperator__coll__graph.svg" width="1706" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classapfel_1_1DoubleOperator__coll__graph.svg" width="1930" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -145,6 +145,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7e196d994c3a47b380e2dc0123eb5aa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> constructor.  <br /></td></tr>
 <tr class="memitem:acbfb555186026355d6ed401936d34940" id="r_acbfb555186026355d6ed401936d34940"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acbfb555186026355d6ed401936d34940">DoubleOperator</a> (<a class="el" href="classapfel_1_1DoubleObject.html">DoubleObject</a>&lt; <a class="el" href="classapfel_1_1Operator.html">Operator</a> &gt; const &amp;DObj)</td></tr>
 <tr class="memdesc:acbfb555186026355d6ed401936d34940"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> constructor.  <br /></td></tr>
+<tr class="memitem:a6d2e078959e5c4219c84c593088284d9" id="r_a6d2e078959e5c4219c84c593088284d9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6d2e078959e5c4219c84c593088284d9">EmitDoubleOperatorBinary</a> (std::ostream &amp;os) const</td></tr>
+<tr class="memdesc:a6d2e078959e5c4219c84c593088284d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that dumps the <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object onto an output stream in cereal portable-binary format. Only the integration accuracy, the <a class="el" href="classapfel_1_1DoubleExpression.html" title="The DoubleExpression class encapsulates in a proper form a two-variable analytic expression in such a...">DoubleExpression</a> name, the grid descriptors (for a consistency check on reload) and the operator container are stored; the grids themselves are supplied again at load time.  <br /></td></tr>
+<tr class="memitem:a476799fd3a97b6ec58abb9ffed2c9d57" id="r_a476799fd3a97b6ec58abb9ffed2c9d57"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a476799fd3a97b6ec58abb9ffed2c9d57">EmitDoubleOperatorBinary</a> (std::string const &amp;filename) const</td></tr>
+<tr class="memdesc:a476799fd3a97b6ec58abb9ffed2c9d57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience overload that dumps the <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object to a file in cereal portable-binary format.  <br /></td></tr>
 <tr class="memitem:ab60c4c060a1029e69b5fa2e8ac08c170" id="r_ab60c4c060a1029e69b5fa2e8ac08c170"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#ab60c4c060a1029e69b5fa2e8ac08c170">~DoubleOperator</a> ()</td></tr>
 <tr class="memdesc:ab60c4c060a1029e69b5fa2e8ac08c170"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classapfel_1_1Operator.html" title="This class defines the basic object Operator which essentially contains the convolution between an &quot;E...">Operator</a> virtual destructor.  <br /></td></tr>
 <tr class="memitem:a7e04014f9bf28690de20bae08421924a" id="r_a7e04014f9bf28690de20bae08421924a"><td class="memItemLeft"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7e04014f9bf28690de20bae08421924a">GetFirstGrid</a> () const</td></tr>
@@ -183,8 +187,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1ca64e449de9d91adbca7803d6c886d8" id="r_a1ca64e449de9d91adbca7803d6c886d8"><td class="memItemLeft"><a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1ca64e449de9d91adbca7803d6c886d8">operator*=</a> (std::function&lt; double(double const &amp;)&gt; f)</td></tr>
 <tr class="memdesc:a1ca64e449de9d91adbca7803d6c886d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">this *= 1D-Function  <br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a3d3bb920063d52f9e42f9470c54d46fa" id="r_a3d3bb920063d52f9e42f9470c54d46fa"><td class="memItemLeft">static <a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3d3bb920063d52f9e42f9470c54d46fa">ReadBinary</a> (std::istream &amp;is, <a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr1, <a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr2, <a class="el" href="classapfel_1_1DoubleExpression.html">DoubleExpression</a> const &amp;dexpr)</td></tr>
+<tr class="memdesc:a3d3bb920063d52f9e42f9470c54d46fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that reconstructs a <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object from an input stream produced by EmitDoubleOperatorBinary.  <br /></td></tr>
+<tr class="memitem:ad397caaf71d49b340e8b1d8dcbfba813" id="r_ad397caaf71d49b340e8b1d8dcbfba813"><td class="memItemLeft">static <a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad397caaf71d49b340e8b1d8dcbfba813">ReadBinary</a> (std::string const &amp;filename, <a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr1, <a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr2, <a class="el" href="classapfel_1_1DoubleExpression.html">DoubleExpression</a> const &amp;dexpr)</td></tr>
+<tr class="memdesc:ad397caaf71d49b340e8b1d8dcbfba813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience overload that reconstructs a <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object from a file produced by EmitDoubleOperatorBinary.  <br /></td></tr>
+<tr class="memitem:a5cabedc164b1f35c0bf1708d01698f17" id="r_a5cabedc164b1f35c0bf1708d01698f17"><td class="memItemLeft">static <a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5cabedc164b1f35c0bf1708d01698f17">ReadBinary</a> (std::istream &amp;is)</td></tr>
+<tr class="memdesc:a5cabedc164b1f35c0bf1708d01698f17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-contained reader that reconstructs a <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> from an input stream produced by EmitDoubleOperatorBinary without any external information: the grids are rebuilt from the stored descriptors and owned by the returned object. Use this when the original grids are not available (e.g. reading the operator in a different program). The grids can then be retrieved through <a class="el" href="#a7e04014f9bf28690de20bae08421924a" title="Function that returns the first Grid object associated with the double operator.">GetFirstGrid()</a>/GetSecondGrid().  <br /></td></tr>
+<tr class="memitem:a82ebe0dc847bf51f01bd8cebc630dbe3" id="r_a82ebe0dc847bf51f01bd8cebc630dbe3"><td class="memItemLeft">static <a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a82ebe0dc847bf51f01bd8cebc630dbe3">ReadBinary</a> (std::string const &amp;filename)</td></tr>
+<tr class="memdesc:a82ebe0dc847bf51f01bd8cebc630dbe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience overload of the self-contained reader taking a file path.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a8d4f0100b1db9f3ac8e648771491a74b" id="r_a8d4f0100b1db9f3ac8e648771491a74b"><td class="memItemLeft">std::shared_ptr&lt; const <a class="el" href="classapfel_1_1Grid.html">Grid</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8d4f0100b1db9f3ac8e648771491a74b">_grid1Owned</a></td></tr>
+<tr class="memdesc:a8d4f0100b1db9f3ac8e648771491a74b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owns _grid1 for self-contained operators (null otherwise).  <br /></td></tr>
+<tr class="memitem:a4ce92f9a3a2fd13fc295ac56def6b193" id="r_a4ce92f9a3a2fd13fc295ac56def6b193"><td class="memItemLeft">std::shared_ptr&lt; const <a class="el" href="classapfel_1_1Grid.html">Grid</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4ce92f9a3a2fd13fc295ac56def6b193">_grid2Owned</a></td></tr>
+<tr class="memdesc:a4ce92f9a3a2fd13fc295ac56def6b193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owns _grid2 for self-contained operators (null otherwise).  <br /></td></tr>
 <tr class="memitem:aff3a085356a9c976f208958b86409900" id="r_aff3a085356a9c976f208958b86409900"><td class="memItemLeft"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const  &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aff3a085356a9c976f208958b86409900">_grid1</a></td></tr>
 <tr class="memdesc:aff3a085356a9c976f208958b86409900"><td class="mdescLeft">&#160;</td><td class="mdescRight">First grid on which to compute the operator.  <br /></td></tr>
 <tr class="memitem:acc2c17c84ea4ca408460a4c7567d59ae" id="r_acc2c17c84ea4ca408460a4c7567d59ae"><td class="memItemLeft"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const  &amp;&#160;</td><td class="memItemRight"><a class="el" href="#acc2c17c84ea4ca408460a4c7567d59ae">_grid2</a></td></tr>
@@ -195,6 +214,13 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:aa90664c8227b9826eba46a775a380b5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the double expression.  <br /></td></tr>
 <tr class="memitem:ad398d99a069efe9423e474643c4c811f" id="r_ad398d99a069efe9423e474643c4c811f"><td class="memItemLeft">std::vector&lt; std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad398d99a069efe9423e474643c4c811f">_dOperator</a></td></tr>
 <tr class="memdesc:ad398d99a069efe9423e474643c4c811f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> container.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a77e5a57e5c5c5b0719f4848591adeac5" id="r_a77e5a57e5c5c5b0719f4848591adeac5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a77e5a57e5c5c5b0719f4848591adeac5">DoubleOperator</a> (<a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr1, <a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;gr2, double const &amp;eps, std::string const &amp;dexprName, std::vector&lt; std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; &gt; &gt; dOperator)</td></tr>
+<tr class="memdesc:a77e5a57e5c5c5b0719f4848591adeac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private all-arguments constructor used by the external-grid ReadBinary to initialise the const and reference members directly from the deserialised data, sidestepping the lack of a default constructor. The grids are external (not owned).  <br /></td></tr>
+<tr class="memitem:a16e128b8b0685e26e1dbb0a1312d102f" id="r_a16e128b8b0685e26e1dbb0a1312d102f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a16e128b8b0685e26e1dbb0a1312d102f">DoubleOperator</a> (std::shared_ptr&lt; const <a class="el" href="classapfel_1_1Grid.html">Grid</a> &gt; grid1, std::shared_ptr&lt; const <a class="el" href="classapfel_1_1Grid.html">Grid</a> &gt; grid2, double const &amp;eps, std::string const &amp;dexprName, std::vector&lt; std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; &gt; &gt; dOperator)</td></tr>
+<tr class="memdesc:a16e128b8b0685e26e1dbb0a1312d102f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private all-arguments constructor used by the self-contained ReadBinary: the object takes shared ownership of the rebuilt grids and binds its grid references to them.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -208,7 +234,7 @@ Friends</h2></td></tr>
 </dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4f3ed9d60293d9d1c4d3355a753872d3" name="a4f3ed9d60293d9d1c4d3355a753872d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f3ed9d60293d9d1c4d3355a753872d3">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f3ed9d60293d9d1c4d3355a753872d3">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,7 +259,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a68c36b99707ccac768929a6b209c90f6" name="a68c36b99707ccac768929a6b209c90f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68c36b99707ccac768929a6b209c90f6">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a68c36b99707ccac768929a6b209c90f6">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +284,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="ab3e3b34b5383768b06e6896bef7dcae9" name="ab3e3b34b5383768b06e6896bef7dcae9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3e3b34b5383768b06e6896bef7dcae9">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3e3b34b5383768b06e6896bef7dcae9">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +309,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a1646d9ce15e4de8302258cfe59284a12" name="a1646d9ce15e4de8302258cfe59284a12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1646d9ce15e4de8302258cfe59284a12">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1646d9ce15e4de8302258cfe59284a12">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +351,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a7e196d994c3a47b380e2dc0123eb5aa7" name="a7e196d994c3a47b380e2dc0123eb5aa7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e196d994c3a47b380e2dc0123eb5aa7">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e196d994c3a47b380e2dc0123eb5aa7">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -355,7 +381,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="acbfb555186026355d6ed401936d34940" name="acbfb555186026355d6ed401936d34940"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbfb555186026355d6ed401936d34940">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acbfb555186026355d6ed401936d34940">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -406,7 +432,149 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a77e5a57e5c5c5b0719f4848591adeac5" name="a77e5a57e5c5c5b0719f4848591adeac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77e5a57e5c5c5b0719f4848591adeac5">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">apfel::DoubleOperator::DoubleOperator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>gr1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>gr2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>eps</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>dexprName</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>dOperator</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private all-arguments constructor used by the external-grid ReadBinary to initialise the const and reference members directly from the deserialised data, sidestepping the lack of a default constructor. The grids are external (not owned). </p>
+
+</div>
+</div>
+<a id="a16e128b8b0685e26e1dbb0a1312d102f" name="a16e128b8b0685e26e1dbb0a1312d102f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16e128b8b0685e26e1dbb0a1312d102f">&#9670;&#160;</a></span>DoubleOperator() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">apfel::DoubleOperator::DoubleOperator </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classapfel_1_1Grid.html">Grid</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>grid1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classapfel_1_1Grid.html">Grid</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>grid2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>eps</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>dexprName</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; <a class="el" href="classapfel_1_1matrix.html">matrix</a>&lt; double &gt; &gt; &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>dOperator</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private all-arguments constructor used by the self-contained ReadBinary: the object takes shared ownership of the rebuilt grids and binds its grid references to them. </p>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a6d2e078959e5c4219c84c593088284d9" name="a6d2e078959e5c4219c84c593088284d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d2e078959e5c4219c84c593088284d9">&#9670;&#160;</a></span>EmitDoubleOperatorBinary() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::DoubleOperator::EmitDoubleOperatorBinary </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>os</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that dumps the <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object onto an output stream in cereal portable-binary format. Only the integration accuracy, the <a class="el" href="classapfel_1_1DoubleExpression.html" title="The DoubleExpression class encapsulates in a proper form a two-variable analytic expression in such a...">DoubleExpression</a> name, the grid descriptors (for a consistency check on reload) and the operator container are stored; the grids themselves are supplied again at load time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>the output stream the object is written to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a476799fd3a97b6ec58abb9ffed2c9d57" name="a476799fd3a97b6ec58abb9ffed2c9d57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a476799fd3a97b6ec58abb9ffed2c9d57">&#9670;&#160;</a></span>EmitDoubleOperatorBinary() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apfel::DoubleOperator::EmitDoubleOperatorBinary </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience overload that dumps the <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object to a file in cereal portable-binary format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>the path of the file the object is written to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a42ab40fc8f089a5bf7f15c4710daae72" name="a42ab40fc8f089a5bf7f15c4710daae72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a42ab40fc8f089a5bf7f15c4710daae72">&#9670;&#160;</a></span>GetDoubleExpressionName()</h2>
 
@@ -778,6 +946,176 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a5cabedc164b1f35c0bf1708d01698f17" name="a5cabedc164b1f35c0bf1708d01698f17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cabedc164b1f35c0bf1708d01698f17">&#9670;&#160;</a></span>ReadBinary() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a> apfel::DoubleOperator::ReadBinary </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;</td>          <td class="paramname"><span class="paramname"><em>is</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Self-contained reader that reconstructs a <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> from an input stream produced by EmitDoubleOperatorBinary without any external information: the grids are rebuilt from the stored descriptors and owned by the returned object. Use this when the original grids are not available (e.g. reading the operator in a different program). The grids can then be retrieved through <a class="el" href="#a7e04014f9bf28690de20bae08421924a" title="Function that returns the first Grid object associated with the double operator.">GetFirstGrid()</a>/GetSecondGrid(). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is</td><td>the input stream the object is read from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the reconstructed, self-contained <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object </dd></dl>
+
+</div>
+</div>
+<a id="a3d3bb920063d52f9e42f9470c54d46fa" name="a3d3bb920063d52f9e42f9470c54d46fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d3bb920063d52f9e42f9470c54d46fa">&#9670;&#160;</a></span>ReadBinary() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a> apfel::DoubleOperator::ReadBinary </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;</td>          <td class="paramname"><span class="paramname"><em>is</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>gr1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>gr2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1DoubleExpression.html">DoubleExpression</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>dexpr</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that reconstructs a <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object from an input stream produced by EmitDoubleOperatorBinary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is</td><td>the input stream the object is read from </td></tr>
+    <tr><td class="paramname">gr1</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object for the first variable </td></tr>
+    <tr><td class="paramname">gr2</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object for the second variable </td></tr>
+    <tr><td class="paramname">dexpr</td><td>the double expression, needed to compare names </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the reconstructed <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object </dd></dl>
+
+</div>
+</div>
+<a id="a82ebe0dc847bf51f01bd8cebc630dbe3" name="a82ebe0dc847bf51f01bd8cebc630dbe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ebe0dc847bf51f01bd8cebc630dbe3">&#9670;&#160;</a></span>ReadBinary() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a> apfel::DoubleOperator::ReadBinary </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience overload of the self-contained reader taking a file path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>the path of the file the object is read from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the reconstructed, self-contained <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object </dd></dl>
+
+</div>
+</div>
+<a id="ad397caaf71d49b340e8b1d8dcbfba813" name="ad397caaf71d49b340e8b1d8dcbfba813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad397caaf71d49b340e8b1d8dcbfba813">&#9670;&#160;</a></span>ReadBinary() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4f3ed9d60293d9d1c4d3355a753872d3">DoubleOperator</a> apfel::DoubleOperator::ReadBinary </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>gr1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1Grid.html">Grid</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>gr2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapfel_1_1DoubleExpression.html">DoubleExpression</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>dexpr</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience overload that reconstructs a <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object from a file produced by EmitDoubleOperatorBinary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>the path of the file the object is read from </td></tr>
+    <tr><td class="paramname">gr1</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object for the first variable </td></tr>
+    <tr><td class="paramname">gr2</td><td>the <a class="el" href="classapfel_1_1Grid.html" title="The Grid class defines ab object that is essentially a collection of &quot;SubGrid&quot; objects plus other glo...">Grid</a> object for the second variable </td></tr>
+    <tr><td class="paramname">dexpr</td><td>the double expression, needed to compare names </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the reconstructed <a class="el" href="classapfel_1_1DoubleOperator.html" title="This class defines the basic object DoubleOperator which essentially contains the convolution between...">DoubleOperator</a> object </dd></dl>
+
+</div>
+</div>
 <a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
 <a id="a57c4bbd5b5425f71bf06aca8379ec35a" name="a57c4bbd5b5425f71bf06aca8379ec35a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57c4bbd5b5425f71bf06aca8379ec35a">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
@@ -907,6 +1245,30 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a8d4f0100b1db9f3ac8e648771491a74b" name="a8d4f0100b1db9f3ac8e648771491a74b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d4f0100b1db9f3ac8e648771491a74b">&#9670;&#160;</a></span>_grid1Owned</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classapfel_1_1Grid.html">Grid</a>&gt; apfel::DoubleOperator::_grid1Owned</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Owns _grid1 for self-contained operators (null otherwise). </p>
+
+</div>
+</div>
 <a id="acc2c17c84ea4ca408460a4c7567d59ae" name="acc2c17c84ea4ca408460a4c7567d59ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acc2c17c84ea4ca408460a4c7567d59ae">&#9670;&#160;</a></span>_grid2</h2>
 
@@ -928,6 +1290,30 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Second grid on which to compute the operator. </p>
+
+</div>
+</div>
+<a id="a4ce92f9a3a2fd13fc295ac56def6b193" name="a4ce92f9a3a2fd13fc295ac56def6b193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ce92f9a3a2fd13fc295ac56def6b193">&#9670;&#160;</a></span>_grid2Owned</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classapfel_1_1Grid.html">Grid</a>&gt; apfel::DoubleOperator::_grid2Owned</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Owns _grid2 for self-contained operators (null otherwise). </p>
 
 </div>
 </div>
