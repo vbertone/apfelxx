@@ -10,5 +10,7 @@ var searchData=
   ['unpolarised_20sia_7',['Zero-mass coefficient functions for unpolarised SIA',['../group__NCMasslessSIA.html',1,'']]],
   ['unpolarised_20sidis_8',['unpolarised SIDIS',['../group__NLOzmSIDISEW.html',1,'NLO zero-mass coefficient functions for electroweak unpolarised SIDIS'],['../group__NLOzmSIDIS.html',1,'NLO zero-mass coefficient functions for unpolarised SIDIS'],['../group__NNLOzmSIDISEW.html',1,'NNLO zero-mass coefficient functions for electroweak unpolarised SIDIS'],['../group__NNLOzmSIDIS.html',1,'NNLO zero-mass coefficient functions for unpolarised SIDIS'],['../group__EWMasslessSIDIS.html',1,'Zero-mass coefficient functions for electroweak unpolarised SIDIS'],['../group__NCMasslessSIDIS.html',1,'Zero-mass coefficient functions for unpolarised SIDIS']]],
   ['unpolarised_20splitting_20functions_9',['Unpolarised splitting functions',['../group__UnpSF.html',1,'Unpolarised splitting functions'],['../group__UnpSFtl.html',1,'Unpolarised splitting functions']]],
-  ['unpolarised_20splitting_20functions_20for_20qcdxqed_20evolution_10',['Unpolarised splitting functions for QCDxQED evolution',['../group__UnpSFQED.html',1,'']]]
+  ['unpolarised_20splitting_20functions_20for_20qcdxqed_20evolution_10',['Unpolarised splitting functions for QCDxQED evolution',['../group__UnpSFQED.html',1,'']]],
+  ['unpolarised_20splitting_20functions_20in_20the_20krk_20scheme_11',['NLO unpolarised splitting functions in the Krk scheme',['../group__KrkSF.html',1,'']]],
+  ['unpolarised_20splitting_20functions_20in_20the_20phys_20scheme_12',['NLO unpolarised splitting functions in the PHYS scheme',['../group__PhysSF.html',1,'']]]
 ];
