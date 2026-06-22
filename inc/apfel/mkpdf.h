@@ -122,7 +122,7 @@ LHAPDF::PDF* mkPDF(apfel::InitialiseEvolution const& ev)
 
   // Set quark masses and thresholds
   const std::vector<std::string> Qnames{"Down", "Up", "Strange", "Charm", "Bottom", "Top"};
-  const std::vector<double> trhs = ev.GetEvolutionSetup().Thresholds;
+  const std::vector<double> trhs = ev.GetEvolutionSetup().QuarkThresholds;
   for (int iq = 0; iq < (int) Qnames.size(); iq++)
     {
       dist->info().set_entry("M" + Qnames[iq], (iq < (int) trhs.size() ? trhs[iq] : 1e8 + iq));

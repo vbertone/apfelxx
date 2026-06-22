@@ -86,7 +86,7 @@ namespace apfel
         if (_setup.Virtuality == EvolutionSetup::SPACE)
           {
             if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-              _DglapObj = InitializeDglapObjectsQCD(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
+              _DglapObj = InitializeDglapObjectsQCDOme(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
             else if (_setup.EvolPolarisation == EvolutionSetup::POL)
               _DglapObj = InitializeDglapObjectsQCDpol(*_g, _setup.QuarkMasses, _setup.QuarkThresholds, false, IntEps);
             else if (_setup.EvolPolarisation == EvolutionSetup::TRANS)
@@ -103,7 +103,7 @@ namespace apfel
     else if (_setup.Theory == EvolutionSetup::QCD_QED)
       if (_setup.Virtuality == EvolutionSetup::SPACE)
         if (_setup.EvolPolarisation == EvolutionSetup::UNP)
-          _DglapObjQED = InitializeDglapObjectsQCDQED(*_g, _setup.QuarkThresholds, _setup.LeptonThresholds, false, IntEps);
+          _DglapObjQED = InitializeDglapObjectsQCDQEDOme(*_g, _setup.QuarkThresholds, _setup.LeptonThresholds, false, IntEps);
   }
 
   //_________________________________________________________________________________

@@ -246,10 +246,13 @@ namespace apfel
   std::ostream& operator << (std::ostream& os, Grid const& gr)
   {
     os << "Grid: " << &gr << "\n";
+    os << "Number of subgrids = " << gr._GlobalGrid.size() << "\n";
+    os << "Parameters of the subgrids:" << "\n";
+    for(int ig = 0; ig < (int) gr._GlobalGrid.size(); ig++)
+      os << "ig = " << ig << ", nx = " << gr._GlobalGrid[ig].nx() << ", xmin = " << gr._GlobalGrid[ig].xMin() << ", interp. deg. = " <<  gr._GlobalGrid[ig].InterDegree() << "\n";
     os << "JointGrid = " << &gr._JointGrid << "\n";
     for (const auto &v: gr._JointGrid->GetGrid())
       os << v << " ";
-
     return os;
   }
 }
