@@ -9,11 +9,12 @@
 namespace apfel
 {
   /**
-   * @name Collins-Soper anomalous dimension.
-   * Coefficients of the Collins-Soper anomalous dimension. The
-   * expressions are taken from eq. (69)
-   * https://arxiv.org/pdf/1705.07167.pdf and from eq (D.9) of
-   * https://arxiv.org/pdf/1604.07869.pdf.
+   * @name Collins-Soper anomalous dimension.  Coefficients of the
+   * Collins-Soper anomalous dimension. The expressions are taken from
+   * eq. (69) https://arxiv.org/pdf/1705.07167.pdf and from eq (D.9)
+   * of https://arxiv.org/pdf/1604.07869.pdf. The
+   * &alpha;<SUB>s</SUB><SUP>4</SUP> coefficients are taken from
+   * https://arxiv.org/pdf/2205.02242
    * @note All the expressions do not include an overall factor
    * C<SUB>F</SUB> or C<SUB>A</SUB>.
    */
@@ -44,5 +45,23 @@ namespace apfel
 
   /// &alpha;<SUB>s</SUB><SUP>3</SUP>L<SUP>3</SUP> term
   double KCS23(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>4</SUP> term
+  double KCS30(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>4</SUP>L term
+  double KCS31(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>4</SUP>L<SUP>2</SUP> term
+  double KCS32(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>4</SUP>L<SUP>3</SUP> term
+  double KCS33(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>4</SUP>L<SUP>4</SUP> term
+  double KCS34(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>4</SUP> term (gluon, overall C<SUB>A</SUB> stripped)
+  double KCS30g(int const& nf);
   ///@}
 }

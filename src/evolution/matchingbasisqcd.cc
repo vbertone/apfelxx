@@ -29,7 +29,7 @@ namespace apfel
     // Heavy valence-like distributions
     _rules[enf] = {{M0, enf, 1}, {M10, enf, 1}, {M11, enf, - static_cast<double>(nf)}};
     for (int k = nf + 2; k <= 6; k++)
-      _rules[2 * k] = {{M0, 2 * k, 1}, {M10, 2 * k, 1}, {M11, 2 * k, 1}};;
+      _rules[2 * k] = {{M0, 2 * k, 1}, {M10, 2 * k, 1}, {M11, 2 * k, 1}};
 
     // Gluon
     _rules[0] = {{M0, 0, 1}, {M1, 0, 1}, {M2, 1, 1./6.}, {M3, onf, - 1. / nf1}};

@@ -591,7 +591,7 @@ namespace apfel
   }
   double AS2polggH_0_ome::Singular(double const& x) const
   {
-    return _ome_s(0, x);;
+    return _ome_s(0, x);
   }
   double AS2polggH_0_ome::Local(double const& x) const
   {

@@ -68,4 +68,15 @@ namespace apfel
             + 15. / 4. * ( - 384. * pow(zeta3, 2) - 7936. / 35. * pow(zeta2, 3)
                            + 3520. / 3. * zeta5 + 128. / 3. * zeta3 - 128. * zeta2 ) );
   }
+
+  //_________________________________________________________________________
+  double gammaK4(int const& nf)
+  {
+    if (nf <= 3 )
+      return 2 * Pi2 * Pi2 * 1.3;
+    else if (nf == 4)
+      return 2 * Pi2 * Pi2 * 0.8;
+    else
+      return 2 * Pi2 * Pi2 * 0.5;
+  }
 }

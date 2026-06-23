@@ -104,8 +104,8 @@ int main()
   const bool movegrids = (Rmove.GetFirstGrid() == gx && Rmove.GetSecondGrid() == gz);
 
   const bool copymove_ok = shape_cp && shape_mv && copygrids && movegrids
-    && nelem_cp == nelem_s && nelem_mv == nelem_s
-    && bitdiffs_cp == 0 && bitdiffs_mv == 0;
+                           && nelem_cp == nelem_s && nelem_mv == nelem_s
+                           && bitdiffs_cp == 0 && bitdiffs_mv == 0;
 
   const bool epsmatch  = (O.GetIntegrationAccuracy() == Rs.GetIntegrationAccuracy()
                           && O.GetIntegrationAccuracy() == Rf.GetIntegrationAccuracy()

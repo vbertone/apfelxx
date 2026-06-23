@@ -9,13 +9,15 @@
 namespace apfel
 {
   /**
-   * @name Cusp anomalous dimension.
-   * Coefficients of the &gamma;<SUB>K</SUB> anomalous dimension. The
-   * expressions up to O(&alpha;<SUB>s</SUB><SUP>3</SUP>) are taken
-   * from eq. (59) https://arxiv.org/pdf/1705.07167.pdf. While the
-   * expressions at O(&alpha;<SUB>s</SUB><SUP>4</SUP>) are taken from
-   * Eq. (6.3) of https://arxiv.org/pdf/1911.10174.pdf or Eq. (6) of
-   * https://arxiv.org/pdf/2002.04617v2.pdf
+   * @name Cusp anomalous dimension.  Coefficients of the
+   * &gamma;<SUB>K</SUB> anomalous dimension. The expressions up to
+   * O(&alpha;<SUB>s</SUB><SUP>3</SUP>) are taken from eq. (59)
+   * https://arxiv.org/pdf/1705.07167.pdf. While the expressions at
+   * O(&alpha;<SUB>s</SUB><SUP>4</SUP>) are taken from Eq. (6.3) of
+   * https://arxiv.org/pdf/1911.10174.pdf or Eq. (6) of
+   * https://arxiv.org/pdf/2002.04617v2.pdf. The expression for the
+   * O(&alpha;<SUB>s</SUB><SUP>4</SUP>) is approximated and extracted
+   * from https://arxiv.org/pdf/1812.11818.
    * @note All the expressions do not include an overall factor
    * C<SUB>F</SUB> or C<SUB>A</SUB>.
    */
@@ -36,5 +38,8 @@ namespace apfel
   /// anonalous dimension needed to obtain the gluon anomalous
   /// dimension (neglected for now).
   double gammaK3gmq(int const& nf);
+
+  /// &alpha;<SUB>s</SUB><SUP>5</SUP> term
+  double gammaK4(int const& nf);
   ///@}
 }

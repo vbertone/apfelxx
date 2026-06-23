@@ -13,8 +13,22 @@ int main()
   const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
   //const std::vector<double> Thresholds = {0, 0, 0, 0, 0};
 
+  // Log accuracy
+  const apfel::LogAccuracy LogAcc = apfel::LogAccuracy::N4LL;
+
+  // PDF/alpha evolution accuracy determined by the log accuracy
+  apfel::FixedOrderAccuracy FOAcc;
+  if (LogAcc == apfel::LogAccuracy::NNLL || LogAcc == apfel::LogAccuracy::NNLLp)
+    FOAcc = apfel::FixedOrderAccuracy::NLO;
+  else if (LogAcc == apfel::LogAccuracy::NNNLL || LogAcc == apfel::LogAccuracy::NNNLLp)
+    FOAcc = apfel::FixedOrderAccuracy::NNLO;
+  else if (LogAcc == apfel::LogAccuracy::N4LL)
+    FOAcc = apfel::FixedOrderAccuracy::NNNLO;
+  else
+    FOAcc = apfel::FixedOrderAccuracy::LO;
+
   // Running coupling
-  apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, apfel::FixedOrderAccuracy::NNLO};
+  apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, FOAcc};
   const apfel::TabulateObject<double> tabas{a, 500, 0.9, 1001, 3};
   const auto Alphas = [=] (double const& mu) -> double{ return tabas.Evaluate(mu); };
 
@@ -22,7 +36,7 @@ int main()
   const apfel::Grid g{{apfel::SubGrid{100, 1e-5, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
 
   // Construct the DGLAP objects
-  const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds), apfel::LHToyPDFs, sqrt(2), apfel::FixedOrderAccuracy::NNLO, Alphas);
+  const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCDOme(g, Thresholds), apfel::LHToyPDFs, sqrt(2), FOAcc, Alphas);
 
   // Tabulate PDFs
   const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabPDFs{*EvolvedPDFs, 200, 1, 20000, 3};
@@ -44,11 +58,11 @@ int main()
   const double x2 = Q / exp(y) / Vs;
 
   // Build evolved TMD PDFs
-  const auto EvTMDPDFs = BuildTmdPDFs(TmdObj, CollPDFs, Alphas, apfel::LogAccuracy::NNNLL);
-  //const auto EvTMDPDFs = BuildTmdPDFsWithTMCs(TmdObj, CollPDFs, Alphas, apfel::LogAccuracy::NNNLL, apfel::ProtonMass);
+  const auto EvTMDPDFs = BuildTmdPDFs(TmdObj, CollPDFs, Alphas, LogAcc);
+  //const auto EvTMDPDFs = BuildTmdPDFsWithTMCs(TmdObj, CollPDFs, Alphas, LogAcc, apfel::ProtonMass);
 
   // Get Drell-Yan hard-factor function
-  const double hcs = HardFactor("DY", TmdObj, Alphas, apfel::LogAccuracy::NNNLL)(Q);
+  const double hcs = HardFactor("DY", TmdObj, Alphas, LogAcc)(Q);
 
   // Number of active flavours at 'Q'
   const int nf = apfel::NF(Q, Thresholds);
