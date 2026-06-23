@@ -32,13 +32,13 @@ namespace apfel
   //_________________________________________________________________________
   double KCS11(int const& nf)
   {
-    return - gammaK1(nf) + 2 * beta0qcd(nf) * KCS00();
+    return - gammaK1(nf);
   }
 
   //_________________________________________________________________________
   double KCS12(int const& nf)
   {
-    return - beta0qcd(nf) * gammaK0();
+    return - ( - 2 ) * beta0qcd(nf) * gammaK0() / 2;
   }
 
   //_________________________________________________________________________
@@ -54,21 +54,22 @@ namespace apfel
   //_________________________________________________________________________
   double KCS21(int const& nf)
   {
-    return - gammaK2(nf) + 2 * beta1qcd(nf) * KCS00() + 4 * beta0qcd(nf) * KCS10(nf);
+    return - gammaK2(nf);
   }
 
   //_________________________________________________________________________
   double KCS22(int const& nf)
   {
-    const double b0 = beta0qcd(nf);
-    return - beta1qcd(nf) * gammaK0() - 2 * b0 * ( gammaK1(nf) - 2 * b0 * KCS00() );
+    const double bt0 = - 2 * beta0qcd(nf);
+    const double b1 = beta1qcd(nf) / beta0qcd(nf);
+    return - bt0 * ( 2 * gammaK1(nf) + b1 * gammaK0() ) / 2;
   }
 
   //_________________________________________________________________________
   double KCS23(int const& nf)
   {
-    const double b02 = pow(beta0qcd(nf), 2);
-    return - 4 * b02 * gammaK0() / 3;
+    const double bt02 = pow(- 2 * beta0qcd(nf), 2);
+    return - bt02 * gammaK0() / 3;
   }
 
   //_________________________________________________________________________
@@ -123,19 +124,25 @@ namespace apfel
   //_________________________________________________________________________
   double KCS32(int const& nf)
   {
-    return 0. * nf;
+    const double bt0 = - 2 * beta0qcd(nf);
+    const double b1 = beta1qcd(nf) / beta0qcd(nf);
+    const double b2 = beta2qcd(nf) / beta0qcd(nf);
+    return - bt0 * ( 3 * gammaK2(nf) + 2 * gammaK1(nf) * b1 + gammaK0() *b2 ) / 2;
   }
 
   //_________________________________________________________________________
   double KCS33(int const& nf)
   {
-    return 0. * nf;
+    const double bt02 = pow(- 2 * beta0qcd(nf), 2);
+    const double b1 = beta1qcd(nf) / beta0qcd(nf);
+    return - bt02 * ( 6 * gammaK1(nf) + 5 * gammaK0() * b1 ) / 6;
   }
 
   //_________________________________________________________________________
   double KCS34(int const& nf)
   {
-    return 0. * nf;
+    const double bt03 = pow(- 2 * beta0qcd(nf), 3);
+    return - bt03 * gammaK0() / 4;
   }
 
   //_________________________________________________________________________
