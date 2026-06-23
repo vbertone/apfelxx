@@ -264,6 +264,7 @@ namespace apfel
     // ===============================================================
     // NNNLO corrections (upon request)
     std::map<int, std::map<int, Operator>> MatchNNNLO;
+    std::map<int, std::map<int, Operator>> MatchNNNLOb;
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
     if (n3lo)
       {
@@ -307,6 +308,52 @@ namespace apfel
             OM.insert({MatchingBasisQCD::M10, ANS3qqHm});
             OM.insert({MatchingBasisQCD::M11, APS3Hqs});
             MatchNNNLO.insert({nf, OM});
+          }
+
+        // Auxiliary NNNLO contributions to be used for backward
+        // matching. They are labelled with perturbative order -3.
+        for (int nf = nfi; nf <= nff; nf++)
+          {
+            const double lnk  = LogKth[nf];
+            const double lnk2 = lnk * lnk;
+            const Operator AS1Hg   =          lnk * AS1HgL;
+            const Operator AS1ggH  =          lnk * AS1ggHL;
+            const Operator AS1gH   = AS1gH0 + lnk * AS1gHL;
+            const Operator AS1HH   = AS1HH0 + lnk * AS1HHL;
+            const Operator AS2Hg   = AS2Hg0  + lnk * AS2HgL  + lnk2 * AS2HgL2;
+            const Operator AS2ggH  = AS2ggH0 + lnk * AS2ggHL + lnk2 * AS2ggHL2;
+            const Operator AS2gH   = Zero;
+            const Operator AS2HH   = Zero;
+            const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
+            const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
+            const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
+            const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
+            const Operator AS12Hg  = AS1Hg  * AS2ggH + AS1gH * AS2HH;
+            const Operator AS12ggH = AS1ggH * AS2ggH + AS1gH * AS2Hg;
+            const Operator AS12gH  = AS1ggH * AS2gH  + AS1gH * AS2HH;
+            const Operator AS12HH  = AS1Hg  * AS2gH  + AS1HH * AS2HH;
+            const Operator AS21Hg  = AS2Hg  * AS1ggH + AS2gH * AS1HH;
+            const Operator AS21ggH = AS2ggH * AS1ggH + AS2gH * AS1Hg;
+            const Operator AS21gH  = AS2ggH * AS1gH  + AS2gH * AS1HH;
+            const Operator AS21HH  = AS2Hg  * AS1gH  + AS2HH * AS1HH;
+            const Operator AS1Hg3  = AS1Hg  * AS1ggH2 + AS1gH * AS1HH2;
+            const Operator AS1ggH3 = AS1ggH * AS1ggH2 + AS1gH * AS1Hg2;
+            const Operator AS1gH3  = AS1ggH * AS1gH2  + AS1gH * AS1HH2;
+            const Operator AS1HH3  = AS1Hg  * AS1gH2  + AS1HH * AS1HH2;
+            std::map<int, Operator> OM;
+            OM.insert({MatchingBasisQCD::M0,  Zero});
+            OM.insert({MatchingBasisQCD::M1,  AS12ggH + AS21ggH - AS1ggH3});
+            OM.insert({MatchingBasisQCD::M2,  AS12gH  + AS21gH  - AS1gH3});
+            OM.insert({MatchingBasisQCD::M3,  AS12gH  + AS21gH  - AS1gH3});
+            OM.insert({MatchingBasisQCD::M4,  AS12Hg  + AS21Hg  - AS1Hg3});
+            OM.insert({MatchingBasisQCD::M5,  AS12HH  + AS21HH  - AS1HH3});
+            OM.insert({MatchingBasisQCD::M6,  AS12HH  + AS21HH  - AS1HH3});
+            OM.insert({MatchingBasisQCD::M7,  Zero});
+            OM.insert({MatchingBasisQCD::M8,  AS12Hg  + AS21Hg - AS1Hg3});
+            OM.insert({MatchingBasisQCD::M9,  AS12HH  + AS21HH - AS1HH3});
+            OM.insert({MatchingBasisQCD::M10, Zero});
+            OM.insert({MatchingBasisQCD::M11, Zero});
+            MatchNNNLOb.insert({nf, OM});
           }
 
         // ===============================================================
@@ -373,6 +420,7 @@ namespace apfel
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLOb.at(nf)}});
             obj.MatchingConditions.insert({ 3, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-3, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNNLOb.at(nf)}});
           }
         else
           {
@@ -385,6 +433,7 @@ namespace apfel
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLOb.at(nf)}});
             obj.MatchingConditions.insert({ 3, Set<Operator>{MatchingBasisQCD{nf},  MatchNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-3, Set<Operator>{MatchingBasisQCD{nf},  MatchNNNLOb.at(nf)}});
           }
         DglapObj.insert({nf, obj});
       }
@@ -679,6 +728,53 @@ namespace apfel
         MatchNNNLO.insert({nf, OM});
       }
 
+    // Auxiliary NNNLO contributions to be used for backward
+    // matching. They are labelled with perturbative order -3.
+    std::map<int, std::map<int, Operator>> MatchNNNLOb;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const double lnk  = LogKth[nf];
+        const double lnk2 = lnk * lnk;
+        const Operator AS1Hg   =          lnk * AS1HgL;
+        const Operator AS1ggH  =          lnk * AS1ggHL;
+        const Operator AS1gH   = AS1gH0 + lnk * AS1gHL;
+        const Operator AS1HH   = AS1HH0 + lnk * AS1HHL;
+        const Operator AS2Hg   = AS2Hg0  + lnk * AS2HgL  + lnk2 * AS2HgL2;
+        const Operator AS2ggH  = AS2ggH0 + lnk * AS2ggHL + lnk2 * AS2ggHL2;
+        const Operator AS2gH   = Zero;
+        const Operator AS2HH   = Zero;
+        const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
+        const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
+        const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
+        const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
+        const Operator AS12Hg  = AS1Hg  * AS2ggH + AS1gH * AS2HH;
+        const Operator AS12ggH = AS1ggH * AS2ggH + AS1gH * AS2Hg;
+        const Operator AS12gH  = AS1ggH * AS2gH  + AS1gH * AS2HH;
+        const Operator AS12HH  = AS1Hg  * AS2gH  + AS1HH * AS2HH;
+        const Operator AS21Hg  = AS2Hg  * AS1ggH + AS2gH * AS1HH;
+        const Operator AS21ggH = AS2ggH * AS1ggH + AS2gH * AS1Hg;
+        const Operator AS21gH  = AS2ggH * AS1gH  + AS2gH * AS1HH;
+        const Operator AS21HH  = AS2Hg  * AS1gH  + AS2HH * AS1HH;
+        const Operator AS1Hg3  = AS1Hg  * AS1ggH2 + AS1gH * AS1HH2;
+        const Operator AS1ggH3 = AS1ggH * AS1ggH2 + AS1gH * AS1Hg2;
+        const Operator AS1gH3  = AS1ggH * AS1gH2  + AS1gH * AS1HH2;
+        const Operator AS1HH3  = AS1Hg  * AS1gH2  + AS1HH * AS1HH2;
+        std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0,  Zero});
+        OM.insert({MatchingBasisQCD::M1,  AS12ggH + AS21ggH - AS1ggH3});
+        OM.insert({MatchingBasisQCD::M2,  AS12gH  + AS21gH  - AS1gH3});
+        OM.insert({MatchingBasisQCD::M3,  AS12gH  + AS21gH  - AS1gH3});
+        OM.insert({MatchingBasisQCD::M4,  AS12Hg  + AS21Hg  - AS1Hg3});
+        OM.insert({MatchingBasisQCD::M5,  AS12HH  + AS21HH  - AS1HH3});
+        OM.insert({MatchingBasisQCD::M6,  AS12HH  + AS21HH  - AS1HH3});
+        OM.insert({MatchingBasisQCD::M7,  Zero});
+        OM.insert({MatchingBasisQCD::M8,  AS12Hg  + AS21Hg - AS1Hg3});
+        OM.insert({MatchingBasisQCD::M9,  AS12HH  + AS21HH - AS1HH3});
+        OM.insert({MatchingBasisQCD::M10, Zero});
+        OM.insert({MatchingBasisQCD::M11, Zero});
+        MatchNNNLOb.insert({nf, OM});
+      }
+
     // ===============================================================
     // NNNLO splitting function operators
     std::map<int, std::map<int, Operator>> OpMapNNNLO;
@@ -731,6 +827,7 @@ namespace apfel
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNLOb.at(nf)}});
             obj.MatchingConditions.insert({ 3, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-3, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNNNLOb.at(nf)}});
           }
         else
           {
@@ -743,6 +840,7 @@ namespace apfel
             obj.MatchingConditions.insert({ 2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLO.at(nf)}});
             obj.MatchingConditions.insert({-2, Set<Operator>{MatchingBasisQCD{nf},  MatchNNLOb.at(nf)}});
             obj.MatchingConditions.insert({ 3, Set<Operator>{MatchingBasisQCD{nf},  MatchNNNLO.at(nf)}});
+            obj.MatchingConditions.insert({-3, Set<Operator>{MatchingBasisQCD{nf},  MatchNNNLOb.at(nf)}});
           }
         DglapObj.insert({nf, obj});
       }
@@ -3612,7 +3710,7 @@ namespace apfel
       {
         const double cp = (Up ? AlphasTh.at(nf+1).second : AlphasTh.at(nf+1).first) / FourPi;
         const auto& mc = DglapObj.at(nf).MatchingConditions;
-        return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) + cp * mc.at(3) ) );
+        return mc.at(0) + (Up ? 1 : -1) * cp * ( mc.at(1) + cp * ( ( mc.at(2) - (Up ? 0 : 1) * mc.at(-2) ) + cp * ( mc.at(3)  - (Up ? 0 : 1) * mc.at(-3) ) ) );
       };
     else
       throw std::runtime_error(error("MatchingConditions","Perturbative order not allowed."));
