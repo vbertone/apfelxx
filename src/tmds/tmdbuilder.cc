@@ -2720,6 +2720,30 @@ namespace apfel
           return coup * ( lo + coup * ( nlo + coup * nnlo ) );
         };
       }
+    // N4LL
+    else if (PerturbativeOrder == N4LL)
+      {
+        gammaK = [=] (double const& mu) -> double
+        {
+          const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
+          const double coup = Alphas(mu) / FourPi;
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+        };
+        K = [=] (double const& mu) -> double
+        {
+          const auto& d = TmdObj.at(NF(mu, thrs)).KCS;
+          const std::vector<double> d0 = d.at(0);
+          const std::vector<double> d1 = d.at(1);
+          const std::vector<double> d2 = d.at(2);
+          const std::vector<double> d3 = d.at(3);
+          const double coup  = Alphas(mu) / FourPi;
+          const double lo    = d0[0] + Lmu * d0[1];
+          const double nlo   = d1[0] + Lmu * ( d1[1] + Lmu * d1[2] );
+          const double nnlo  = d2[0] + Lmu * ( d2[1] + Lmu * ( d2[2] + Lmu * d2[3] ) );
+          const double nnnlo = d3[0] + Lmu * ( d3[1] + Lmu * ( d3[2] + Lmu * ( d3[3] + Lmu * d3[4] ) ) );
+          return coup * ( lo + coup * ( nlo + coup * ( nnlo + coup * nnnlo ) ) );
+        };
+      }
 
     // Define the integrands
     const Integrator I2{[=] (double const& mu) -> double{ return gammaK(mu) / mu; }};

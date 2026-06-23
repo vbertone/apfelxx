@@ -26,28 +26,31 @@ int main()
   const auto alphas = [&] (double const& mu) -> double{ return alphas_obj.Evaluate(mu); };
 
   // Computing Collins-Soper kernel
-  const auto cs_kernel_LL    = apfel::CollinsSoperKernel(tmd_objects, alphas, 0);
-  const auto cs_kernel_NLL   = apfel::CollinsSoperKernel(tmd_objects, alphas, 1);
-  const auto cs_kernel_NNLL  = apfel::CollinsSoperKernel(tmd_objects, alphas, 2);
-  const auto cs_kernel_NNNLL = apfel::CollinsSoperKernel(tmd_objects, alphas, 3);
+  const double Ci = 2;
+  const auto cs_kernel_LL     = apfel::CollinsSoperKernel(tmd_objects, alphas, 0, Ci);
+  const auto cs_kernel_NLL    = apfel::CollinsSoperKernel(tmd_objects, alphas, 1, Ci);
+  const auto cs_kernel_NNLL   = apfel::CollinsSoperKernel(tmd_objects, alphas, 2, Ci);
+  const auto cs_kernel_NNNLL  = apfel::CollinsSoperKernel(tmd_objects, alphas, 3, Ci);
+  const auto cs_kernel_NNNNLL = apfel::CollinsSoperKernel(tmd_objects, alphas, 4, Ci);
 
   // Focus on the physically relevant range
   const std::vector<double> b_values = {0.2, 0.5, 0.8, 1.0};
   const std::vector<double> mu_values = {2.0, 5.0, 10.0, 91.0};
 
   std::cout << "\nCollins-Soper Kernel K(b, mu) values:" << std::endl;
-  std::cout << "b [GeV^-1] |  mu [GeV]  |   K(b,mu) LL |  K(b,mu) NLL | K(b,mu) NNLL | K(b,mu) N3LL |" << std::endl;
-  std::cout << "-------------------------------------------------------------------------------------" << std::endl;
+  std::cout << "b [GeV^-1] |  mu [GeV]  |   K(b,mu) LL |  K(b,mu) NLL | K(b,mu) NNLL | K(b,mu) N3LL | K(b,mu) N4LL |" << std::endl;
+  std::cout << "----------------------------------------------------------------------------------------------------" << std::endl;
   const auto is_valid_result = [] (double const& x) -> bool{ return !std::isnan(x) && !std::isinf(x) && std::abs(x) < 100.0; };
   for (const auto& b : b_values)
     {
       for (const auto& mu : mu_values)
         {
-          double k_LL    = cs_kernel_LL(b, mu);
-          double k_NLL   = cs_kernel_NLL(b, mu);
-          double k_NNLL  = cs_kernel_NNLL(b, mu);
-          double k_NNNLL = cs_kernel_NNNLL(b, mu);
-          if (is_valid_result(k_LL) && is_valid_result(k_NLL) && is_valid_result(k_NNLL) && is_valid_result(k_NNNLL))
+          double k_LL     = cs_kernel_LL(b, mu);
+          double k_NLL    = cs_kernel_NLL(b, mu);
+          double k_NNLL   = cs_kernel_NNLL(b, mu);
+          double k_NNNLL  = cs_kernel_NNNLL(b, mu);
+          double k_NNNNLL = cs_kernel_NNNNLL(b, mu);
+          if (is_valid_result(k_LL) && is_valid_result(k_NLL) && is_valid_result(k_NNLL) && is_valid_result(k_NNNLL) && is_valid_result(k_NNNNLL))
             {
               std::cout << std::fixed << std::setprecision(6)
                         << std::setw(10) << b << " | "
@@ -56,6 +59,7 @@ int main()
                         << std::setw(12) << k_NLL << " | "
                         << std::setw(12) << k_NNLL << " | "
                         << std::setw(12) << k_NNNLL << " | "
+                        << std::setw(12) << k_NNNNLL << " | "
                         << std::endl;
             }
           else
@@ -66,10 +70,11 @@ int main()
                         << std::setw(12) << "N/A" << " | "
                         << std::setw(12) << "N/A" << " | "
                         << std::setw(12) << "N/A" << " | "
+                        << std::setw(12) << "N/A" << " | "
                         << " (numerical instability)" << std::endl;
             }
         }
-      std::cout << "--------------------------------------------------------------------------------------" << std::endl;
+      std::cout << "----------------------------------------------------------------------------------------------------" << std::endl;
     }
 
   const double fixed_mu = 10.0;
