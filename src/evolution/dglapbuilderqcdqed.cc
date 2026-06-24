@@ -451,6 +451,7 @@ namespace apfel
     // ===============================================================
     // NNNLO corrections (upon request)
     std::map<int, std::map<int, Operator>> Match30;
+    std::map<int, std::map<int, Operator>> Matchm30;
     std::map<int, std::map<int, Operator>> OpMap40;
     if (n3lo)
       {
@@ -502,6 +503,50 @@ namespace apfel
           }
 
         // ===============================================================
+        // O(as^3) matching conditions for backward evolution
+        for (int nt = nti; nt <= ntf; nt++)
+          {
+            const double lnk  = LogKth[nt];
+            const double lnk2 = lnk * lnk;
+            const Operator AS1Hg   =          lnk * AS1HgL;
+            const Operator AS1ggH  =          lnk * AS1ggHL;
+            const Operator AS1gH   = AS1gH0 + lnk * AS1gHL;
+            const Operator AS1HH   = AS1HH0 + lnk * AS1HHL;
+            const Operator AS2Hg   = AS2Hg0  + lnk * AS2HgL  + lnk2 * AS2HgL2;
+            const Operator AS2ggH  = AS2ggH0 + lnk * AS2ggHL + lnk2 * AS2ggHL2;
+            const Operator AS2gH   = Zero;
+            const Operator AS2HH   = Zero;
+            const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
+            const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
+            const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
+            const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
+            const Operator AS12Hg  = AS1Hg  * AS2ggH + AS1gH * AS2HH;
+            const Operator AS12ggH = AS1ggH * AS2ggH + AS1gH * AS2Hg;
+            const Operator AS12gH  = AS1ggH * AS2gH  + AS1gH * AS2HH;
+            const Operator AS12HH  = AS1Hg  * AS2gH  + AS1HH * AS2HH;
+            const Operator AS21Hg  = AS2Hg  * AS1ggH + AS2gH * AS1HH;
+            const Operator AS21ggH = AS2ggH * AS1ggH + AS2gH * AS1Hg;
+            const Operator AS21gH  = AS2ggH * AS1gH  + AS2gH * AS1HH;
+            const Operator AS21HH  = AS2Hg  * AS1gH  + AS2HH * AS1HH;
+            const Operator AS1Hg3  = AS1Hg  * AS1ggH2 + AS1gH * AS1HH2;
+            const Operator AS1ggH3 = AS1ggH * AS1ggH2 + AS1gH * AS1Hg2;
+            const Operator AS1gH3  = AS1ggH * AS1gH2  + AS1gH * AS1HH2;
+            const Operator AS1HH3  = AS1Hg  * AS1gH2  + AS1HH * AS1HH2;
+            std::map<int, Operator> OM;
+            if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+              {
+                OM.insert({MatchingBasisQCDQED::Kgg, AS12ggH + AS21ggH - AS1ggH3});
+                OM.insert({MatchingBasisQCDQED::KgQ, AS12gH  + AS21gH  - AS1gH3});
+                OM.insert({MatchingBasisQCDQED::KQg, AS12Hg  + AS21Hg  - AS1Hg3});
+                OM.insert({MatchingBasisQCDQED::KXX, AS12HH  + AS21HH - AS1HH3});
+              }
+            // Insert Zero in the remaining slots
+            for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSsqm; i++)
+              OM.insert({i, Zero});
+            Matchm30.insert({nt, OM});
+          }
+
+        // ===============================================================
         // O(as^4) splitting function operators
         for (int nt = nti; nt <= ntf; nt++)
           {
@@ -545,6 +590,7 @@ namespace apfel
             for (int i = EvolutionBasisQCDQED::PPDD; i <= EvolutionBasisQCDQED::Pgmgm; i++)
               OP.insert({i, Zero});
             Match30.insert({nt, OM});
+            Matchm30.insert({nt, OM});
             OpMap40.insert({nt, OP});
           }
       }
@@ -582,6 +628,7 @@ namespace apfel
             obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
             obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
             obj.MatchingConditions.insert({{ 3, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match30.at(nt)}});
+            obj.MatchingConditions.insert({{-3, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Matchm30.at(nt)}});
           }
         else
           {
@@ -598,6 +645,7 @@ namespace apfel
             obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
             obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
             obj.MatchingConditions.insert({{ 3, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match30.at(nt)}});
+            obj.MatchingConditions.insert({{-3, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm30.at(nt)}});
           }
         DglapObj.insert({nt, obj});
       }
@@ -1085,6 +1133,51 @@ namespace apfel
       }
 
     // ===============================================================
+    // O(as^3) matching conditions for backward evolution
+    std::map<int, std::map<int, Operator>> Matchm30;
+    for (int nt = nti; nt <= ntf; nt++)
+      {
+        const double lnk  = LogKth[nt];
+        const double lnk2 = lnk * lnk;
+        const Operator AS1Hg   =          lnk * AS1HgL;
+        const Operator AS1ggH  =          lnk * AS1ggHL;
+        const Operator AS1gH   = AS1gH0 + lnk * AS1gHL;
+        const Operator AS1HH   = AS1HH0 + lnk * AS1HHL;
+        const Operator AS2Hg   = AS2Hg0  + lnk * AS2HgL  + lnk2 * AS2HgL2;
+        const Operator AS2ggH  = AS2ggH0 + lnk * AS2ggHL + lnk2 * AS2ggHL2;
+        const Operator AS2gH   = Zero;
+        const Operator AS2HH   = Zero;
+        const Operator AS1Hg2  = AS1Hg  * AS1ggH + AS1gH * AS1HH;
+        const Operator AS1ggH2 = AS1ggH * AS1ggH + AS1gH * AS1Hg;
+        const Operator AS1gH2  = AS1ggH * AS1gH  + AS1gH * AS1HH;
+        const Operator AS1HH2  = AS1Hg  * AS1gH  + AS1HH * AS1HH;
+        const Operator AS12Hg  = AS1Hg  * AS2ggH + AS1gH * AS2HH;
+        const Operator AS12ggH = AS1ggH * AS2ggH + AS1gH * AS2Hg;
+        const Operator AS12gH  = AS1ggH * AS2gH  + AS1gH * AS2HH;
+        const Operator AS12HH  = AS1Hg  * AS2gH  + AS1HH * AS2HH;
+        const Operator AS21Hg  = AS2Hg  * AS1ggH + AS2gH * AS1HH;
+        const Operator AS21ggH = AS2ggH * AS1ggH + AS2gH * AS1Hg;
+        const Operator AS21gH  = AS2ggH * AS1gH  + AS2gH * AS1HH;
+        const Operator AS21HH  = AS2Hg  * AS1gH  + AS2HH * AS1HH;
+        const Operator AS1Hg3  = AS1Hg  * AS1ggH2 + AS1gH * AS1HH2;
+        const Operator AS1ggH3 = AS1ggH * AS1ggH2 + AS1gH * AS1Hg2;
+        const Operator AS1gH3  = AS1ggH * AS1gH2  + AS1gH * AS1HH2;
+        const Operator AS1HH3  = AS1Hg  * AS1gH2  + AS1HH * AS1HH2;
+        std::map<int, Operator> OM;
+        if (Species.at(nt) == PartonSpecies::DOWNTYPEQUARK || Species.at(nt) == PartonSpecies::UPTYPEQUARK)
+          {
+            OM.insert({MatchingBasisQCDQED::Kgg, AS12ggH + AS21ggH - AS1ggH3});
+            OM.insert({MatchingBasisQCDQED::KgQ, AS12gH  + AS21gH  - AS1gH3});
+            OM.insert({MatchingBasisQCDQED::KQg, AS12Hg  + AS21Hg  - AS1Hg3});
+            OM.insert({MatchingBasisQCDQED::KXX, AS12HH  + AS21HH - AS1HH3});
+          }
+        // Insert Zero in the remaining slots
+        for (int i = MatchingBasisQCDQED::ONE; i <= MatchingBasisQCDQED::KNSsqm; i++)
+          OM.insert({i, Zero});
+        Matchm30.insert({nt, OM});
+      }
+
+    // ===============================================================
     // O(as^4) splitting function operators
     std::map<int, std::map<int, Operator>> OpMap40;
     for (int nt = nti; nt <= ntf; nt++)
@@ -1151,6 +1244,7 @@ namespace apfel
             obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
             obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
             obj.MatchingConditions.insert({{ 3, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Match30.at(nt)}});
+            obj.MatchingConditions.insert({{-3, 0}, Set<Operator>{MatchingOperatorBasisQCDQED{nd, nu, nl, obj.Species}, Matchm30.at(nt)}});
           }
         else
           {
@@ -1167,6 +1261,7 @@ namespace apfel
             obj.MatchingConditions.insert({{ 2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match20.at(nt)}});
             obj.MatchingConditions.insert({{-2, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm20.at(nt)}});
             obj.MatchingConditions.insert({{ 3, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Match30.at(nt)}});
+            obj.MatchingConditions.insert({{-3, 0}, Set<Operator>{MatchingBasisQCDQED{nd, nu, nl, obj.Species}, Matchm30.at(nt)}});
           }
         DglapObj.insert({nt, obj});
       }
