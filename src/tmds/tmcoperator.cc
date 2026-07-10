@@ -7,8 +7,6 @@
 #include "apfel/tmcoperator.h"
 
 #include <cmath>
-#include <math.h>
-#include <iostream>
 
 namespace apfel
 {

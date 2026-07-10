@@ -10,8 +10,6 @@
 #include "apfel/tools.h"
 #include "apfel/integrator.h"
 
-#include <iostream>
-
 namespace apfel
 {
   //_________________________________________________________________________________

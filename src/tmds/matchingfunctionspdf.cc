@@ -8,9 +8,6 @@
 #include "apfel/constants.h"
 #include "apfel/specialfunctions.h"
 
-#include <numeric>
-#include <iostream>
-
 namespace apfel
 {
   //_________________________________________________________________________________

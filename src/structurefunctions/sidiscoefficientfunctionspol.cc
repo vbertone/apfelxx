@@ -9,8 +9,6 @@
 #include "apfel/constants.h"
 #include "apfel/tools.h"
 
-#include <iostream>
-
 namespace apfel
 {
   //_________________________________________________________________________________
