@@ -47,8 +47,8 @@ namespace apfel
   {
   public:
     DDn(int const& n): Expression(), _n(n) {}
-    double Singular(double const& x) const { return pow(log( 1 - x ), _n) / ( 1 - x ); }
-    double Local(double const& x) const { return pow(log( 1 - x ), _n + 1) / ( _n + 1 ); }
+    double Singular(double const& x) const { return pow(log(1 - x), _n) / ( 1 - x ); }
+    double Local(double const& x) const { return pow(log(1 - x), _n + 1) / ( _n + 1 ); }
   private:
     int const _n;
   };
@@ -57,7 +57,7 @@ namespace apfel
   {
   public:
     ln(int const& n): Expression(), _n(n) {}
-    double Regular(double const& x) const { return pow(log( 1 - x ), _n); }
+    double Regular(double const& x) const { return pow(log(1 - x), _n); }
   private:
     int const _n;
   };
@@ -70,7 +70,7 @@ namespace apfel
     lrqq(): Expression() {}
     double Regular(double const& x) const
     {
-      const double expr = ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
+      const double expr = ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log(1 - x);
       return 2 * CF * expr;
     }
   };
@@ -88,7 +88,7 @@ namespace apfel
     rlqq(): Expression() {}
     double Regular(double const& x) const
     {
-      const double expr = - ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
+      const double expr = - ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log(1 - x);
       return 2 * CF * expr;
     }
   };
@@ -135,7 +135,7 @@ namespace apfel
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
-      const double expr = ( 1 + omx * omx ) * log( x * omx ) / x + x;
+      const double expr = ( 1 + omx * omx ) * log(x * omx) / x + x;
       return 2 * CF * expr;
     }
   };
@@ -201,7 +201,7 @@ namespace apfel
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
-      const double expr = ( x * x + omx * omx ) * log( omx / x ) + 2 * x * omx;
+      const double expr = ( x * x + omx * omx ) * log(omx / x) + 2 * x * omx;
       return expr;
     }
   };
@@ -293,7 +293,7 @@ namespace apfel
   // different grids.
   inline SidisObjects InitializeSIDIS(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
-    report("Initializing SIDIS hard cross sections... ");
+    report("Initialising SIDIS hard cross sections... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -305,7 +305,7 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Define object of the structure containing the DglapObjects
+    // Define object of the structure containing the SidisObjects
     SidisObjects SidisObj;
 
     // ====================================================

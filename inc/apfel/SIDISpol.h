@@ -30,7 +30,7 @@ namespace apfel
     lrqqpol(): Expression() {}
     double Regular(double const& x) const
     {
-      const double expr = ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
+      const double expr = ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log(1 - x);
       return 2 * CF * expr;
     }
   };
@@ -48,7 +48,7 @@ namespace apfel
     rlqqpol(): Expression() {}
     double Regular(double const& x) const
     {
-      const double expr = - ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log( 1 - x );
+      const double expr = - ( 1 + x * x ) * log(x) / ( 1 - x ) + 1 - x - ( 1 + x ) * log(1 - x);
       return 2 * CF * expr;
     }
   };
@@ -95,7 +95,7 @@ namespace apfel
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
-      const double expr = ( 1 + omx * omx ) * log( x * omx ) / x + x;
+      const double expr = ( 1 + omx * omx ) * log(x * omx) / x + x;
       return 2 * CF * expr;
     }
   };
@@ -147,7 +147,7 @@ namespace apfel
     double Regular(double const& x) const
     {
       const double omx = ( 1 - x );
-      const double expr = ( x * x - omx * omx ) * log( omx / x ) + 2 * omx;
+      const double expr = ( x * x - omx * omx ) * log(omx / x) + 2 * omx;
       return expr;
     }
   };
@@ -182,7 +182,7 @@ namespace apfel
   // different grids.
   SidisPolObjects InitializeSIDISpol(Grid const& gx, Grid const& gz, std::vector<double> const& Thresholds, std::vector<int> exclude = {})
   {
-    report("Initializing SIDIS longitudinally polarised hard cross sections... ");
+    report("Initialising SIDIS longitudinally polarised hard cross sections... ");
     Timer t;
 
     // Compute initial and final number of active flavours according
@@ -194,7 +194,7 @@ namespace apfel
       if (v <= 0)
         nfi++;
 
-    // Define object of the structure containing the DglapObjects.
+    // Define object of the structure containing the SIDISpolObjects
     SidisPolObjects SidisObj;
 
     // ====================================================
