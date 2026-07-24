@@ -143,7 +143,6 @@ namespace apfel
     const Operator K1gq{g, K1gqPOS{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator K1gg{g, K1ggPOS{nf}, IntEps};
         std::map<int, Operator> OK;
         OK.insert({EvolutionBasisQCD::PNSP, Zero});
         OK.insert({EvolutionBasisQCD::PNSM, Zero});
@@ -151,7 +150,7 @@ namespace apfel
         OK.insert({EvolutionBasisQCD::PQQ,  Zero});
         OK.insert({EvolutionBasisQCD::PQG,  2 * nf * K1qg});
         OK.insert({EvolutionBasisQCD::PGQ,  K1gq});
-        OK.insert({EvolutionBasisQCD::PGG,  K1gg});
+        OK.insert({EvolutionBasisQCD::PGG,  Zero});
         KNLO.insert({nf, OK});
       }
 
