@@ -100,6 +100,16 @@ endif()
 
 # Testing
 enable_testing()
+
+# Fortran wrapper: mirrors the old Fortran-native APFEL interface
+option(APFEL_FORTRAN_WRAPPER "Build the Fortran wrapper (mirrors the old Fortran-native APFEL interface)" ON)
+if(APFEL_FORTRAN_WRAPPER)
+    message("-- The Fortran wrapper will be built.")
+    add_subdirectory(fwrap)
+else()
+    message("-- The Fortran wrapper will not be built.")
+endif()
+
 add_subdirectory(tests)
 
 # ============================
