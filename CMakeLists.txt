@@ -145,6 +145,16 @@ if(LHAPDF_FOUND)
     endif()
 endif()
 
+# Fortran wrapper flags (empty if APFEL_FORTRAN_WRAPPER was OFF, so
+# apfelxx-config's --fortran-cflags/--fortran-libs just print nothing
+# rather than referencing a library that was never built).
+set(fortran_cflags "")
+set(fortran_ldflags "")
+if(APFEL_FORTRAN_WRAPPER)
+    set(fortran_cflags "-I${prefix}/include/apfel/fortran")
+    set(fortran_ldflags "-L${prefix}/lib -lapfelxxfortran")
+endif()
+
 configure_file(
     "${PROJECT_SOURCE_DIR}/bin/apfelxx-config.in"
     "${PROJECT_BINARY_DIR}/bin/apfelxx-config"
@@ -162,12 +172,27 @@ configure_file(
     "${PROJECT_BINARY_DIR}/bin/apfelxx.pc"
 )
 
+# pkg-config for the Fortran wrapper: a separate .pc file (rather than
+# folding it into apfelxx.pc), since it's an optional component with its
+# own library and include directory; "Requires: apfelxx" pulls in the
+# C++ library's own flags transitively.
+if(APFEL_FORTRAN_WRAPPER)
+    configure_file(
+        "${PROJECT_SOURCE_DIR}/bin/apfelxxfortran.pc.in"
+        "${PROJECT_BINARY_DIR}/bin/apfelxxfortran.pc"
+    )
+endif()
+
 # CMake config files
 include(CMakePackageConfigHelpers)
+# INCLUDE_INSTALL_DIR feeds apfelxxConfig.cmake.in's @PACKAGE_INCLUDE_INSTALL_DIR@
+# (via PATH_VARS below), which is what apfelxx_INCLUDE_DIRS resolves to.
+set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include)
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/apfelxxConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfig.cmake
     INSTALL_DESTINATION lib/cmake/apfelxx
+    PATH_VARS INCLUDE_INSTALL_DIR
 )
 write_basic_package_version_file(
     ${CMAKE_CURRENT_BINARY_DIR}/apfelxxConfigVersion.cmake
@@ -192,6 +217,11 @@ install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx-config
 install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxx.pc
     DESTINATION lib/pkgconfig
 )
+if(APFEL_FORTRAN_WRAPPER)
+    install(FILES ${PROJECT_BINARY_DIR}/bin/apfelxxfortran.pc
+        DESTINATION lib/pkgconfig
+    )
+endif()
 install(EXPORT apfelxxTargets
     FILE apfelxxTargets.cmake
     NAMESPACE apfelxx::

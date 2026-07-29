@@ -10,16 +10,19 @@ if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
     echo
     echo "Usage: apfelxx-config [Options]"
     echo "Options:"
-    echo "  --help | -h : show this help message"
-    echo "  --version   : code version"
-    echo "  --prefix    : installation prefix"
-    echo "  --incdir    : path to the APFEL++ header directory"
-    echo "  --libdir    : path to the APFEL++ library directory"
-    echo "  --cppflags  : compiler flags for use with C++ compilation"
-    echo "  --cxxflags  : same as --cppflags"
-    echo "  --cflags    : same as --cppflags"
-    echo "  --ldflags   : compiler flags for use with the linker stage of compilation"
-    echo "  --libs      : same as --ldflags"
+    echo "  --help | -h       : show this help message"
+    echo "  --version         : code version"
+    echo "  --prefix          : installation prefix"
+    echo "  --incdir          : path to the APFEL++ header directory"
+    echo "  --libdir          : path to the APFEL++ library directory"
+    echo "  --cppflags        : compiler flags for use with C++ compilation"
+    echo "  --cxxflags        : same as --cppflags"
+    echo "  --cflags          : same as --cppflags"
+    echo "  --ldflags         : compiler flags for use with the linker stage of compilation"
+    echo "  --libs            : same as --ldflags"
+    echo "  --fortran-cflags  : compiler flags for use with the Fortran wrapper (module search path)"
+    echo "  --fortran-libs    : linker flags for use with the Fortran wrapper"
+    echo "  --fortran-ldflags : same as --fortran-libs"
 fi
 
 OUT=""
@@ -50,5 +53,14 @@ test -n "$tmp" && OUT="$OUT @ldflags@"
 
 tmp=$( echo "$*" | egrep -- '--\<libs\>')
 test -n "$tmp" && OUT="$OUT @ldflags@"
+
+tmp=$( echo "$*" | egrep -- '--\<fortran-cflags\>')
+test -n "$tmp" && OUT="$OUT @fortran_cflags@"
+
+tmp=$( echo "$*" | egrep -- '--\<fortran-libs\>')
+test -n "$tmp" && OUT="$OUT @fortran_ldflags@"
+
+tmp=$( echo "$*" | egrep -- '--\<fortran-ldflags\>')
+test -n "$tmp" && OUT="$OUT @fortran_ldflags@"
 
 echo $OUT

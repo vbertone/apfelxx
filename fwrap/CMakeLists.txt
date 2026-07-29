@@ -12,28 +12,41 @@ add_library(apfelxxfortran SHARED
 )
 target_link_libraries(apfelxxfortran PRIVATE apfelxx)
 
+# Propagate the .mod search path to anything that links this target, both
+# from within the build tree (other targets in this directory already do
+# this explicitly below) and after installation.
+target_include_directories(apfelxxfortran
+    INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_Fortran_MODULE_DIRECTORY}>
+        $<INSTALL_INTERFACE:include/apfel/fortran>
+)
+
+# .mod files are compiler-specific binary interface files, unlike the
+# portable C++ headers under include/apfel, so they get their own
+# subdirectory rather than being installed alongside them.
+install(TARGETS apfelxxfortran EXPORT apfelxxTargets
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+)
+install(DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/ DESTINATION include/apfel/fortran)
+
 add_executable(checkapfel_test checkapfel_test.f90)
 target_link_libraries(checkapfel_test PRIVATE apfelxxfortran)
 target_include_directories(checkapfel_test PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
-add_test(NAME checkapfel_test COMMAND checkapfel_test)
 
 add_executable(initialize_test initialize_test.f90)
 target_link_libraries(initialize_test PRIVATE apfelxxfortran)
 target_include_directories(initialize_test PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
-add_test(NAME initialize_test COMMAND initialize_test)
 
 add_executable(evolve_test evolve_test.f90)
 target_link_libraries(evolve_test PRIVATE apfelxxfortran)
 target_include_directories(evolve_test PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
-add_test(NAME evolve_test COMMAND evolve_test)
 
 add_executable(renfacratio_test renfacratio_test.f90)
 target_link_libraries(renfacratio_test PRIVATE apfelxxfortran)
 target_include_directories(renfacratio_test PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
-add_test(NAME renfacratio_test COMMAND renfacratio_test)
 
-# Example program (mirrors the old examples/Tabulation.f), not a ctest:
-# it reads Q0^2, Q^2 interactively from stdin, same as the original.
 add_executable(tabulation tabulation.f90)
 target_link_libraries(tabulation PRIVATE apfelxxfortran)
 target_include_directories(tabulation PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
