@@ -26,3 +26,10 @@ endif()
 # Provide legacy variables for backward compatibility
 set(apfelxx_LIBRARIES apfelxx::apfelxx)
 set(apfelxx_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIR@")
+
+# Fortran wrapper: optional, only present if APFEL_FORTRAN_WRAPPER was ON
+# when this apfelxx installation was built.
+if(TARGET apfelxx::apfelxxfortran)
+    set(apfelxx_FORTRAN_LIBRARIES apfelxx::apfelxxfortran)
+    set(apfelxx_FORTRAN_INCLUDE_DIRS "${PACKAGE_PREFIX_DIR}/include/apfel/fortran")
+endif()

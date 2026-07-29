@@ -3,7 +3,7 @@ exec_prefix=@exec_prefix@
 includedir=@includedir@
 libdir=@libdir@
 
-Name: boh
+Name: apfelxx
 Description: APFEL++: A PDF Evolution Library
 Version: @apfelxx_VERSION@
 Cflags: @cflags@
