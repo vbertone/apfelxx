@@ -134,6 +134,24 @@ namespace apfel
                                                                 std::map<int, std::map<int, Set<Operator>>> const& K);
 
   /**
+   * @brief The ChangeFactorisationSchemeMSbarToK function performs
+   * the (local-in-scale) factorisation-scheme transformation of a set
+   * of distributions at a given scale: f<SUP>K</SUP> =
+   * f<SUP>MSbar</SUP> + &Sigma;<SUB>k</SUB>
+   * (&alpha;<SUB>s</SUB>/4&pi;)<SUP>k</SUP> K<SUP>(k)</SUP> (x)
+   * f<SUP>MSbar</SUP>. It takes care of the normalisation of the PQQ
+   * and PGQ entries of the kernels (factor of nf/6).
+   * @param fMSbar: the set of distributions in the MSbar scheme
+   * @param K: scheme-change kernels
+   * @param nf: number of active flavours at the scale of fMSbar
+   * @param as: value of the strong coupling at the scale of fMSbar
+   */
+  Set<Distribution> ChangeFactorisationSchemeMSbarToK(Set<Distribution>                           const& fMSbar,
+                                                      std::map<int, std::map<int, Set<Operator>>> const& K,
+                                                      int                                         const& nf,
+                                                      double                                      const& as);
+
+  /**
    * @brief The ChangeFactorisationSchemeMSbarToK function changes the
    * factoristion scheme od structure-functions objects from MSbar to
    * the scheme coded in the input kernels K.

@@ -6,6 +6,7 @@
 
 #include "apfel/factorisationschemes.h"
 #include "apfel/factorisationschemekernels.h"
+#include "apfel/constants.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
 #include "apfel/betaqcd.h"
@@ -437,6 +438,30 @@ namespace apfel
       }
 
     return DOK;
+  }
+
+  //_____________________________________________________________________________
+  Set<Distribution> ChangeFactorisationSchemeMSbarToK(Set<Distribution>                           const& fMSbar,
+                                                      std::map<int, std::map<int, Set<Operator>>> const& K,
+                                                      int                                         const& nf,
+                                                      double                                      const& as)
+  {
+    // Set output equal to input
+    Set<Distribution> fK = fMSbar;
+
+    // Accumulate the perturbative corrections
+    for (auto const& Kk : K.at(nf))
+      {
+        // Adjust the normalisation of the PQQ and PGQ entries for the
+        // direct application of the operators to the distributions.
+        Set<Operator> Kloc = Kk.second;
+        std::map<int, Operator> Kobj = Kloc.GetObjects();
+        Kobj.at(EvolutionBasisQCD::PQQ) *= nf / 6.;
+        Kobj.at(EvolutionBasisQCD::PGQ) *= nf / 6.;
+        Kloc.SetObjects(Kobj);
+        fK += pow(as / FourPi, Kk.first) * ( Kloc * fMSbar );
+      }
+    return fK;
   }
 
   //_____________________________________________________________________________
