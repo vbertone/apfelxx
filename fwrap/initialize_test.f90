@@ -6,7 +6,7 @@
 ! 0.118, MuQCDRef = 91.1876, NLO, same grid parameters).
 !
 program initialize_test
-  use apfel_evolution
+  use apfel_fortran
   implicit none
 
   double precision, parameter :: sqrt2 = 1.4142135623730951d0

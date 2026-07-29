@@ -1,7 +1,7 @@
 !
 ! Fortran driver reproducing the structure of the old APFEL example
 ! program examples/Tabulation.f on top of the new apfelxx Fortran
-! wrapper (fwrap/apfel_evolution.f90), evolving from Q0 = sqrt(2) GeV
+! wrapper (fwrap/apfel_fortran.f90), evolving from Q0 = sqrt(2) GeV
 ! to Q = 100 GeV (non-interactive, unlike the original).
 !
 ! No SetXxx calls are made at all: InitializeAPFEL falls back to its
@@ -10,7 +10,7 @@
 ! apfel::EvolutionSetup's own defaults (inc/apfel/evolutionsetup.h).
 !
 program tabulation
-  use apfel_evolution
+  use apfel_fortran
   implicit none
 
   integer, parameter :: nlha = 9

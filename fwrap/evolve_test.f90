@@ -13,7 +13,7 @@
 ! EvolveAPFEL, and xPDFxQ is checked without touching xPDF.
 !
 program evolve_test
-  use apfel_evolution
+  use apfel_fortran
   implicit none
 
   double precision, parameter :: sqrt2 = 1.4142135623730951d0

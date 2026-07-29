@@ -9,7 +9,7 @@
 ! genuine Fortran symbols of the old APFEL library if both are ever
 ! linked into the same program.
 !
-module apfel_evolution
+module apfel_fortran
   use iso_c_binding
   implicit none
 
@@ -30,6 +30,8 @@ module apfel_evolution
   public :: CachePDFsAPFEL
   public :: xPDF
   public :: xPDFxQ
+  public :: SetRenFacRatio
+  public :: SetReplica
 
   interface
     function apfelxxf_checkapfel() bind(C, name="apfelxxf_checkapfel") result(res)
@@ -116,6 +118,16 @@ module apfel_evolution
       real(c_double), value :: x, q
       real(c_double) :: res
     end function apfelxxf_xpdfxq
+
+    subroutine apfelxxf_setrenfacratio(xi) bind(C, name="apfelxxf_setrenfacratio")
+      import :: c_double
+      real(c_double), value :: xi
+    end subroutine apfelxxf_setrenfacratio
+
+    subroutine apfelxxf_setreplica(irep) bind(C, name="apfelxxf_setreplica")
+      import :: c_int
+      integer(c_int), value :: irep
+    end subroutine apfelxxf_setreplica
   end interface
 
 contains
@@ -200,4 +212,14 @@ contains
     xPDFxQ = apfelxxf_xpdfxq(int(i, c_int), real(x, c_double), real(q, c_double))
   end function xPDFxQ
 
-end module apfel_evolution
+  subroutine SetRenFacRatio(xi)
+    double precision, intent(in) :: xi
+    call apfelxxf_setrenfacratio(real(xi, c_double))
+  end subroutine SetRenFacRatio
+
+  subroutine SetReplica(irep)
+    integer, intent(in) :: irep
+    call apfelxxf_setreplica(int(irep, c_int))
+  end subroutine SetReplica
+
+end module apfel_fortran

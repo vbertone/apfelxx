@@ -8,7 +8,7 @@ set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/mod)
 
 add_library(apfelxxfortran SHARED
     apfelfortran.cc
-    apfel_evolution.f90
+    apfel_fortran.f90
 )
 target_link_libraries(apfelxxfortran PRIVATE apfelxx)
 
@@ -26,6 +26,11 @@ add_executable(evolve_test evolve_test.f90)
 target_link_libraries(evolve_test PRIVATE apfelxxfortran)
 target_include_directories(evolve_test PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
 add_test(NAME evolve_test COMMAND evolve_test)
+
+add_executable(renfacratio_test renfacratio_test.f90)
+target_link_libraries(renfacratio_test PRIVATE apfelxxfortran)
+target_include_directories(renfacratio_test PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
+add_test(NAME renfacratio_test COMMAND renfacratio_test)
 
 # Example program (mirrors the old examples/Tabulation.f), not a ctest:
 # it reads Q0^2, Q^2 interactively from stdin, same as the original.

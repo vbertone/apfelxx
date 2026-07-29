@@ -4,7 +4,7 @@
 ! through to the C++ shim.
 !
 program checkapfel_test
-  use apfel_evolution
+  use apfel_fortran
   implicit none
 
   if (.not. CheckAPFEL()) then

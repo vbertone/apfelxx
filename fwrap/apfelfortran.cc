@@ -1,8 +1,8 @@
 //
 // apfelxx Fortran wrapper
 //
-// C-linkage shim called by the apfel_evolution Fortran module
-// (fwrap/apfel_evolution.f90) via bind(C) interfaces. Mirrors the
+// C-linkage shim called by the apfel_fortran Fortran module
+// (fwrap/apfel_fortran.f90) via bind(C) interfaces. Mirrors the
 // procedural, stateful interface of the old Fortran-native APFEL
 // (APFELfwevol.h) on top of apfelxx's C++ evolution machinery.
 //
@@ -62,6 +62,14 @@ namespace
       {100, 1e-5, 3}, {100, 1e-1, 3}, {100, 6e-1, 3}, {80, 8.5e-1, 5}
     };
 
+    // Renormalisation/factorisation scale-variation ratio xi = muR/muF,
+    // passed straight through to BuildDglap (which defaults to 1 itself).
+    double xi = 1;
+
+    // LHAPDF member index, consulted by SetPDFSet when it next builds an
+    // LHAPDF-backed InSet. Has no effect on the built-in "toyLH" set.
+    int replica = 0;
+
     // Built by InitializeAPFEL (grid + evolution-kernel integrals only,
     // no PDFs involved yet, exactly like the old InitializeAPFEL.f)
     std::unique_ptr<const apfel::Grid> g;
@@ -116,7 +124,7 @@ namespace
 
     if (!state.dglap || state.dglapQ0 != q0)
       {
-        state.dglap = apfel::BuildDglap(state.DglapObj, state.InSet, q0, state.PerturbativeOrder, state.as);
+        state.dglap = apfel::BuildDglap(state.DglapObj, state.InSet, q0, state.PerturbativeOrder, state.as, state.xi);
         state.dglapQ0 = q0;
       }
   }
@@ -210,6 +218,21 @@ extern "C"
     return State().PerturbativeOrder;
   }
 
+  void apfelxxf_setrenfacratio(double xi)
+  {
+    FortranState& state = State();
+    state.xi = xi;
+    // The dglap object was built with the previous xi: force a rebuild.
+    state.dglap.reset();
+    state.tab.reset();
+    state.evolved = false;
+  }
+
+  void apfelxxf_setreplica(int irep)
+  {
+    State().replica = irep;
+  }
+
   void apfelxxf_setpdfset(char const* name, int length)
   {
     FortranState& state = State();
@@ -220,7 +243,7 @@ extern "C"
     else
       {
 #ifdef WITH_LHAPDF
-        auto pdf = std::shared_ptr<LHAPDF::PDF>(LHAPDF::mkPDF(pdfset, 0));
+        auto pdf = std::shared_ptr<LHAPDF::PDF>(LHAPDF::mkPDF(pdfset, state.replica));
         state.InSet = [pdf] (double const& x, double const& Q0) -> std::map<int, double>
         {
           return apfel::PhysToQCDEv(pdf->xfxQ(x, Q0));
