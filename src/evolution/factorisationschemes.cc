@@ -6,6 +6,7 @@
 
 #include "apfel/factorisationschemes.h"
 #include "apfel/factorisationschemekernels.h"
+#include "apfel/constants.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
 #include "apfel/betaqcd.h"
@@ -143,7 +144,6 @@ namespace apfel
     const Operator K1gq{g, K1gqPOS{}, IntEps};
     for (int nf = nfi; nf <= nff; nf++)
       {
-        const Operator K1gg{g, K1ggPOS{nf}, IntEps};
         std::map<int, Operator> OK;
         OK.insert({EvolutionBasisQCD::PNSP, Zero});
         OK.insert({EvolutionBasisQCD::PNSM, Zero});
@@ -151,7 +151,7 @@ namespace apfel
         OK.insert({EvolutionBasisQCD::PQQ,  Zero});
         OK.insert({EvolutionBasisQCD::PQG,  2 * nf * K1qg});
         OK.insert({EvolutionBasisQCD::PGQ,  K1gq});
-        OK.insert({EvolutionBasisQCD::PGG,  K1gg});
+        OK.insert({EvolutionBasisQCD::PGG,  Zero});
         KNLO.insert({nf, OK});
       }
 
@@ -438,6 +438,30 @@ namespace apfel
       }
 
     return DOK;
+  }
+
+  //_____________________________________________________________________________
+  Set<Distribution> ChangeFactorisationSchemeMSbarToK(Set<Distribution>                           const& fMSbar,
+                                                      std::map<int, std::map<int, Set<Operator>>> const& K,
+                                                      int                                         const& nf,
+                                                      double                                      const& as)
+  {
+    // Set output equal to input
+    Set<Distribution> fK = fMSbar;
+
+    // Accumulate the perturbative corrections
+    for (auto const& Kk : K.at(nf))
+      {
+        // Adjust the normalisation of the PQQ and PGQ entries for the
+        // direct application of the operators to the distributions.
+        Set<Operator> Kloc = Kk.second;
+        std::map<int, Operator> Kobj = Kloc.GetObjects();
+        Kobj.at(EvolutionBasisQCD::PQQ) *= nf / 6.;
+        Kobj.at(EvolutionBasisQCD::PGQ) *= nf / 6.;
+        Kloc.SetObjects(Kobj);
+        fK += pow(as / FourPi, Kk.first) * ( Kloc * fMSbar );
+      }
+    return fK;
   }
 
   //_____________________________________________________________________________

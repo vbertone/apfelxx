@@ -42,18 +42,6 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
-  K1ggPOS::K1ggPOS(int const& nf):
-    Expression(),
-    _nf(nf)
-  {
-  }
-  double K1ggPOS::Regular(double const& x) const
-  {
-    const double xm1 = x - 1;
-    return 2 * ( ( 475. / 3. ) * TR * _nf * x * x * xm1 * xm1 );
-  }
-
-  //_________________________________________________________________________________
   K1qqMPOS::K1qqMPOS():
     Expression()
   {
@@ -92,7 +80,8 @@ namespace apfel
   }
   double K1ggMPOS::Regular(double const& x) const
   {
-    return K1ggPOS{_nf}.Regular(x);
+    const double xm1 = x - 1;
+    return 2 * ( ( 475. / 3. ) * TR * _nf * x * x * xm1 * xm1 );
   }
 
   //_________________________________________________________________________________

@@ -42,7 +42,7 @@ int main()
   const auto DglapObjAnKrk = InitializeDglapObjectsQCDKrk(g, Thresholds);
 
   // Trasformed sets of input PDFs
-  const apfel::Set<apfel::Distribution> SetLHToyPDFsKrk = SetLHToyPDFs + as(mu0) / apfel::FourPi * ( KKrk.at(apfel::NF(mu0, Thresholds)).at(1) * SetLHToyPDFs );
+  const apfel::Set<apfel::Distribution> SetLHToyPDFsKrk = ChangeFactorisationSchemeMSbarToK(SetLHToyPDFs, KKrk, apfel::NF(mu0, Thresholds), as(mu0));
   const std::function<std::map<int, double>(double const&, double const&)> LHToyPDFsKrk = [=] (double const& x, double const&) -> std::map<int, double>
   {
     std::map<int, double> out;
@@ -66,7 +66,7 @@ int main()
 
   // Trasformed sets of input PDFs
   // Trasformed sets of input PDFs
-  const apfel::Set<apfel::Distribution> SetLHToyPDFsPHYS = SetLHToyPDFs + as(mu0) / apfel::FourPi * ( KPHYS.at(apfel::NF(mu0, Thresholds)).at(1) * SetLHToyPDFs );
+  const apfel::Set<apfel::Distribution> SetLHToyPDFsPHYS = ChangeFactorisationSchemeMSbarToK(SetLHToyPDFs, KPHYS, apfel::NF(mu0, Thresholds), as(mu0));
   const std::function<std::map<int, double>(double const&, double const&)> LHToyPDFsPHYS = [=] (double const& x, double const&) -> std::map<int, double>
   {
     std::map<int, double> out;
