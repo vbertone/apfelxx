@@ -54,10 +54,16 @@ namespace apfel
     ///@}
 
     /**
-     * @brief Function to add more terms.
+     * @brief Function to add one more term.
      * @param newterm: new term to be appended to the vector of terms
      */
     void AddTerm(term<T, U> const& newterm);
+
+    /**
+     * @brief Function to add multiple terms.
+     * @param newterms: new terms to be appended to the vector of terms
+     */
+    void AddTerms(std::vector<term<T, U>> const& newterms);
 
     /**
      * @brief Function to get the terms.

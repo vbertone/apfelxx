@@ -37,6 +37,13 @@ namespace apfel
 
   //_________________________________________________________________________
   template<class T, class U>
+  void DoubleObject<T, U>::AddTerms(std::vector<term<T, U>> const& newterms)
+  {
+    _terms.insert(_terms.end(), newterms.begin(), newterms.end());
+  }
+
+  //_________________________________________________________________________
+  template<class T, class U>
   template<class V> DoubleObject<V> DoubleObject<T, U>::operator *= (DoubleObject<V> const& o) const
   {
     const std::vector<term<V>> tt = o.GetTerms();
