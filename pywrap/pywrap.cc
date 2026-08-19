@@ -185,6 +185,16 @@ PYBIND11_MODULE(apfelpy, m)
   _constants.attr("CKM")        = apfel::CKM;
   _constants.attr("CKM2")       = apfel::CKM2;
 
+  py::enum_<apfel::PartonSpecies>(_constants, "PartonSpecies", "Partonic species relevant to the QCDxQED evolution.")
+  .value("UNKNOWN",       apfel::PartonSpecies::UNKNOWN)
+  .value("GLUON",         apfel::PartonSpecies::GLUON)
+  .value("DOWNTYPEQUARK", apfel::PartonSpecies::DOWNTYPEQUARK)
+  .value("UPTYPEQUARK",   apfel::PartonSpecies::UPTYPEQUARK)
+  .value("PHOTON",        apfel::PartonSpecies::PHOTON)
+  .value("CHARGEDLEPTON", apfel::PartonSpecies::CHARGEDLEPTON)
+  .value("NEUTRINO",      apfel::PartonSpecies::NEUTRINO)
+  .export_values();
+
   // Wrappers of "betaqcd.h"
   _betaQCD.def("beta0qcd", &apfel::beta0qcd, "nf"_a);
   _betaQCD.def("beta1qcd", &apfel::beta1qcd, "nf"_a);
@@ -219,7 +229,9 @@ PYBIND11_MODULE(apfelpy, m)
 
   // Wrappers of "lhtoypdfs.h"
   _utilities.def("LHToyPDFs", &apfel::LHToyPDFs, "x"_a, "Q"_a);
+  _utilities.def("LHToyPDFsQCDQED", &apfel::LHToyPDFsQCDQED, "x"_a, "Q"_a);
   _utilities.def("LHToyPDFsPhys", &apfel::LHToyPDFsPhys, "x"_a, "Q"_a);
+  _utilities.def("LHToyPDFsPlusMinus", &apfel::LHToyPDFsPlusMinus, "x"_a, "Q"_a);
   _utilities.def("LHToyPDFsPol", &apfel::LHToyPDFsPol, "x"_a, "Q"_a);
   _utilities.def("LHToyFFs", &apfel::LHToyFFs, "x"_a, "Q"_a);
 
@@ -253,6 +265,10 @@ PYBIND11_MODULE(apfelpy, m)
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, double> const&>(&apfel::QCDEvToPhys),              "QCDEvMap"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, apfel::Distribution> const&>(&apfel::QCDEvToPhys), "QCDEvMap"_a);
   _utilities.def("QCDEvToPhys", py::overload_cast<std::map<int, apfel::Operator> const&>(&apfel::QCDEvToPhys),     "QCDEvMap"_a);
+  _utilities.def("PlusMinusQCDQEDToPhys", py::overload_cast<std::map<int, double> const&>(&apfel::PlusMinusQCDQEDToPhys),              "PlusMinusMap"_a);
+  _utilities.def("PlusMinusQCDQEDToPhys", py::overload_cast<std::map<int, apfel::Distribution> const&>(&apfel::PlusMinusQCDQEDToPhys), "PlusMinusMap"_a);
+  _utilities.def("PhysToPlusMinusQCDQED", py::overload_cast<std::map<int, double> const&>(&apfel::PhysToPlusMinusQCDQED),              "InPhysMap"_a);
+  _utilities.def("PhysToPlusMinusQCDQED", py::overload_cast<std::map<int, apfel::Distribution> const&>(&apfel::PhysToPlusMinusQCDQED), "InPhysMap"_a);
 
   // Wrappers of "timer.h"
   py::class_<apfel::Timer>(m, "Timer", "Computes the time elapsed between start and stop.")
@@ -366,6 +382,11 @@ PYBIND11_MODULE(apfelpy, m)
   .def(py::self + py::self)
   .def(py::self - py::self)
   .def(py::self * py::self);
+
+  _utilities.def("DistributionMap", py::overload_cast<apfel::Grid const&, std::function<std::map<int, double>(double const&, double const&)> const&, double const&, std::vector<int> const&>(&apfel::DistributionMap), "Fill in a map of distributions from a map-valued function of (x, Q).", "g"_a, "InDistFunc"_a, "Q"_a, "skip"_a = std::vector<int> {});
+  _utilities.def("DistributionMap", py::overload_cast<apfel::Grid const&, std::function<std::map<int, double>(double const&)> const&, std::vector<int> const&>(&apfel::DistributionMap), "Fill in a map of distributions from a map-valued function of x.", "g"_a, "InDistFunc"_a, "skip"_a = std::vector<int> {});
+  _utilities.def("DistributionMap", py::overload_cast<apfel::Grid const&, std::function<std::vector<double>(double const&)> const&, int const&>(&apfel::DistributionMap), "Fill in a map of distributions from a vector-valued function of x.", "g"_a, "InDistFunc"_a, "NOutputs"_a = 0);
+  _utilities.def("Sum", &apfel::Sum, "Sum the elements of the joint grid of a distribution.", "InDist"_a);
 
   // Wrappers of "expression.h"
   // Trampoline class for virtual class
@@ -654,6 +675,23 @@ PYBIND11_MODULE(apfelpy, m)
   py::class_<apfel::MatchingOperatorBasisQCD, apfel::ConvolutionMap>(m, "MatchingOperatorBasisQCD", "Convolution map for the QCD matching of operators at heavy-quark thresholds.")
   .def(py::init<int const&>(), "nf"_a);
 
+  // Wrappers of "evolutionbasisqcdqed.h"
+  py::class_<apfel::EvolutionBasisQCDQED, apfel::ConvolutionMap>(m, "EvolutionBasisQCDQED", "QCDxQED evolution basis: convolution map for the DGLAP evolution of distributions.")
+  .def(py::init<int const&, int const&, int const&>(), "nd"_a, "nu"_a, "nl"_a);
+
+  py::class_<apfel::EvolutionOperatorBasisQCDQED, apfel::ConvolutionMap>(m, "EvolutionOperatorBasisQCDQED", "QCDxQED evolution basis: convolution map for the DGLAP evolution of operators.")
+  .def(py::init<int const&, int const&, int const&>(), "nd"_a, "nu"_a, "nl"_a);
+
+  py::class_<apfel::EvolveDistributionsBasisQCDQED, apfel::ConvolutionMap>(m, "EvolveDistributionsBasisQCDQED", "Convolution map to evolve a full set of distributions in the QCDxQED basis.")
+  .def(py::init<>());
+
+  // Wrappers of "matchingbasisqcdqed.h"
+  py::class_<apfel::MatchingBasisQCDQED, apfel::ConvolutionMap>(m, "MatchingBasisQCDQED", "Convolution map for the QCDxQED matching of distributions at heavy-quark/lepton thresholds.")
+  .def(py::init<int const&, int const&, int const&, apfel::PartonSpecies const&>(), "nd"_a, "nu"_a, "nl"_a, "species"_a);
+
+  py::class_<apfel::MatchingOperatorBasisQCDQED, apfel::ConvolutionMap>(m, "MatchingOperatorBasisQCDQED", "Convolution map for the QCDxQED matching of operators at heavy-quark/lepton thresholds.")
+  .def(py::init<int const&, int const&, int const&, apfel::PartonSpecies const&>(), "nd"_a, "nu"_a, "nl"_a, "species"_a);
+
   // Wrappers of "set.h"
   py::class_<apfel::Set<apfel::Distribution>>(m, "SetD", "Collection of objects (distributions) together with a convolution map.")
   .def(py::init<apfel::ConvolutionMap const&, std::map<int, apfel::Distribution> const&>(), "Map"_a = apfel::ConvolutionMap{"UNDEFINED"}, "in"_a = std::map<int, apfel::Distribution> {})
@@ -665,6 +703,7 @@ PYBIND11_MODULE(apfelpy, m)
   .def("SetObjects", &apfel::Set<apfel::Distribution>::SetObjects, "(Re)set the map of objects.", "objects"_a)
   .def("Combine", py::overload_cast<>(&apfel::Set<apfel::Distribution>::Combine, py::const_), "Sum all objects of the set into a single one.")
   .def("Combine", py::overload_cast<std::vector<double> const&>(&apfel::Set<apfel::Distribution>::Combine, py::const_), "Sum all objects of the set weighted by the given coefficients.", "weights"_a)
+  .def("Squash", &apfel::Set<apfel::Distribution>::Squash, "Squash the distributions of the set and return a map of doubles.")
   .def("Print", &apfel::Set<apfel::Distribution>::Print, "Print the Set object.")
   .def(py::self *= double())
   //.def(py::self *= py::self)
@@ -684,7 +723,12 @@ PYBIND11_MODULE(apfelpy, m)
   .def(std::map<int, double>() * py::self)
   .def(py::self / double())
   .def(py::self + py::self)
-  .def(py::self - py::self);
+  .def(py::self - py::self)
+  // Convolution of two sets of distributions.
+  .def("__mul__", [] (apfel::Set<apfel::Distribution> const& lhs, apfel::Set<apfel::Distribution> const& rhs)
+  {
+    return lhs * rhs;
+  }, py::is_operator());
 
   py::class_<apfel::Set<apfel::Operator>>(m, "SetO", "Collection of objects (operators) together with a convolution map.")
   .def(py::init<apfel::ConvolutionMap const&, std::map<int, apfel::Operator> const&>(), "Map"_a = apfel::ConvolutionMap{"UNDEFINED"}, "in"_a = std::map<int, apfel::Operator> {})
@@ -696,6 +740,7 @@ PYBIND11_MODULE(apfelpy, m)
   .def("SetObjects", &apfel::Set<apfel::Operator>::SetObjects, "objects"_a)
   .def("Combine", py::overload_cast<>(&apfel::Set<apfel::Operator>::Combine, py::const_))
   .def("Combine", py::overload_cast<std::vector<double> const&>(&apfel::Set<apfel::Operator>::Combine, py::const_), "weights"_a)
+  .def("Evaluate", &apfel::Set<apfel::Operator>::Evaluate, "Interpolate the operators of the set over their first index at x and return a set of distributions.", "x"_a)
   .def("Print", &apfel::Set<apfel::Operator>::Print)
   .def(py::self *= double())
   //.def(py::self *= py::self)
@@ -715,7 +760,17 @@ PYBIND11_MODULE(apfelpy, m)
   .def(std::map<int, double>() * py::self)
   .def(py::self / double())
   .def(py::self + py::self)
-  .def(py::self - py::self);
+  .def(py::self - py::self)
+  // Convolution of a set of operators with a set of distributions,
+  // used to evolve distributions through the evolution operators.
+  .def("__mul__", [] (apfel::Set<apfel::Operator> const& lhs, apfel::Set<apfel::Distribution> const& rhs)
+  {
+    return lhs * rhs;
+  }, py::is_operator())
+  .def("__mul__", [] (apfel::Set<apfel::Operator> const& lhs, apfel::Set<apfel::Operator> const& rhs)
+  {
+    return lhs * rhs;
+  }, py::is_operator());
 
   py::class_<apfel::Set<apfel::DoubleObject<apfel::Distribution, apfel::Operator>>>(m, "SetDO", "Collection of objects (distribution-operator double objects) together with a convolution map.")
   .def(py::init<apfel::ConvolutionMap const&, std::map<int, apfel::DoubleObject<apfel::Distribution, apfel::Operator>> const&>(), "Map"_a = apfel::ConvolutionMap{"UNDEFINED"}, "in"_a = std::map<int, apfel::DoubleObject<apfel::Distribution, apfel::Operator>> {})
@@ -877,6 +932,27 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeDglapObjectsQCDTtrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDTtrans), "g"_a, "Masses"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeDglapObjectsQCDTtrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&>(&apfel::InitializeDglapObjectsQCDTtrans), "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
 
+  // Wrappers of "dglapbuilderqcdqed.h"
+  py::class_<apfel::DglapObjectsQCDQED>(m, "DglapObjectsQCDQED", "Container of the operators (splitting functions, matching conditions and inhomogeneous terms) needed to build the QCDxQED DGLAP evolution.")
+  .def_readwrite("Threshold", &apfel::DglapObjectsQCDQED::Threshold)
+  .def_readwrite("Species", &apfel::DglapObjectsQCDQED::Species)
+  .def_readwrite("ActiveFlavours", &apfel::DglapObjectsQCDQED::ActiveFlavours)
+  .def_readwrite("UnitySet", &apfel::DglapObjectsQCDQED::UnitySet)
+  .def_readwrite("SplittingFunctions", &apfel::DglapObjectsQCDQED::SplittingFunctions)
+  .def_readwrite("MatchingConditions", &apfel::DglapObjectsQCDQED::MatchingConditions)
+  .def_readwrite("InhomogeneousTerms", &apfel::DglapObjectsQCDQED::InhomogeneousTerms);
+
+  _initializers.def("InitializeDglapObjectsQCDQED", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&, bool const&, std::vector<int> const&>(&apfel::InitializeDglapObjectsQCDQED), "Precompute the perturbative coefficients of the QCDxQED splitting functions and matching conditions.", "g"_a, "QuarkThresholds"_a, "LeptonThresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5, "n3lo"_a = false, "IMod"_a = std::vector<int> {0, 0, 0, 0});
+  _initializers.def("InitializeDglapObjectsQCDQEDOme", py::overload_cast<apfel::Grid const&, std::vector<double> const&, std::vector<double> const&, bool const&, double const&, std::vector<int> const&>(&apfel::InitializeDglapObjectsQCDQEDOme), "Precompute the perturbative coefficients of the QCDxQED splitting functions and matching conditions using libome for the matching conditions at threshold.", "g"_a, "QuarkThresholds"_a, "LeptonThresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5, "IMod"_a = std::vector<int> {0, 0, 0, 0});
+  _initializers.def("InitializeDglapObjectsPhoton", py::overload_cast<apfel::Grid const&, std::vector<double> const&, bool const&, double const&, bool const&>(&apfel::InitializeDglapObjectsPhoton), "Precompute the perturbative coefficients of the splitting functions, matching conditions and inhomogeneous terms for the QCD evolution of the photon.", "g"_a, "Thresholds"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5, "DISgamma"_a = false);
+
+  _builders.def("SplittingFunctionsQCDQED", &apfel::SplittingFunctionsQCDQED, "Construct a function of the number of active flavours and t = 2log(mu) returning the full set of QCDxQED splitting functions.", "DglapObj"_a, "PerturbativeOrder"_a, "Alphas"_a, "Alphaem"_a);
+  _builders.def("MatchingConditionsQCDQED", &apfel::MatchingConditionsQCDQED, "Construct a function of the matching direction and the number of active flavours returning the full set of QCDxQED matching functions.", "DglapObj"_a, "PerturbativeOrder"_a, "AlphasTh"_a, "AlphaemTh"_a);
+  _builders.def("InhomogeneousTermsQCDQED", &apfel::InhomogeneousTermsQCDQED, "Construct a function of the number of active flavours and t = 2log(mu) returning the full set of QCDxQED inhomogeneous terms.", "DglapObj"_a, "PerturbativeOrder"_a, "Alphas"_a, "Alphaem"_a);
+
+  _builders.def("BuildDglap", py::overload_cast<std::map<int, apfel::DglapObjectsQCDQED> const&, std::function<std::map<int, double>(double const&, double const&)> const&, double const&, int const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&, int const&>(&apfel::BuildDglap), "Build the QCDxQED DGLAP evolution object from the DGLAP objects and the initial-scale distributions.", "DglapObj"_a, "InDistFunc"_a, "MuRef"_a, "PerturbativeOrder"_a, "Alphas"_a, "Alphaem"_a, "nsteps"_a = 10);
+  _builders.def("BuildDglap", py::overload_cast<std::map<int, apfel::DglapObjectsQCDQED> const&, double const&, int const&, std::function<double(double const&)> const&, std::function<double(double const&)> const&, int const&>(&apfel::BuildDglap), "Build the QCDxQED DGLAP evolution object from the DGLAP objects (no initial distributions set).", "DglapObj"_a, "MuRef"_a, "PerturbativeOrder"_a, "Alphas"_a, "Alphaem"_a, "nsteps"_a = 10);
+
   // Wrappers of "tabulateobject.h"
   constexpr char const* tabdoc = "Tabulates an object on a Q-grid for fast interpolation (specialisation of QGrid<T>).";
   bind_tabulateobject<double>(m, "TabulateObject", tabdoc);
@@ -932,7 +1008,7 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeImCFF1NCObjectsZM", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeImCFF1NCObjectsZM),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
   _initializers.def("InitializeReCFF1NCObjectsZM", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeReCFF1NCObjectsZM),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
 
-  // Wrappers of "dglapbuilder.h"
+  // Wrappers of "gpdbuilder.h"
   _initializers.def("InitializeGpdObjects", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjects), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeGpdObjectsPol", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsPol), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
   _initializers.def("InitializeGpdObjectsTrans", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjectsTrans), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
