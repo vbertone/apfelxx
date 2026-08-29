@@ -41,7 +41,7 @@ int main()
   const apfel::Operator Om22ps = Om22psc + lxi * Om22psb;
   const apfel::Operator Om22g  = Om22gc  + lxi * Om22gb;
 
-  // Contruct extended operators
+  // Construct extended operators
   const apfel::Operator Om21gExt {Om21g, eta};
   const apfel::Operator Om22nsExt{Om22ns, eta};
   const apfel::Operator Om22psExt{Om22ps, eta};
@@ -83,10 +83,10 @@ int main()
   const double xstp = exp( log(xmax / xmin) / ( nx - 1 ) );
   for (double x = xmin; x < xmax * 1.000001; x *= xstp)
     std::cout << std::setprecision(4) << x << "\t"
-              << ( Dm21gExt.Evaluate(x) - Dm21g.Evaluate(x / eta) ) / ( Dm21g.Evaluate(x / eta) + 1 )<< "\t"
+              << ( Dm21gExt.Evaluate(x)  - Dm21g.Evaluate(x / eta) )  / ( Dm21g.Evaluate(x / eta)  + 1 )<< "\t"
               << ( Dm22nsExt.Evaluate(x) - Dm22ns.Evaluate(x / eta) ) / ( Dm22ns.Evaluate(x / eta) + 1 ) << "\t"
               << ( Dm22psExt.Evaluate(x) - Dm22ps.Evaluate(x / eta) ) / ( Dm22ps.Evaluate(x / eta) + 1 ) << "\t"
-              << ( Dm22gExt.Evaluate(x) - Dm22g.Evaluate(x / eta) ) / ( Dm22g.Evaluate(x / eta) + 1 ) << "\t"
+              << ( Dm22gExt.Evaluate(x)  - Dm22g.Evaluate(x / eta) )  / ( Dm22g.Evaluate(x / eta)  + 1 ) << "\t"
               << std::endl;
   std::cout << std::endl;
 

@@ -74,6 +74,32 @@ namespace apfel
     double Evaluate(double const& x, int const& ig) const;
 
     /**
+     * @brief Function that evaluates the interpolated
+     * function. Differently from Evaluate, this function interpolates
+     * using logarithms as a basis.
+     * @param x: the value in x to be interpolated
+     * @return the interpolated result
+     * @note The interpolants polynomial in log(x) are defined in
+     * terms of the logarithmic step of the grid, which is only
+     * defined for the single subgrids and not for the joint grid
+     * (that in general is not logarithmically spaced). Therefore,
+     * this function selects the subgrid that the joint grid would
+     * take "x" from, i.e. the last subgrid whose lower bound is below
+     * "x", and interpolates over it.
+     */
+    double EvaluateLog(double const& x) const;
+
+    /**
+     * @brief Function that evaluates the interpolated function on a
+     * given subgrid. Differently from Evaluate, this function
+     * interpolates using logarithms as a basis.
+     * @param x: the value in x to be interpolated
+     * @param ig: the subgrid index
+     * @return the interpolated result
+     */
+    double EvaluateLog(double const& x, int const& ig) const;
+
+    /**
      * @brief Function that evaluates the derivative of the
      * interpolated function on the joint grid.
      * @param x: the value in x where the derivative has to be computed

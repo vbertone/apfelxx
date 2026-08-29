@@ -55,6 +55,38 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  double Interpolator::EvaluateLog(double const& x) const
+  {
+    // The interpolants polynomial in log(x) rely on the logarithmic
+    // step of the grid, which is undefined for the joint grid because
+    // in general it is not logarithmically spaced. Therefore, select
+    // the subgrid that the joint grid would take "x" from, i.e. the
+    // last subgrid whose lower bound is below "x". The subgrids are
+    // ordered by increasing lower bound by Grid::CreateJointGrid.
+    int ig = 0;
+    for (int jg = _grid.nGrids() - 1; jg > 0; jg--)
+      if (x >= _grid.GetSubGrid(jg).xMin())
+        {
+          ig = jg;
+          break;
+        }
+
+    return EvaluateLog(x, ig);
+  }
+
+  //_________________________________________________________________________________
+  double Interpolator::EvaluateLog(double const& x, int const& ig) const
+  {
+    const double lnx = log(x);
+    const std::array<int, 2> bounds = SumBounds(x, _grid.GetSubGrid(ig));
+    double result = 0;
+    for (int beta = bounds[0]; beta < bounds[1]; beta++)
+      result += InterpolantLog(beta, lnx, _grid.GetSubGrid(ig)) * _distributionSubGrid[ig][beta];
+
+    return result;
+  }
+
+  //_________________________________________________________________________________
   double Interpolator::Derive(double const& x) const
   {
     const std::array<int, 2> bounds = SumBounds(x, _grid.GetJointGrid());
