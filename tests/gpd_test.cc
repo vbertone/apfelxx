@@ -53,7 +53,7 @@ int main()
 
   // Evolve GPDs to the final Scale
   apfel::Timer t;
-  const std::map<int, apfel::Distribution> gpds = apfel::QCDEvToPhys(TabulatedGPDs.Evaluate(mu).GetObjects());
+  const std::map<int, apfel::Distribution> gpds = apfel::QCDEvToPhys(EvolvedGPDs->Evaluate(mu).GetObjects());
   t.stop();
 
   std::cout << "Interpolation of the tabulated GPDs... ";

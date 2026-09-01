@@ -1390,15 +1390,9 @@ namespace apfel
         const int nu = NDU[nt][1];
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
-          {
-            OM.insert({8  - i, ( NC * ed2 ) * Ppgm01});
-            OM.insert({11 + i, ( NC * ed2 ) * Ppgm01});
-          }
+          OM.insert({8  - i, ( NC * ed2 ) * Ppgm01});
         for (int i = 0; i < nu; i++)
-          {
-            OM.insert({5  - i, ( NC * eu2 ) * Ppgm01});
-            OM.insert({14 + i, ( NC * eu2 ) * Ppgm01});
-          }
+          OM.insert({5  - i, ( NC * eu2 ) * Ppgm01});
         // Insert Zero in the remaining slots
         for (int i = EvolutionBasisQCDQED::Object::TAUP; i <= EvolutionBasisQCDQED::Object::TAUM; i++)
           OM.insert({i, ZeroDist});
@@ -1470,8 +1464,8 @@ namespace apfel
     // ===============================================================
     // O(a*as) inhomogeneous terms
     std::map<int, std::map<int, Distribution>> InHom11;
-    const Distribution Ppgm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedqgm{}.Regular(x) - (DISgamma ? DeltaP11qednsp{}.Regular(x) : 0) ); }};
-    const Distribution Pggm11{g, [DISgamma] (double const& x) -> double { return x * ( P11qedggm{}.Regular(x) - (DISgamma ? DeltaP11qedggm{}.Regular(x) : 0) ); }};
+    const Distribution Ppgm11{g, [DISgamma] (double const& x) -> double { return (x >= 1 ? 0 : x * ( P11qedqgm{}.Regular(x) - (DISgamma ? DeltaP11qednsp{}.Regular(x) : 0) )); }};
+    const Distribution Pggm11{g, [DISgamma] (double const& x) -> double { return (x >= 1 ? 0 : x * ( P11qedggm{}.Regular(x) - (DISgamma ? DeltaP11qedggm{}.Regular(x) : 0) )); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
@@ -1479,15 +1473,9 @@ namespace apfel
         const int nu = NDU[nt][1];
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
-          {
-            OM.insert({8  - i, ( NC * ed2 ) * Ppgm11});
-            OM.insert({11 + i, ( NC * ed2 ) * Ppgm11});
-          }
+          OM.insert({8  - i, ( NC * ed2 ) * Ppgm11});
         for (int i = 0; i < nu; i++)
-          {
-            OM.insert({5  - i, ( NC * eu2 ) * Ppgm11});
-            OM.insert({14 + i, ( NC * eu2 ) * Ppgm11});
-          }
+          OM.insert({5  - i, ( NC * eu2 ) * Ppgm11});
         OM.insert({9, ( NC * SumCh2[nt] ) * Pggm11});
         // Insert Zero in the remaining slots
         for (int i = EvolutionBasisQCDQED::Object::TAUP; i <= EvolutionBasisQCDQED::Object::TAUM; i++)
@@ -1604,27 +1592,27 @@ namespace apfel
       }
 
     // ===============================================================
-    // O(a*as^2) inhomogeneous terms
+    // O(a*as^2) inhomogeneous terms. The DeltaP21qed* scheme-change
+    // terms are transcribed from Eqs. (5.20) and (5.21) of
+    // arXiv:hep-ph/0110331, where the transformation itself is given
+    // in Eq. (4.20). As transcribed they carry the opposite sign
+    // convention to their DeltaP11qed* counterparts above and thus
+    // have to be added rather than subtracted. The delta(1-x) term of
+    // DeltaP21qednsp (its Local part) is currently not included.
     std::map<int, std::map<int, Distribution>> InHom21;
-    const Distribution Pps21{g, [DISgamma] (double const& x) -> double { return x * ( P21qedps{}.Regular(x) - (DISgamma ? DeltaP21qedps{}.Regular(x) : 0) ); }};
+    const Distribution Pps21{g, [DISgamma] (double const& x) -> double { return (x >= 1 ? 0 : x * ( P21qedps{}.Regular(x) + (DISgamma ? DeltaP21qedps{}.Regular(x) : 0) )); }};
     for (int nt = nti; nt <= ntf; nt++)
       {
         // Determine number of active quarks
         const int nd = NDU[nt][0];
         const int nu = NDU[nt][1];
-        const Distribution Pnsp21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qednsp{nt}.Regular(x) - (DISgamma ? DeltaP21qednsp{nt}.Regular(x) : 0) ); }};
-        const Distribution Pggm21{g, [nt, DISgamma] (double const& x) -> double { return x * ( P21qedggm{nt}.Regular(x) - (DISgamma ? DeltaP21qedggm{nt}.Regular(x) : 0) ); }};
+        const Distribution Pnsp21{g, [nt, DISgamma] (double const& x) -> double { return (x >= 1 ? 0 : x * ( P21qednsp{nt}.Regular(x) + (DISgamma ? DeltaP21qednsp{nt}.Regular(x) : 0) )); }};
+        const Distribution Pggm21{g, [nt, DISgamma] (double const& x) -> double { return (x >= 1 ? 0 : x * ( P21qedggm{nt}.Regular(x) + (DISgamma ? DeltaP21qedggm{nt}.Regular(x) : 0) )); }};
         std::map<int, Distribution> OM;
         for (int i = 0; i < nd; i++)
-          {
-            OM.insert({8  - i, ( NC * ed2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
-            OM.insert({11 + i, ( NC * ed2 ) * Pnsp21});
-          }
+          OM.insert({8  - i, ( NC * ed2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
         for (int i = 0; i < nu; i++)
-          {
-            OM.insert({5  - i, ( NC * eu2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
-            OM.insert({14 + i, ( NC * eu2 ) * Pnsp21});
-          }
+          OM.insert({5  - i, ( NC * eu2 ) * Pnsp21 + ( NC * SumCh2[nt] ) * Pps21});
         OM.insert({9, ( NC * SumCh2[nt] ) * Pggm21});
         // Insert Zero in the remaining slots
         for (int i = EvolutionBasisQCDQED::Object::TAUP; i <= EvolutionBasisQCDQED::Object::TAUM; i++)
