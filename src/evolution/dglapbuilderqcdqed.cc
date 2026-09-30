@@ -457,9 +457,9 @@ namespace apfel
       {
         // Copy the vector of switches to vary the parameterisation of the
         // approximated N3LO splitting functions and adjust it to match
-        // the correct number of switches (4). Issue a warning in case
+        // the correct number of switches (3). Issue a warning in case
         // the original vector is modified.
-        const int nvar = 4;
+        const int nvar = 3;
         std::vector<int> im = IMod;
         if (im.size() != nvar)
           {
@@ -554,10 +554,10 @@ namespace apfel
             const Operator O40nsp{g, P3nsp{nf},       IntEps};
             const Operator O40nsm{g, P3nsm{nf},       IntEps};
             const Operator O40nss{g, P3nss{nf},       IntEps};
-            const Operator O40ps {g, aP3ps{nf, im[0]}, IntEps};
-            const Operator O40qg {g, P3qg{nf, im[1]}, IntEps};
-            const Operator O40gq {g, P3gq{nf, im[2]}, IntEps};
-            const Operator O40gg {g, P3gg{nf, im[3]}, IntEps};
+            const Operator O40ps {g, pP3ps{nf},       IntEps};
+            const Operator O40qg {g, P3qg{nf, im[0]}, IntEps};
+            const Operator O40gq {g, P3gq{nf, im[1]}, IntEps};
+            const Operator O40gg {g, P3gg{nf, im[2]}, IntEps};
             std::map<int, Operator> OM;
             OM.insert({EvolutionBasisQCDQED::PPDD,  O40nsp});
             OM.insert({EvolutionBasisQCDQED::PPUU,  O40nsp});
@@ -1086,9 +1086,9 @@ namespace apfel
     // NNNLO corrections
     // Copy the vector of switches to vary the parameterisation of the
     // approximated N3LO splitting functions and adjust it to match
-    // the correct number of switches (4). Issue a warning in case
+    // the correct number of switches (3). Issue a warning in case
     // the original vector is modified.
-    const int nvar = 4;
+    const int nvar = 3;
     std::vector<int> im = IMod;
     if (im.size() != nvar)
       {
@@ -1186,10 +1186,10 @@ namespace apfel
         const Operator O40nsp{g, P3nsp{nf},       IntEps};
         const Operator O40nsm{g, P3nsm{nf},       IntEps};
         const Operator O40nss{g, P3nss{nf},       IntEps};
-        const Operator O40ps {g, aP3ps{nf, im[0]}, IntEps};
-        const Operator O40qg {g, P3qg{nf, im[1]}, IntEps};
-        const Operator O40gq {g, P3gq{nf, im[2]}, IntEps};
-        const Operator O40gg {g, P3gg{nf, im[3]}, IntEps};
+        const Operator O40ps {g, pP3ps{nf},       IntEps};
+        const Operator O40qg {g, P3qg{nf, im[0]}, IntEps};
+        const Operator O40gq {g, P3gq{nf, im[1]}, IntEps};
+        const Operator O40gg {g, P3gg{nf, im[2]}, IntEps};
         std::map<int, Operator> OM;
         OM.insert({EvolutionBasisQCDQED::PPDD,  O40nsp});
         OM.insert({EvolutionBasisQCDQED::PPUU,  O40nsp});

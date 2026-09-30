@@ -88,8 +88,8 @@ order: [3, 0]
 order: [4, 0]
 - Momentum sum rules:
   * MSR1 = 0
-  * MSR2 = -0.0772887
-  * MSR3 = -0.0772887
+  * MSR2 = 0.0334757
+  * MSR3 = 0.0334757
   * MSR4 = -0.00795858
   * MSR5 = 0
 - Valence sum rules:

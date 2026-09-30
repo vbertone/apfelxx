@@ -35,7 +35,7 @@ order: 2
 
 order: 3
 - Momentum sum rules:
-  * MSR1 = -0.0772887
+  * MSR1 = 0.0334757
   * MSR2 = -0.00795858
 - Valence sum rules:
   * VSR1 = 0.594316
