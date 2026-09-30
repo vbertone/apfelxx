@@ -428,18 +428,47 @@ namespace apfel
   /* }; */
 
   /**
-   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet
-   * unpolarised splitting function. Parameterisation determined in
-   * https://arxiv.org/pdf/2512.10783.pdf
+   * @brief Approximated space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>)
+   * pure-singlet unpolarised splitting function. Parameterisation
+   * determined in https://arxiv.org/pdf/2512.10783.pdf
    */
-  class P3ps: public Expression
+  class aP3ps: public Expression
   {
   public:
-    P3ps(int const& nf, int const& imod = 0);
+    aP3ps(int const& nf, int const& imod = 0);
     double Regular(double const& x) const;
   private:
     int const _nf;
     int const _imod;
+  };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet
+   * unpolarised splitting function. Parameterisation of the exact
+   * result determined in https://arxiv.org/pdf/2609.37563
+   */
+  class pP3ps: public Expression
+  {
+  public:
+    pP3ps(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
+  };
+
+  /**
+   * @brief Space-like O(&alpha;<SUB>s</SUB><SUP>4</SUP>) pure-singlet
+   * unpolarised splitting function. Exact result determined in
+   * https://arxiv.org/pdf/2609.37563 in terms of harmonic
+   * polylogarithms up to weight six.
+   */
+  class P3ps: public Expression
+  {
+  public:
+    P3ps(int const& nf);
+    double Regular(double const& x) const;
+  private:
+    int const _nf;
   };
 
   /* /\** */

@@ -33,6 +33,28 @@ namespace apfel
     _gpd(gpd),
     _Operator(op)
   {
+    // GPD-like operators are stored as a single full matrix defined
+    // on the joint grid (see BuildOperatorGPD) and thus require a
+    // dedicated treatment: the checks below assume instead that the
+    // operator is given on the single subgrids.
+    if (_gpd)
+      {
+        // GPD-like operators are always extended
+        _extended = true;
+
+        // Check that the operator contains one single matrix
+        if ((int) _Operator.size() != 1)
+          throw std::runtime_error(error("Operator::operator", "GPD-like operators must contain a single matrix."));
+
+        // Check that the size of the matrix matches that of the
+        // joint grid.
+        const int nx = _grid.GetJointGrid().nx();
+        if ((int) _Operator[0].size(0) != nx || (int) _Operator[0].size(1) != nx)
+          throw std::runtime_error(error("Operator::operator", "The size of the joint grid does not match."));
+
+        return;
+      }
+
     // Check that the number of subgrids matches
     if (_grid.nGrids() != (int) _Operator.size())
       throw std::runtime_error(error("Operator::operator", "The number of SubGrids does not match."));

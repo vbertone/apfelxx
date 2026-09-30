@@ -53,6 +53,9 @@ target_include_directories(apfelxx
 target_compile_options(apfelxx PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-Wall -Wextra -O3 -Wno-psabi>
     $<$<COMPILE_LANGUAGE:Fortran>:-O3>
+    # Automatic arrays on the stack rather than the heap (saves a
+    # malloc/free per array per call, e.g. in the harmonic polylogs)
+    $<$<AND:$<COMPILE_LANGUAGE:Fortran>,$<Fortran_COMPILER_ID:GNU>>:-fstack-arrays>
 )
 
 # Set MODULES path

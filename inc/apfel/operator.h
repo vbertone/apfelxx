@@ -43,6 +43,9 @@ namespace apfel
      * @param gr: the Grid object
      * @param op: raw operator previously computed
      * @param gpd: whether the operator had to computed for a GPD-like expression (default: false)
+     * @note GPD-like operators are expected to contain one single
+     * full matrix defined on the joint grid, while DGLAP-like
+     * operators are expected to contain one matrix per subgrid.
      */
     Operator(Grid const& gr, std::vector<matrix<double>> const& op, bool const& gpd = false);
 

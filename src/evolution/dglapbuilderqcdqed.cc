@@ -554,7 +554,7 @@ namespace apfel
             const Operator O40nsp{g, P3nsp{nf},       IntEps};
             const Operator O40nsm{g, P3nsm{nf},       IntEps};
             const Operator O40nss{g, P3nss{nf},       IntEps};
-            const Operator O40ps {g, P3ps{nf, im[0]}, IntEps};
+            const Operator O40ps {g, aP3ps{nf, im[0]}, IntEps};
             const Operator O40qg {g, P3qg{nf, im[1]}, IntEps};
             const Operator O40gq {g, P3gq{nf, im[2]}, IntEps};
             const Operator O40gg {g, P3gg{nf, im[3]}, IntEps};
@@ -1186,7 +1186,7 @@ namespace apfel
         const Operator O40nsp{g, P3nsp{nf},       IntEps};
         const Operator O40nsm{g, P3nsm{nf},       IntEps};
         const Operator O40nss{g, P3nss{nf},       IntEps};
-        const Operator O40ps {g, P3ps{nf, im[0]}, IntEps};
+        const Operator O40ps {g, aP3ps{nf, im[0]}, IntEps};
         const Operator O40qg {g, P3qg{nf, im[1]}, IntEps};
         const Operator O40gq {g, P3gq{nf, im[2]}, IntEps};
         const Operator O40gg {g, P3gg{nf, im[3]}, IntEps};

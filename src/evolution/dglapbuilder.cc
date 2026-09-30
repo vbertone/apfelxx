@@ -363,7 +363,7 @@ namespace apfel
             const Operator O3nsp{g, P3nsp{nf},       IntEps};
             const Operator O3nsm{g, P3nsm{nf},       IntEps};
             const Operator O3nss{g, P3nss{nf},       IntEps};
-            const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+            const Operator O3ps {g, aP3ps{nf, im[0]}, IntEps};
             const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
             const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
             const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
@@ -791,7 +791,7 @@ namespace apfel
         const Operator O3nsp{g, P3nsp{nf},       IntEps};
         const Operator O3nsm{g, P3nsm{nf},       IntEps};
         const Operator O3nss{g, P3nss{nf},       IntEps};
-        const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+        const Operator O3ps {g, aP3ps{nf, im[0]}, IntEps};
         const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
         const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
         const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
@@ -1196,7 +1196,7 @@ namespace apfel
             const Operator O3nsp{g, P3nsp{nf},       IntEps};
             const Operator O3nsm{g, P3nsm{nf},       IntEps};
             const Operator O3nss{g, P3nss{nf},       IntEps};
-            const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+            const Operator O3ps {g, aP3ps{nf, im[0]}, IntEps};
             const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
             const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
             const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
@@ -1616,7 +1616,7 @@ namespace apfel
         const Operator O3nsp{g, P3nsp{nf},       IntEps};
         const Operator O3nsm{g, P3nsm{nf},       IntEps};
         const Operator O3nss{g, P3nss{nf},       IntEps};
-        const Operator O3ps {g, P3ps{nf, im[0]}, IntEps};
+        const Operator O3ps {g, aP3ps{nf, im[0]}, IntEps};
         const Operator O3qg {g, P3qg{nf, im[1]}, IntEps};
         const Operator O3gq {g, P3gq{nf, im[2]}, IntEps};
         const Operator O3gg {g, P3gg{nf, im[3]}, IntEps};
