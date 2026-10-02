@@ -547,17 +547,13 @@ namespace apfel
 
   //_____________________________________________________________________________
   OgataQuadrature::OgataQuadrature(int const& nu, double const& CutOff, double const& h, int const& nZeroMax):
-    _nu(nu),
+    _nu(nu >= 0 && nu < (int) jZeros.size() ? nu : throw std::runtime_error(error("OgataQuadrature", "Value on 'nu' not available."))),
     _CutOff(CutOff),
     _h(h),
     _nZeroMax(std::min(nZeroMax, (int) jZeros[_nu].size())),
     _xf(_nZeroMax),
     _weights(_nZeroMax)
   {
-    // Check that nu is within the available range
-    if (_nu < 0 || _nu > (int) jZeros.size())
-      throw std::runtime_error(error("OgataQuadrature", "Value on 'nu' not available."));
-
     // Check that the manimum number of zero's is within the available
     // range, otherwise issue a warning
     if (nZeroMax > (int) jZeros[_nu].size())
@@ -573,7 +569,7 @@ namespace apfel
     // Run over the zeros of J and compute unscaled coordinates and
     // weights. There are 1000 precomputed zeros. This should be
     // enough for all practical applications.
-    for (int i = 0; i < nZeroMax; i++)
+    for (int i = 0; i < std::min(nZeroMax, _nZeroMax); i++)
       {
         const double jz = jZeros[_nu][i];
         const double z  = jz / M_PI;
@@ -589,11 +585,12 @@ namespace apfel
     // Compute _h dynamically if requested
     if (Dynh)
       {
-        OgataQuadrature *ptr =  const_cast<OgataQuadrature*> (this);
+        OgataQuadrature oq = *this;
         // This seems to be a good and yet simple scaling for _h (but
         // may not be too general).
-        ptr -> _h = 0.001 * M_PI * qT;
-        ptr -> InitialiseWeights(nmax);
+        oq._h = 0.001 * M_PI * qT;
+        oq.InitialiseWeights(nmax);
+        return oq.transform(func, qT, false, nmax, period);
       }
 
     T integral     = _weights[0] * func(_xf[0] / qT);
