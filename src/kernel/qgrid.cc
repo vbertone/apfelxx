@@ -282,13 +282,15 @@ namespace apfel
     if (Q < _Qg.front() || Q > _Qg.back())
       return bounds;
 
-    // If Q falls in the tiny gap at the thresholds assume the node
-    // below.
+    // If Q falls in a threshold gap, select the node on the same side as NF(Q)
     for (int iQ = 1; iQ < (int) _nQg.size() - 1; iQ++)
       if (Q > _Qg[_nQg[iQ] - 1] && Q <= _Qg[_nQg[iQ]])
         {
-          std::get<1>(bounds) = _nQg[iQ] - 1;
-          std::get<2>(bounds) = _nQg[iQ];
+          const int upper = _nQg[iQ];
+          const int node = NF(Q, _Thresholds) == NF(_Qg[upper - 1], _Thresholds)
+              ? upper - 1 : upper;
+          std::get<1>(bounds) = node;
+          std::get<2>(bounds) = node + 1;
           return bounds;
         }
 
