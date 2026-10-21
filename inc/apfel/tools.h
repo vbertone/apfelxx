@@ -45,9 +45,25 @@ namespace apfel
    * @param Q: absolute value the virtuality of the vector boson
    * @param virt: virtuality (true: time-like, false: space-like)
    * @param Comp: the flavour selector (default: TOTAL, i.e. all flavours are computed)
+   * @param fl11: whether to append the couplings needed for the fl11 contributions to F2 and FL at O(&alpha;<SUB>s</SUB><SUP>3</SUP>) (default: true)
    * @return the std::vector of the electroweak charges
+   * @note If fl11 is true, the vector has 30 entries: the 6
+   * electroweak charges, followed by line and loop couplings for
+   * photon and Z on the closed quark loop (see Fl11Charges). Pass
+   * fl11 = false to get the 6 electroweak charges only.
    */
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& Comp = TOTAL);
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& Comp = TOTAL, bool const& fl11 = true);
+
+  /**
+   * @brief Utility function for the computation of the charges of the
+   * fl11 contributions to the NC structure functions, i.e. the line
+   * couplings times the sums of the loop couplings over the active
+   * flavours.
+   * @param Ch: the 30-entry vector of charges (see ElectroWeakCharges)
+   * @param nf: number of active flavours
+   * @return the std::vector of the fl11 charges
+   */
+  std::vector<double> Fl11Charges(std::vector<double> const& Ch, int const& nf);
 
   /**
    * @brief Utility function for the computation of the

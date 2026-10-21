@@ -71,6 +71,32 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  DISNCBasis::DISNCBasis(int const& k, double const& fact, double const& fact11):
+    DISNCBasis{k, fact}
+  {
+    _name += "_fl11";
+
+    // Append the fl11 rules
+    const DISNCBasis b11{k, fact11};
+    for (auto const& r : b11.GetRules())
+      for (auto const& o : r.second)
+        _rules[r.first].push_back({(o.operand == CG ? CG11 : CQ11), o.object, o.coefficient});
+  }
+
+  //_________________________________________________________________________________
+  DISNCBasis::DISNCBasis(std::vector<double> const& Ch, std::vector<double> const& Ch11):
+    DISNCBasis{Ch}
+  {
+    _name += "_fl11";
+
+    // Append the fl11 rules
+    const DISNCBasis b11{Ch11};
+    for (auto const& r : b11.GetRules())
+      for (auto const& o : r.second)
+        _rules[r.first].push_back({(o.operand == CG ? CG11 : CQ11), o.object, o.coefficient});
+  }
+
+  //_________________________________________________________________________________
   DISCCBasis::DISCCBasis(int const& l, bool const& Is3, double const& fact):
     ConvolutionMap{"DISCCBasis_" + std::to_string(l) + "_" + std::to_string(Is3)}
   {

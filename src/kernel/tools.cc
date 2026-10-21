@@ -12,6 +12,7 @@
 #include "apfel/alphaqcd.h"
 #include "apfel/alphaqed.h"
 #include "apfel/integrator.h"
+#include "apfel/messages.h"
 
 #include <algorithm>
 #include <math.h>
@@ -39,7 +40,7 @@ namespace apfel
   }
 
   //_________________________________________________________________________
-  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& Comp)
+  std::vector<double> ElectroWeakCharges(double const& Q, bool const& virt, int const& Comp, bool const& fl11)
   {
     // Relevant constants
     const double Q2   = Q * Q;
@@ -80,7 +81,41 @@ namespace apfel
                         - 2 * QCh[Comp-1] * Vq[Comp-1] * Ve * PZ
                         + ( Ve * Ve + Ae * Ae ) * ( Vq[Comp-1] * Vq[Comp-1] + Aq[Comp-1] * Aq[Comp-1] ) * PZ2;
 
+    // Append line and loop couplings for the fl11 contributions with
+    // photon and Z on the loop.
+    if (fl11)
+      {
+        Charges.resize(30, 0.);
+        for (auto i = 0; i < 6; i++)
+          {
+            if (Comp < 1 || Comp > 6 || Comp == i + 1)
+              {
+                Charges[6 + i]  = QCh[i] - Ve * Vq[i] * PZ;
+                Charges[18 + i] = - Ve * QCh[i] * PZ + ( Ve * Ve + Ae * Ae ) * Vq[i] * PZ2;
+              }
+            Charges[12 + i] = QCh[i];
+            Charges[24 + i] = Vq[i];
+          }
+      }
+
     return Charges;
+  }
+
+  //_________________________________________________________________________
+  std::vector<double> Fl11Charges(std::vector<double> const& Ch, int const& nf)
+  {
+    if (Ch.size() != 30)
+      throw std::runtime_error(error("Fl11Charges", "The charge vector must have 30 entries."));
+
+    // Sums of the loop couplings over the active flavours
+    const double Lg = std::accumulate(Ch.begin() + 12, Ch.begin() + 12 + nf, 0.);
+    const double LZ = std::accumulate(Ch.begin() + 24, Ch.begin() + 24 + nf, 0.);
+
+    std::vector<double> Ch11(6, 0.);
+    for (int i = 0; i < nf; i++)
+      Ch11[i] = Ch[6 + i] * Lg + Ch[18 + i] * LZ;
+
+    return Ch11;
   }
 
   //_________________________________________________________________________

@@ -349,6 +349,51 @@ namespace apfel
   };
 
   /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) fl11 quark
+   * coefficient function for F2 stripped of the charge factors.
+   */
+  class C23q11: public Expression
+  {
+  public:
+    C23q11();
+    double Regular(double const& x) const;
+    double Local(double const&)     const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) fl11 gluon
+   * coefficient function for F2 stripped of the charge factors.
+   */
+  class C23g11: public Expression
+  {
+  public:
+    C23g11();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) fl11 quark
+   * coefficient function for FL stripped of the charge factors.
+   */
+  class CL3q11: public Expression
+  {
+  public:
+    CL3q11();
+    double Regular(double const& x) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) fl11 gluon
+   * coefficient function for FL stripped of the charge factors.
+   */
+  class CL3g11: public Expression
+  {
+  public:
+    CL3g11();
+    double Regular(double const& x) const;
+  };
+
+  /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>3</SUP>) non-singlet-plus
    * coefficient function for F3.
    */
