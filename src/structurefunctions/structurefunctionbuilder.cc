@@ -80,6 +80,36 @@ namespace apfel
         C2NNNLO.insert({nf, C2NNNLOnf});
       }
 
+    // Same as above with the fl11 contributions separated out, to be
+    // used with their own charges (see Fl11Charges). The fl11
+    // operands vanish below O(as^3).
+    const Operator O23q11{g, C23q11{}, IntEps};
+    const Operator O23g11{g, C23g11{}, IntEps};
+    std::map<int, Operator> C2LO11  = C2LO;
+    std::map<int, Operator> C2NLO11 = C2NLO;
+    std::map<int, std::map<int, Operator>> C2NNLO11 = C2NNLO;
+    std::map<int, std::map<int, Operator>> C2NNNLO11;
+    for (auto m : {&C2LO11, &C2NLO11})
+      {
+        m->insert({DISNCBasis::CQ11, Zero});
+        m->insert({DISNCBasis::CG11, Zero});
+      }
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        C2NNLO11.at(nf).insert({DISNCBasis::CQ11, Zero});
+        C2NNLO11.at(nf).insert({DISNCBasis::CG11, Zero});
+        const Operator O23ps{g, C23ps{nf, false}, IntEps};
+        const Operator O23g {g, C23g{nf, false},  IntEps};
+        const Operator O23nsp{g, C23nsp{nf, false}, IntEps};
+        std::map<int, Operator> C2NNNLOnf;
+        C2NNNLOnf.insert({DISNCBasis::CNS,  O23nsp});
+        C2NNNLOnf.insert({DISNCBasis::CS,   O23nsp + 6 * O23ps});
+        C2NNNLOnf.insert({DISNCBasis::CG,   O23g});
+        C2NNNLOnf.insert({DISNCBasis::CQ11, O23q11});
+        C2NNNLOnf.insert({DISNCBasis::CG11, O23g11});
+        C2NNNLO11.insert({nf, C2NNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
@@ -95,6 +125,10 @@ namespace apfel
       for (int k = 1; k <= 6; k++)
         EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
+      // fl11 charges, if provided
+      const bool fl11 = (Ch.size() == 30);
+      const std::vector<double> Ch11 = (fl11 ? Fl11Charges(Ch, nf) : std::vector<double>{});
+
       // Fill in structure function object
       StructureFunctionObjects FObj;
       FObj.nf   = nf;
@@ -104,12 +138,15 @@ namespace apfel
       for (int k = 0; k <= 6; k++)
         {
 // *INDENT-OFF*
-          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          if (fl11)
+            FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh, Ch11} : DISNCBasis{k, EffCh[k-1], Ch11[k-1]})});
+          else
+            FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
 // *INDENT-ON*
-          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
-          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO.at(nf)}});
-          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNNLO.at(nf)}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2LO11 : C2LO)}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2NLO11 : C2NLO)}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2NNLO11 : C2NNLO).at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2NNNLO11 : C2NNNLO).at(nf)}});
         }
       return FObj;
     };
@@ -176,6 +213,36 @@ namespace apfel
         CLNNNLO.insert({nf, CLNNNLOnf});
       }
 
+    // Same as above with the fl11 contributions separated out, to be
+    // used with their own charges (see Fl11Charges). The fl11
+    // operands vanish below O(as^3).
+    const Operator OL3q11{g, CL3q11{}, IntEps};
+    const Operator OL3g11{g, CL3g11{}, IntEps};
+    std::map<int, Operator> CLLO11  = CLLO;
+    std::map<int, Operator> CLNLO11 = CLNLO;
+    std::map<int, std::map<int, Operator>> CLNNLO11 = CLNNLO;
+    std::map<int, std::map<int, Operator>> CLNNNLO11;
+    for (auto m : {&CLLO11, &CLNLO11})
+      {
+        m->insert({DISNCBasis::CQ11, Zero});
+        m->insert({DISNCBasis::CG11, Zero});
+      }
+    for (int nf = 1; nf <= 6; nf++)
+      {
+        CLNNLO11.at(nf).insert({DISNCBasis::CQ11, Zero});
+        CLNNLO11.at(nf).insert({DISNCBasis::CG11, Zero});
+        const Operator OL3ps{g, CL3ps{nf, false}, IntEps};
+        const Operator OL3g {g, CL3g{nf, false},  IntEps};
+        const Operator OL3nsp{g, CL3nsp{nf, false}, IntEps};
+        std::map<int, Operator> CLNNNLOnf;
+        CLNNNLOnf.insert({DISNCBasis::CNS,  OL3nsp});
+        CLNNNLOnf.insert({DISNCBasis::CS,   OL3nsp + 6 * OL3ps});
+        CLNNNLOnf.insert({DISNCBasis::CG,   OL3g});
+        CLNNNLOnf.insert({DISNCBasis::CQ11, OL3q11});
+        CLNNNLOnf.insert({DISNCBasis::CG11, OL3g11});
+        CLNNNLO11.insert({nf, CLNNNLOnf});
+      }
+
     // Vector of distributions to skip
     const std::vector<int> skip = {2, 4, 6, 8, 10, 12};
 
@@ -191,6 +258,10 @@ namespace apfel
       for (int k = 1; k <= 6; k++)
         EffCh.push_back((k > nf ? 0 : Ch[k-1]));
 
+      // fl11 charges, if provided
+      const bool fl11 = (Ch.size() == 30);
+      const std::vector<double> Ch11 = (fl11 ? Fl11Charges(Ch, nf) : std::vector<double>{});
+
       // Fill in structure function object
       StructureFunctionObjects FObj;
       FObj.nf   = nf;
@@ -200,12 +271,15 @@ namespace apfel
       for (int k = 0; k <= 6; k++)
         {
 // *INDENT-OFF*
-          FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
+          if (fl11)
+            FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh, Ch11} : DISNCBasis{k, EffCh[k-1], Ch11[k-1]})});
+          else
+            FObj.ConvBasis.insert({k, (k == 0 ? DISNCBasis{EffCh} : DISNCBasis{k, EffCh[k-1]})});
 // *INDENT-ON*
-          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
-          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO.at(nf)}});
-          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNNLO.at(nf)}});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLLO11 : CLLO)}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLNLO11 : CLNLO)}});
+          FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLNNLO11 : CLNNLO).at(nf)}});
+          FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLNNNLO11 : CLNNNLO).at(nf)}});
         }
       return FObj;
     };
@@ -1178,6 +1252,23 @@ namespace apfel
     const Operator O23nsp{g, C23nsp{actnf}, IntEps};
     const Operator O23t = O23nsp + 6 * O23ps;
 
+    // Same as above with the fl11 contributions separated out, to be
+    // used with their own charges (see Fl11Charges). The fl11
+    // operands vanish below O(as^3).
+    const Operator O23ps0 {g, C23ps{actnf, false},  IntEps};
+    const Operator O23g0  {g, C23g{actnf, false},   IntEps};
+    const Operator O23nsp0{g, C23nsp{actnf, false}, IntEps};
+    const Operator O23t0 = O23nsp0 + 6 * O23ps0;
+    const Operator O23q11{g, C23q11{}, IntEps};
+    const Operator O23g11{g, C23g11{}, IntEps};
+    std::map<int, Operator> C2LO11  = C2LO;
+    std::map<int, Operator> C2NLO11 = C2NLO;
+    for (auto m : {&C2LO11, &C2NLO11})
+      {
+        m->insert({DISNCBasis::CQ11, Zero});
+        m->insert({DISNCBasis::CG11, Zero});
+      }
+
     // Massive coefficient functions
     // Null set of operator needed for the massive LO coefficient
     // functions.
@@ -1256,6 +1347,10 @@ namespace apfel
     // Define object of the structure containing the DglapObjects
     const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
     {
+      // fl11 charges, if provided
+      const bool fl11 = (Ch.size() == 30);
+      const std::vector<double> Ch11 = (fl11 ? Fl11Charges(Ch, actnf) : std::vector<double>{});
+
       // Fill in structure function object
       StructureFunctionObjects FObj;
       FObj.nf   = actnf;
@@ -1319,16 +1414,25 @@ namespace apfel
       C2NNLO.insert({DISNCBasis::CG,  O22g});
 
       std::map<int, Operator> C2NNNLO;
-      C2NNNLO.insert({DISNCBasis::CNS, O23nsp});
-      C2NNNLO.insert({DISNCBasis::CS,  O23t});
-      C2NNNLO.insert({DISNCBasis::CG,  O23g});
+      C2NNNLO.insert({DISNCBasis::CNS, (fl11 ? O23nsp0 : O23nsp)});
+      C2NNNLO.insert({DISNCBasis::CS,  (fl11 ? O23t0 : O23t)});
+      C2NNNLO.insert({DISNCBasis::CG,  (fl11 ? O23g0 : O23g)});
+
+      // fl11 operands
+      if (fl11)
+        {
+          C2NNLO.insert({DISNCBasis::CQ11, Zero});
+          C2NNLO.insert({DISNCBasis::CG11, Zero});
+          C2NNNLO.insert({DISNCBasis::CQ11, O23q11});
+          C2NNNLO.insert({DISNCBasis::CG11, O23g11});
+        }
 
       for (int k = 1; k <= actnf; k++)
         {
           // Convolution Basis
-          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.ConvBasis.insert({k, (fl11 ? DISNCBasis{k, Ch[k-1], Ch11[k-1]} : DISNCBasis{k, Ch[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2LO11 : C2LO)}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2NLO11 : C2NLO)}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
           FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNNLO}});
         }
@@ -1338,7 +1442,7 @@ namespace apfel
       // contributions to the massive components. No non-singlet
       // included also at O(as^3).
       std::vector<double> ChL(6, 0.);
-      std::map<int, Operator> C2NLOtot   = C2NLO;
+      std::map<int, Operator> C2NLOtot   = (fl11 ? C2NLO11 : C2NLO);
       std::map<int, Operator> C2NNLOtot  = C2NNLO;
       std::map<int, Operator> C2NNNLOtot = C2NNNLO;
       for (int k = 0; k < actnf; k++)
@@ -1354,8 +1458,8 @@ namespace apfel
           C2NNNLOtot.at(DISNCBasis::CG) += wch * FObj.C3.at(k).GetObjects().at(DISNCBasis::CG);
         }
 
-      FObj.ConvBasis.insert({0, DISNCBasis{ChL}});
-      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2LO}});
+      FObj.ConvBasis.insert({0, (fl11 ? DISNCBasis{ChL, Ch11} : DISNCBasis{ChL})});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), (fl11 ? C2LO11 : C2LO)}});
       FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NLOtot}});
       FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NNLOtot}});
       FObj.C3.insert({0, Set<Operator>{FObj.ConvBasis.at(0), C2NNNLOtot}});
@@ -1424,6 +1528,23 @@ namespace apfel
     const Operator OL3g  {g, CL3g{actnf},   IntEps};
     const Operator OL3nsp{g, CL3nsp{actnf}, IntEps};
     const Operator OL3t = OL3nsp + 6 * OL3ps;
+
+    // Same as above with the fl11 contributions separated out, to be
+    // used with their own charges (see Fl11Charges). The fl11
+    // operands vanish below O(as^3).
+    const Operator OL3ps0 {g, CL3ps{actnf, false},  IntEps};
+    const Operator OL3g0  {g, CL3g{actnf, false},   IntEps};
+    const Operator OL3nsp0{g, CL3nsp{actnf, false}, IntEps};
+    const Operator OL3t0 = OL3nsp0 + 6 * OL3ps0;
+    const Operator OL3q11{g, CL3q11{}, IntEps};
+    const Operator OL3g11{g, CL3g11{}, IntEps};
+    std::map<int, Operator> CLLO11  = CLLO;
+    std::map<int, Operator> CLNLO11 = CLNLO;
+    for (auto m : {&CLLO11, &CLNLO11})
+      {
+        m->insert({DISNCBasis::CQ11, Zero});
+        m->insert({DISNCBasis::CG11, Zero});
+      }
 
     // Massive coefficient functions
     // Null set of operator needed for the massive LO coefficient
@@ -1503,6 +1624,10 @@ namespace apfel
     // Define object of the structure containing the DglapObjects
     const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
     {
+      // fl11 charges, if provided
+      const bool fl11 = (Ch.size() == 30);
+      const std::vector<double> Ch11 = (fl11 ? Fl11Charges(Ch, actnf) : std::vector<double>{});
+
       // Fill in structure function object
       StructureFunctionObjects FObj;
       FObj.nf   = actnf;
@@ -1566,16 +1691,25 @@ namespace apfel
       CLNNLO.insert({DISNCBasis::CG,  OL2g});
 
       std::map<int, Operator> CLNNNLO;
-      CLNNNLO.insert({DISNCBasis::CNS, OL3nsp});
-      CLNNNLO.insert({DISNCBasis::CS,  OL3t});
-      CLNNNLO.insert({DISNCBasis::CG,  OL3g});
+      CLNNNLO.insert({DISNCBasis::CNS, (fl11 ? OL3nsp0 : OL3nsp)});
+      CLNNNLO.insert({DISNCBasis::CS,  (fl11 ? OL3t0 : OL3t)});
+      CLNNNLO.insert({DISNCBasis::CG,  (fl11 ? OL3g0 : OL3g)});
+
+      // fl11 operands
+      if (fl11)
+        {
+          CLNNLO.insert({DISNCBasis::CQ11, Zero});
+          CLNNLO.insert({DISNCBasis::CG11, Zero});
+          CLNNNLO.insert({DISNCBasis::CQ11, OL3q11});
+          CLNNNLO.insert({DISNCBasis::CG11, OL3g11});
+        }
 
       for (int k = 1; k <= actnf; k++)
         {
           // Convolution Basis
-          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.ConvBasis.insert({k, (fl11 ? DISNCBasis{k, Ch[k-1], Ch11[k-1]} : DISNCBasis{k, Ch[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLLO11 : CLLO)}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLNLO11 : CLNLO)}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
           FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNNLO}});
         }
@@ -1585,7 +1719,7 @@ namespace apfel
       // contributions to the massive components. No non-singlet
       // included also at O(as^3).
       std::vector<double> ChL(6, 0.);
-      std::map<int, Operator> CLNLOtot   = CLNLO;
+      std::map<int, Operator> CLNLOtot   = (fl11 ? CLNLO11 : CLNLO);
       std::map<int, Operator> CLNNLOtot  = CLNNLO;
       std::map<int, Operator> CLNNNLOtot = CLNNNLO;
       for (int k = 0; k < actnf; k++)
@@ -1601,8 +1735,8 @@ namespace apfel
           CLNNNLOtot.at(DISNCBasis::CG) += wch * FObj.C3.at(k).GetObjects().at(DISNCBasis::CG);
         }
 
-      FObj.ConvBasis.insert({0, DISNCBasis{ChL}});
-      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLLO}});
+      FObj.ConvBasis.insert({0, (fl11 ? DISNCBasis{ChL, Ch11} : DISNCBasis{ChL})});
+      FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), (fl11 ? CLLO11 : CLLO)}});
       FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNLOtot}});
       FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNNLOtot}});
       FObj.C3.insert({0, Set<Operator>{FObj.ConvBasis.at(0), CLNNNLOtot}});
@@ -1669,6 +1803,23 @@ namespace apfel
     const Operator O23g  {g, C23g{actnf},   IntEps};
     const Operator O23nsp{g, C23nsp{actnf}, IntEps};
     const Operator O23t = O23nsp + 6 * O23ps;
+
+    // Same as above with the fl11 contributions separated out, to be
+    // used with their own charges (see Fl11Charges). The fl11
+    // operands vanish below O(as^3).
+    const Operator O23ps0 {g, C23ps{actnf, false},  IntEps};
+    const Operator O23g0  {g, C23g{actnf, false},   IntEps};
+    const Operator O23nsp0{g, C23nsp{actnf, false}, IntEps};
+    const Operator O23t0 = O23nsp0 + 6 * O23ps0;
+    const Operator O23q11{g, C23q11{}, IntEps};
+    const Operator O23g11{g, C23g11{}, IntEps};
+    std::map<int, Operator> C2LO11  = C2LO;
+    std::map<int, Operator> C2NLO11 = C2NLO;
+    for (auto m : {&C2LO11, &C2NLO11})
+      {
+        m->insert({DISNCBasis::CQ11, Zero});
+        m->insert({DISNCBasis::CG11, Zero});
+      }
 
     // Massive zero coefficient functions
     // Null set of operator needed for the massive LO coefficient
@@ -1754,6 +1905,10 @@ namespace apfel
     // Define object of the structure containing the DglapObjects
     const auto F2Obj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
     {
+      // fl11 charges, if provided
+      const bool fl11 = (Ch.size() == 30);
+      const std::vector<double> Ch11 = (fl11 ? Fl11Charges(Ch, actnf) : std::vector<double>{});
+
       // Fill in structure function object
       StructureFunctionObjects FObj;
       FObj.nf   = actnf;
@@ -1813,16 +1968,25 @@ namespace apfel
       C2NNLO.insert({DISNCBasis::CG,  O22g});
 
       std::map<int, Operator> C2NNNLO;
-      C2NNNLO.insert({DISNCBasis::CNS, O23nsp});
-      C2NNNLO.insert({DISNCBasis::CS,  O23t});
-      C2NNNLO.insert({DISNCBasis::CG,  O23g});
+      C2NNNLO.insert({DISNCBasis::CNS, (fl11 ? O23nsp0 : O23nsp)});
+      C2NNNLO.insert({DISNCBasis::CS,  (fl11 ? O23t0 : O23t)});
+      C2NNNLO.insert({DISNCBasis::CG,  (fl11 ? O23g0 : O23g)});
+
+      // fl11 operands
+      if (fl11)
+        {
+          C2NNLO.insert({DISNCBasis::CQ11, Zero});
+          C2NNLO.insert({DISNCBasis::CG11, Zero});
+          C2NNNLO.insert({DISNCBasis::CQ11, O23q11});
+          C2NNNLO.insert({DISNCBasis::CG11, O23g11});
+        }
 
       for (int k = 1; k <= actnf; k++)
         {
           // Convolution Basis
-          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2LO}});
-          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NLO}});
+          FObj.ConvBasis.insert({k, (fl11 ? DISNCBasis{k, Ch[k-1], Ch11[k-1]} : DISNCBasis{k, Ch[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2LO11 : C2LO)}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? C2NLO11 : C2NLO)}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNLO}});
           FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), C2NNNLO}});
         }
@@ -1830,7 +1994,7 @@ namespace apfel
       // Total structure function set to zero for now. Need to
       // construct it a posteriori as a sum of light and heavy
       // components.
-      FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
+      FObj.ConvBasis.insert({0, DISNCBasis{std::vector<double>(Ch.begin(), Ch.begin() + 6)}});
       FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), Not}});
       FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), Not}});
       FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), Not}});
@@ -1898,6 +2062,23 @@ namespace apfel
     const Operator OL3nsp{g, CL3nsp{actnf}, IntEps};
     const Operator OL3t = OL3nsp + 6 * OL3ps;
 
+    // Same as above with the fl11 contributions separated out, to be
+    // used with their own charges (see Fl11Charges). The fl11
+    // operands vanish below O(as^3).
+    const Operator OL3ps0 {g, CL3ps{actnf, false},  IntEps};
+    const Operator OL3g0  {g, CL3g{actnf, false},   IntEps};
+    const Operator OL3nsp0{g, CL3nsp{actnf, false}, IntEps};
+    const Operator OL3t0 = OL3nsp0 + 6 * OL3ps0;
+    const Operator OL3q11{g, CL3q11{}, IntEps};
+    const Operator OL3g11{g, CL3g11{}, IntEps};
+    std::map<int, Operator> CLLO11  = CLLO;
+    std::map<int, Operator> CLNLO11 = CLNLO;
+    for (auto m : {&CLLO11, &CLNLO11})
+      {
+        m->insert({DISNCBasis::CQ11, Zero});
+        m->insert({DISNCBasis::CG11, Zero});
+      }
+
     // Massive zero coefficient functions
     // Null set of operator needed for the massive LO coefficient
     // functions.
@@ -1962,6 +2143,10 @@ namespace apfel
     // Define object of the structure containing the DglapObjects
     const auto FLObj = [=] (double const& Q, std::vector<double> const& Ch) -> StructureFunctionObjects
     {
+      // fl11 charges, if provided
+      const bool fl11 = (Ch.size() == 30);
+      const std::vector<double> Ch11 = (fl11 ? Fl11Charges(Ch, actnf) : std::vector<double>{});
+
       // Fill in structure function object
       StructureFunctionObjects FObj;
       FObj.nf   = actnf;
@@ -2021,16 +2206,25 @@ namespace apfel
       CLNNLO.insert({DISNCBasis::CG,  OL2g});
 
       std::map<int, Operator> CLNNNLO;
-      CLNNNLO.insert({DISNCBasis::CNS, OL3nsp});
-      CLNNNLO.insert({DISNCBasis::CS,  OL3t});
-      CLNNNLO.insert({DISNCBasis::CG,  OL3g});
+      CLNNNLO.insert({DISNCBasis::CNS, (fl11 ? OL3nsp0 : OL3nsp)});
+      CLNNNLO.insert({DISNCBasis::CS,  (fl11 ? OL3t0 : OL3t)});
+      CLNNNLO.insert({DISNCBasis::CG,  (fl11 ? OL3g0 : OL3g)});
+
+      // fl11 operands
+      if (fl11)
+        {
+          CLNNLO.insert({DISNCBasis::CQ11, Zero});
+          CLNNLO.insert({DISNCBasis::CG11, Zero});
+          CLNNNLO.insert({DISNCBasis::CQ11, OL3q11});
+          CLNNNLO.insert({DISNCBasis::CG11, OL3g11});
+        }
 
       for (int k = 1; k <= actnf; k++)
         {
           // Convolution Basis
-          FObj.ConvBasis.insert({k, DISNCBasis{k, Ch[k-1]}});
-          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLLO}});
-          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNLO}});
+          FObj.ConvBasis.insert({k, (fl11 ? DISNCBasis{k, Ch[k-1], Ch11[k-1]} : DISNCBasis{k, Ch[k-1]})});
+          FObj.C0.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLLO11 : CLLO)}});
+          FObj.C1.insert({k, Set<Operator>{FObj.ConvBasis.at(k), (fl11 ? CLNLO11 : CLNLO)}});
           FObj.C2.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNLO}});
           FObj.C3.insert({k, Set<Operator>{FObj.ConvBasis.at(k), CLNNNLO}});
         }
@@ -2038,7 +2232,7 @@ namespace apfel
       // Total structure function set to zero for now. Need to
       // construct it a posteriori as a sum of light and heavy
       // components.
-      FObj.ConvBasis.insert({0, DISNCBasis{Ch}});
+      FObj.ConvBasis.insert({0, DISNCBasis{std::vector<double>(Ch.begin(), Ch.begin() + 6)}});
       FObj.C0.insert({0, Set<Operator>{FObj.ConvBasis.at(0), Not}});
       FObj.C1.insert({0, Set<Operator>{FObj.ConvBasis.at(0), Not}});
       FObj.C2.insert({0, Set<Operator>{FObj.ConvBasis.at(0), Not}});
@@ -2577,9 +2771,13 @@ namespace apfel
     std::vector<Set<Operator>> Cfv(PerturbativeOrder + 1);
     std::vector<Set<Distribution>> DistFv(PerturbativeOrder + 1);
 
-    // LO
+    // LO. Drop the distributions in "skip" (e.g. the valence ones for
+    // F2 and FL), as DistributionMap does for the Observable version.
+    std::map<int, Distribution> InDistFuncQSkip = InDistFuncQ;
+    for (int const& s : FObjQ.skip)
+      InDistFuncQSkip.erase(s);
     Cfv[0] = FObjQ.C0.at(k);
-    DistFv[0] = Set<Distribution> {FObjQ.ConvBasis.at(k), InDistFuncQ};
+    DistFv[0] = Set<Distribution> {FObjQ.ConvBasis.at(k), InDistFuncQSkip};
 
     // NLO
     if (PerturbativeOrder > 0)
@@ -2612,7 +2810,7 @@ namespace apfel
     Set<Distribution> SF = Cfv[0] * DistFv[0];
     for (int i = 0; i <= PerturbativeOrder; i++)
       for (int j = 0; j <= PerturbativeOrder - i; j++)
-        if (i != 0 && j != 0)
+        if (i != 0 || j != 0)
           SF += Cfv[i] * DistFv[j];
 
     // Combine set of distributions and return

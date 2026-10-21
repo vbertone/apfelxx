@@ -27,9 +27,10 @@ namespace apfel
   public:
     /**
      * @brief The map enumerators for the operands and the
-     * distributions.
+     * distributions. CQ11 and CG11 are the quark and gluon fl11
+     * operands.
      */
-    enum Operand: int {CNS, CS, CG};
+    enum Operand: int {CNS, CS, CG, CQ11, CG11};
     enum Object:  int {GLUON, SIGMA, VALENCE, T3, V3, T8, V8, T15, V15, T24, V24, T35, V35};
 
     /**
@@ -50,6 +51,23 @@ namespace apfel
      * @param Ch: vector of the effective quark charges
      */
     DISNCBasis(std::vector<double> const& Ch);
+
+    /**
+     * @brief The DISNCBasis constructor for the k-th component of the
+     * structure functions with the fl11 contributions.
+     * @param k: index that identifies the component of the structure function
+     * @param fact: factor that multiplies the whole structure function
+     * @param fact11: factor that multiplies the fl11 contributions
+     */
+    DISNCBasis(int const& k, double const& fact, double const& fact11);
+
+    /**
+     * @brief The DISNCBasis constructor for the total structure
+     * functions with the fl11 contributions.
+     * @param Ch: vector of the effective quark charges
+     * @param Ch11: vector of the fl11 charges
+     */
+    DISNCBasis(std::vector<double> const& Ch, std::vector<double> const& Ch11);
     ///@}
   };
 

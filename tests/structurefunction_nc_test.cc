@@ -23,7 +23,7 @@ int main()
   const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
-  const int PerturbativeOrder = 2;
+  const int PerturbativeOrder = 3;
 
   // Running coupling
   apfel::AlphaQCD a{0.35, sqrt(2), Thresholds, PerturbativeOrder};
@@ -35,7 +35,7 @@ int main()
   std::function<std::vector<double>(double const&)> fDq = [=] (double const& Q) -> std::vector<double> { return apfel::ParityViolatingElectroWeakCharges(Q, false); };
 
   // Initialize QCD evolution objects
-  const auto DglapObj = InitializeDglapObjectsQCD(g, Thresholds);
+  const auto DglapObj = InitializeDglapObjectsQCDOme(g, Thresholds);
 
   // Construct the DGLAP object
   auto EvolvedPDFs = BuildDglap(DglapObj, apfel::LHToyPDFs, mu0, PerturbativeOrder, as);

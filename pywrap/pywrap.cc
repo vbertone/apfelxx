@@ -246,7 +246,8 @@ PYBIND11_MODULE(apfelpy, m)
   .value("BOTTOM",  apfel::QuarkFlavour::BOTTOM)
   .value("TOP",     apfel::QuarkFlavour::TOP);
   _utilities.def("NF", &apfel::NF, "Q"_a, "Thresholds"_a);
-  _utilities.def("ElectroWeakCharges", &apfel::ElectroWeakCharges, "Q"_a, "virt"_a, "Comp"_a = apfel::QuarkFlavour::TOTAL);
+  _utilities.def("ElectroWeakCharges", &apfel::ElectroWeakCharges, "Q"_a, "virt"_a, "Comp"_a = apfel::QuarkFlavour::TOTAL, "fl11"_a = true);
+  _utilities.def("Fl11Charges", &apfel::Fl11Charges, "Ch"_a, "nf"_a);
   _utilities.def("ParityViolatingElectroWeakCharges", &apfel::ParityViolatingElectroWeakCharges, "Q"_a, "virt"_a, "Comp"_a = apfel::QuarkFlavour::TOTAL);
   _utilities.def("ElectroWeakChargesNWA", &apfel::ElectroWeakChargesNWA);
   _utilities.def("ProductExpansion", &apfel::ProductExpansion, "r"_a);
@@ -659,7 +660,9 @@ PYBIND11_MODULE(apfelpy, m)
   // Wrappers of "disbasis.h"
   py::class_<apfel::DISNCBasis, apfel::ConvolutionMap>(m, "DISNCBasis", "Convolution map for neutral-current DIS structure functions.")
   .def(py::init<int const&, double const&>(), "k"_a, "fact"_a = 1)
-  .def(py::init<std::vector<double> const&>(), "Ch"_a);
+  .def(py::init<std::vector<double> const&>(), "Ch"_a)
+  .def(py::init<int const&, double const&, double const&>(), "k"_a, "fact"_a, "fact11"_a)
+  .def(py::init<std::vector<double> const&, std::vector<double> const&>(), "Ch"_a, "Ch11"_a);
 
   py::class_<apfel::DISCCBasis, apfel::ConvolutionMap>(m, "DISCCBasis", "Convolution map for charged-current DIS structure functions.")
   .def(py::init<int const&, bool const&, double const&>(), "l"_a, "Is3"_a, "fact"_a = 1)

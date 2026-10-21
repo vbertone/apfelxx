@@ -482,12 +482,15 @@ namespace apfel
         {
           std::map<int, Operator> FOKQC0k = FOKQ.C0[k].GetObjects();
           std::map<int, Operator> FOKQC1k = FOKQ.C1[k].GetObjects();
-          FOKQ.C1[k].SetObjects(std::map<int, Operator>
-          {
-            {DISNCBasis::CNS, FOKQC1k.at(DISNCBasis::CNS) - FOKQC0k.at(DISNCBasis::CNS) * K1k.at(EvolutionBasisQCD::PNSP)},
-            {DISNCBasis::CS,  FOKQC1k.at(DISNCBasis::CS) - FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQQ) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGQ)},
-            {DISNCBasis::CG,  FOKQC1k.at(DISNCBasis::CG) - ( 1. / FOKQ.nf ) * FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQG) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGG)}
-          });
+
+          // Only the CNS, CS, and CG operands change. Any other
+          // operand (e.g. CQ11 and CG11 of the fl11 contributions,
+          // which vanish at LO) is left untouched.
+          std::map<int, Operator> FOKC1k = FOKQC1k;
+          FOKC1k.at(DISNCBasis::CNS) = FOKQC1k.at(DISNCBasis::CNS) - FOKQC0k.at(DISNCBasis::CNS) * K1k.at(EvolutionBasisQCD::PNSP);
+          FOKC1k.at(DISNCBasis::CS)  = FOKQC1k.at(DISNCBasis::CS) - FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQQ) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGQ);
+          FOKC1k.at(DISNCBasis::CG)  = FOKQC1k.at(DISNCBasis::CG) - ( 1. / FOKQ.nf ) * FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQG) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGG);
+          FOKQ.C1[k].SetObjects(FOKC1k);
         }
       return FOKQ;
     };

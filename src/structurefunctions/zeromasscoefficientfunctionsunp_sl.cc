@@ -728,6 +728,85 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  C23q11::C23q11():
+    Expression()
+  {
+  }
+  double C23q11::Regular(double const& x) const
+  {
+    const double x2  = x * x;
+    const double dl  = log(x);
+    const double dl2 = dl * dl;
+    const double x1  = 1 - x;
+    const double dl1 = log(x1);
+    const double d81 = 1. / 81;
+    return ( ( 126.42 - 50.29 * x - 50.15 * x2) * x1 - 26.717 - 320. * d81 * dl2 * ( dl + 5. ) + 59.59 * dl
+             - x * dl2 * ( 101.8 + 34.79 * dl + 3.070 * dl2 ) - 9.075 * x * x1 * dl1 ) * x;
+  }
+  double C23q11::Local(double const&) const
+  {
+    return - 11.8880;
+  }
+
+  //_________________________________________________________________________________
+  C23g11::C23g11():
+    Expression()
+  {
+  }
+  double C23g11::Regular(double const& x) const
+  {
+    const double x2   = x * x;
+    const double x3   = x * x2;
+    const double dl   = log(x);
+    const double dl3  = dl * dl * dl;
+    const double dl4  = dl * dl3;
+    const double x1   = 1 - x;
+    const double dl1  = log(x1);
+    const double dl12 = dl1 * dl1;
+    const double dl13 = dl1 * dl12;
+    const double d81  = 1. / 81;
+    return 3.211 * dl12 + 19.04 * x * dl1 + 0.623 * x1 * dl13 - 64.47 * x + 121.6 * x2 - 45.82 * x3 - x * dl * dl1 * ( 31.68 + 37.24 * dl )
+           - x * dl * ( 82.40 + 16.08 * dl ) + x * dl3 * ( 520. * d81 + 11.27 * x ) + 60. * d81 * x * dl4;
+  }
+
+  //_________________________________________________________________________________
+  CL3q11::CL3q11():
+    Expression()
+  {
+  }
+  double CL3q11::Regular(double const& x) const
+  {
+    const double x2  = x * x;
+    const double dl  = log(x);
+    const double dl2 = dl * dl;
+    const double dl3 = dl * dl2;
+    const double d81 = 1. / 81;
+    return ( ( 107.0 + 321.05 * x - 54.62 * x2 ) * ( 1 - x ) - 26.717 - 320. * d81 * dl3 - 640. * d81 * dl2
+             + 9.773 * dl + x * dl * ( 363.8 + 68.32 * dl ) ) * x;
+  }
+
+  //_________________________________________________________________________________
+  CL3g11::CL3g11():
+    Expression()
+  {
+  }
+  double CL3g11::Regular(double const& x) const
+  {
+    const double x2   = x * x;
+    const double dl   = log(x);
+    const double dl2  = dl * dl;
+    const double dl3  = dl * dl2;
+    const double dl4  = dl * dl3;
+    const double x1   = 1 - x;
+    const double dl1  = log(x1);
+    const double dl12 = dl1 * dl1;
+    const double dl13 = dl1 * dl12;
+    const double d27  = 1. / 27;
+    return ( - 0.0105 * dl13 + 1.550 * dl12 + 19.72 * x * dl1 - 66.745 * x + 0.615 * x2 ) * x1 + 20. * d27 * x * dl4
+           + ( 280. / 81. + 2.260 * x) * x * dl3 - ( 15.40 - 2.201 * x ) * x * dl2 - ( 71.66 - 0.121 * x ) * x * dl;
+  }
+
+  //_________________________________________________________________________________
   C33nsp::C33nsp(int const& nf):
     Expression(),
     _nf(nf)
