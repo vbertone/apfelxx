@@ -107,12 +107,16 @@ namespace apfel
         // Final scale
         const double tf = _LogThresholds2[(sgn ? inf : inf - 1)];
 
+        // Displace the final scale by "eps8" to make sure to stay
+        // below (above) the threshold.
+        const double tfd = tf * ( 1 - (sgn ? 1 : -1) * std::copysign(eps8, tf) );
+
         // Do the matching
-        vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, tf, vobj));
+        vobj = MatchObject(sgn, inf, EvolveObject(inf, ti, (sgn ? std::max(ti, tfd) : std::min(ti, tfd)), vobj));
 
         // Update initial scale and displace it by "eps8" to make sure
         // to be above (below) the threshold.
-        ti = tf * ( 1 + (sgn ? 1 : -1) * eps8 );
+        ti = tf * ( 1 + (sgn ? 1 : -1) * std::copysign(eps8, tf) );
       }
     return EvolveObject(nff, ti, lmu2, vobj);
   }
