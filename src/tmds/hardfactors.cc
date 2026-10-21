@@ -88,7 +88,7 @@ namespace apfel
   {
     const int nc     = 3;
     const double Pi4 = Pi2 * Pi2;
-    return CF*(-32/nc + 8*nc - (40*Pi2)/(3.*nc) + (10*nc*Pi2)/3. + (4*Pi4)/(45.*nc)
+    return CF*(-32./nc + 8*nc - (40*Pi2)/(3.*nc) + (10*nc*Pi2)/3. + (4*Pi4)/(45.*nc)
                - (nc*Pi4)/45. - (112*zeta3)/(3.*nc) + (28*nc*zeta3)/3. + (640*zeta5)/(3.*nc)
                - (160*nc*zeta5)/3.);
   }
