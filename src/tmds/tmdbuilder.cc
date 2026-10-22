@@ -2727,7 +2727,7 @@ namespace apfel
         {
           const auto& gc    = TmdObj.at(NF(mu, thrs)).GammaK;
           const double coup = Alphas(mu) / FourPi;
-          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * gc.at(3) ) ) );
+          return coup * ( gc.at(0) + coup * ( gc.at(1) + coup * ( gc.at(2) + coup * ( gc.at(3) + coup * gc.at(4) ) ) ) );
         };
         K = [=] (double const& mu) -> double
         {
