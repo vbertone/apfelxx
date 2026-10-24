@@ -8,6 +8,7 @@
 
 #include "apfel/expression.h"
 #include "apfel/massivezerocoefficientfunctionsunp_sl.h"
+#include "apfel/distribution.h"
 
 #include <vector>
 
@@ -461,23 +462,25 @@ namespace apfel
     Cm2a3gNC(int const& nf, double const& eta, double const& imodthr = 0, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
-    double      const _eta;
-    double      const _imodthr;
-    double      const _imodasy;
-    double      const _damppow;
-    Cmth23gNC   const _cmth23g;
-    Cm023gNC_c  const _cm023g_c;
-    Cm023gNC_l  const _cm023g_l;
-    Cm023gNC_l2 const _cm023g_l2;
-    Cm023gNC_l3 const _cm023g_l3;
-    Cmsx23gNC   const _cmsx23g;
-    Cm0sx23gNC  const _cm0sx23g;
-    double            _cllsx;
-    double            _cllsx0;
-    double            _cnllcsx;
-    double            _cnllcsx0;
-    double            _cnllvsx;
-    double            _cnllvsx0;
+    double HighScale(double const& z) const;
+    double       const _eta;
+    double       const _imodthr;
+    double       const _imodasy;
+    double       const _damppow;
+    Cmth23gNC    const _cmth23g;
+    Cm023gNC_c   const _cm023g_c;
+    Cm023gNC_l   const _cm023g_l;
+    Cm023gNC_l2  const _cm023g_l2;
+    Cm023gNC_l3  const _cm023g_l3;
+    Cmsx23gNC    const _cmsx23g;
+    Cm0sx23gNC   const _cm0sx23g;
+    Distribution const _m0;
+    double             _cllsx;
+    double             _cllsx0;
+    double             _cnllcsx;
+    double             _cnllcsx0;
+    double             _cnllvsx;
+    double             _cnllvsx0;
   };
 
   /**
@@ -490,6 +493,7 @@ namespace apfel
     Cm2a3psNC(int const& nf, double const& eta, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
+    double HighScale(double const& z) const;
     double       const _eta;
     double       const _imodasy;
     double       const _damppow;
@@ -499,6 +503,7 @@ namespace apfel
     Cm023psNC_l3 const _cm023ps_l3;
     Cmsx23psNC   const _cmsx23ps;
     Cm0sx23psNC  const _cm0sx23ps;
+    Distribution const _m0;
     double             _cllsx;
     double             _cllsx0;
     double             _cnllcsx;
@@ -517,22 +522,24 @@ namespace apfel
     CmLa3gNC(int const& nf, double const& eta, double const& imodthr = 0, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
-    double      const _eta;
-    double      const _imodthr;
-    double      const _imodasy;
-    double      const _damppow;
-    CmthL3gNC   const _cmthL3g;
-    Cm0L3gNC_c  const _cm0L3g_c;
-    Cm0L3gNC_l  const _cm0L3g_l;
-    Cm0L3gNC_l2 const _cm0L3g_l2;
-    CmsxL3gNC   const _cmsxL3g;
-    Cm0sxL3gNC  const _cm0sxL3g;
-    double            _cllsx;
-    double            _cllsx0;
-    double            _cnllcsx;
-    double            _cnllcsx0;
-    double            _cnllvsx;
-    double            _cnllvsx0;
+    double HighScale(double const& z) const;
+    double       const _eta;
+    double       const _imodthr;
+    double       const _imodasy;
+    double       const _damppow;
+    CmthL3gNC    const _cmthL3g;
+    Cm0L3gNC_c   const _cm0L3g_c;
+    Cm0L3gNC_l   const _cm0L3g_l;
+    Cm0L3gNC_l2  const _cm0L3g_l2;
+    CmsxL3gNC    const _cmsxL3g;
+    Cm0sxL3gNC   const _cm0sxL3g;
+    Distribution const _m0;
+    double             _cllsx;
+    double             _cllsx0;
+    double             _cnllcsx;
+    double             _cnllcsx0;
+    double             _cnllvsx;
+    double             _cnllvsx0;
   };
 
   /**
@@ -545,6 +552,7 @@ namespace apfel
     CmLa3psNC(int const& nf, double const& eta, double const& imodasy = 0, double const& damppow = 1, bool const& muterms = true);
     double Regular(double const& x) const;
   private:
+    double HighScale(double const& z) const;
     double       const _eta;
     double       const _imodasy;
     double       const _damppow;
@@ -553,6 +561,7 @@ namespace apfel
     Cm0L3psNC_l2 const _cm0L3ps_l2;
     CmsxL3psNC   const _cmsxL3ps;
     Cm0sxL3psNC  const _cm0sxL3ps;
+    Distribution const _m0;
     double             _cllsx;
     double             _cllsx0;
     double             _cnllcsx;

@@ -13,7 +13,7 @@ program renfacratio_test
   double precision, parameter :: Q0 = sqrt2, Q = 100d0, x = 0.1d0
   double precision, parameter :: tol = 1d-9
 
-  double precision, parameter :: ref_gluon = 0.8795946987924586d0
+  double precision, parameter :: ref_gluon = 0.87959470099832104d0
   double precision, parameter :: ref_up    = 0.6578866471090744d0
   double precision, parameter :: ref_ubar  = 0.0952085953462092d0
 

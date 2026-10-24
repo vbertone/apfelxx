@@ -21,7 +21,7 @@ program evolve_test
   double precision, parameter :: tol = 1d-9
 
   ! Reference values (EvolveAPFEL/xPDF: direct dglap->Evaluate)
-  double precision, parameter :: ref_gluon = 0.8524539070427345d0
+  double precision, parameter :: ref_gluon = 0.85245390935587406d0
   double precision, parameter :: ref_up    = 0.6450437853482118d0
   double precision, parameter :: ref_ubar  = 0.0925297723004884d0
 

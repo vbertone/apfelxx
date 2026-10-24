@@ -1026,6 +1026,14 @@ namespace apfel
   }
 
   //_________________________________________________________________________________
+  Grid const& HighScaleGrid()
+  {
+    // Grid used to tabulate the Q >> m limits below
+    static const Grid g{{SubGrid{300, 1e-7, 4}, SubGrid{100, 1e-2, 4}, SubGrid{100, 3e-1, 4}, SubGrid{100, 8e-1, 4}, SubGrid{100, 9.8e-1, 4}}};
+    return g;
+  }
+
+  //_________________________________________________________________________________
   Cm2a3gNC::Cm2a3gNC(int const& nf, double const& eta, double const& imodthr, double const& imodasy, double const& damppow, bool const& muterms):
     Expression(),
     _eta(eta),
@@ -1038,7 +1046,8 @@ namespace apfel
     _cm023g_l2(Cm023gNC_l2{nf, muterms}),
     _cm023g_l3(Cm023gNC_l3{nf, muterms}),
     _cmsx23g(Cmsx23gNC{nf, eta, muterms}),
-    _cm0sx23g(Cm0sx23gNC{nf, eta, muterms})
+    _cm0sx23g(Cm0sx23gNC{nf, eta, muterms}),
+    _m0(HighScaleGrid(), [&] (double const& x) -> double { return x * HighScale(eta * x); })
   {
     _cllsx    = _cmsx23g.CoefficientLL();
     _cllsx0   = _cm0sx23g.CoefficientLL();
@@ -1047,21 +1056,25 @@ namespace apfel
     _cnllvsx  = _cmsx23g.CoefficientNLLVariation();
     _cnllvsx0 = _cm0sx23g.CoefficientNLLVariation();
   }
+  double Cm2a3gNC::HighScale(double const& z) const
+  {
+    const double lxi  = log(4 * _eta / ( 1 - _eta ));
+    const double lxi2 = lxi * lxi;
+    const double lxi3 = lxi * lxi2;
+    return _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z);
+  }
   double Cm2a3gNC::Regular(double const& x) const
   {
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
     const double z    = eta * x;
-    const double lxi  = log(xi);
-    const double lxi2 = lxi * lxi;
-    const double lxi3 = lxi * lxi2;
     const double rho  = 1.3;
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1 - fthr;
     const double thr  = _cmth23g.Regular(x);
     const double dthr = _cmth23g.Delta(x);
-    const double m0   = _cm023g_c.Regular(z) + lxi * _cm023g_l.Regular(z) + lxi2 * _cm023g_l2.Regular(z) + lxi3 * _cm023g_l3.Regular(z);
+    const double m0   = (x < _m0.GetGrid().GetJointGrid().xMin() ? HighScale(z) : _m0.Evaluate(x) / x);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
     const double A2   = 1.2;
@@ -1095,7 +1108,8 @@ namespace apfel
     _cm023ps_l2(Cm023psNC_l2{nf, muterms}),
     _cm023ps_l3(Cm023psNC_l3{nf, muterms}),
     _cmsx23ps(Cmsx23psNC{nf, eta, muterms}),
-    _cm0sx23ps(Cm0sx23psNC{nf, eta, muterms})
+    _cm0sx23ps(Cm0sx23psNC{nf, eta, muterms}),
+    _m0(HighScaleGrid(), [&] (double const& x) -> double { return x * HighScale(eta * x); })
   {
     _cllsx    = _cmsx23ps.CoefficientLL();
     _cllsx0   = _cm0sx23ps.CoefficientLL();
@@ -1104,19 +1118,23 @@ namespace apfel
     _cnllvsx  = _cmsx23ps.CoefficientNLLVariation();
     _cnllvsx0 = _cm0sx23ps.CoefficientNLLVariation();
   }
+  double Cm2a3psNC::HighScale(double const& z) const
+  {
+    const double lxi  = log(4 * _eta / ( 1 - _eta ));
+    const double lxi2 = lxi * lxi;
+    const double lxi3 = lxi * lxi2;
+    return _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z);
+  }
   double Cm2a3psNC::Regular(double const& x) const
   {
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
     const double z    = eta * x;
-    const double lxi  = log(xi);
-    const double lxi2 = lxi * lxi;
-    const double lxi3 = lxi * lxi2;
     const double rho  = 1.3;
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1 - fthr;
-    const double m0   = _cm023ps_c.Regular(z) + lxi * _cm023ps_l.Regular(z) + lxi2 * _cm023ps_l2.Regular(z) + lxi3 * _cm023ps_l3.Regular(z);
+    const double m0   = (x < _m0.GetGrid().GetJointGrid().xMin() ? HighScale(z) : _m0.Evaluate(x) / x);
     const double sx   = ( _cllsx * log(z) + _cnllcsx ) / z;
     const double sx0  = ( _cllsx0 * log(z) + _cnllcsx0 ) / z;
     const double A2   = 1.2;
@@ -1151,7 +1169,8 @@ namespace apfel
     _cm0L3g_l(Cm0L3gNC_l{nf, muterms}),
     _cm0L3g_l2(Cm0L3gNC_l2{nf, muterms}),
     _cmsxL3g(CmsxL3gNC{nf, eta, muterms}),
-    _cm0sxL3g(Cm0sxL3gNC{nf, eta, muterms})
+    _cm0sxL3g(Cm0sxL3gNC{nf, eta, muterms}),
+    _m0(HighScaleGrid(), [&] (double const& x) -> double { return x * HighScale(eta * x); })
   {
     _cllsx    = _cmsxL3g.CoefficientLL();
     _cllsx0   = _cm0sxL3g.CoefficientLL();
@@ -1160,20 +1179,24 @@ namespace apfel
     _cnllvsx  = _cmsxL3g.CoefficientNLLVariation();
     _cnllvsx0 = _cm0sxL3g.CoefficientNLLVariation();
   }
+  double CmLa3gNC::HighScale(double const& z) const
+  {
+    const double lxi  = log(4 * _eta / ( 1 - _eta ));
+    const double lxi2 = lxi * lxi;
+    return _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z);
+  }
   double CmLa3gNC::Regular(double const& x) const
   {
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
     const double z    = eta * x;
-    const double lxi  = log(xi);
-    const double lxi2 = lxi * lxi;
     const double rho  = 1.3;
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1. - fthr;
     const double thr  = _cmthL3g.Regular(x);
     const double dthr = _cmthL3g.Delta(x);
-    const double m0   = _cm0L3g_c.Regular(z) + lxi * _cm0L3g_l.Regular(z) + lxi2 * _cm0L3g_l2.Regular(z);
+    const double m0   = (x < _m0.GetGrid().GetJointGrid().xMin() ? HighScale(z) : _m0.Evaluate(x) / x);
     const double R    = _cllsx / _cllsx0;
     const double damp = 1 / pow(1 + 1 / xi, _damppow);
 
@@ -1200,7 +1223,8 @@ namespace apfel
     _cm0L3ps_l(Cm0L3psNC_l{nf, muterms}),
     _cm0L3ps_l2(Cm0L3psNC_l2{nf, muterms}),
     _cmsxL3ps(CmsxL3psNC{nf, eta, muterms}),
-    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, muterms})
+    _cm0sxL3ps(Cm0sxL3psNC{nf, eta, muterms}),
+    _m0(HighScaleGrid(), [&] (double const& x) -> double { return x * HighScale(eta * x); })
   {
     _cllsx    = _cmsxL3ps.CoefficientLL();
     _cllsx0   = _cm0sxL3ps.CoefficientLL();
@@ -1209,18 +1233,22 @@ namespace apfel
     _cnllvsx  = _cmsxL3ps.CoefficientNLLVariation();
     _cnllvsx0 = _cm0sxL3ps.CoefficientNLLVariation();
   }
+  double CmLa3psNC::HighScale(double const& z) const
+  {
+    const double lxi  = log(4 * _eta / ( 1 - _eta ));
+    const double lxi2 = lxi * lxi;
+    return _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z);
+  }
   double CmLa3psNC::Regular(double const& x) const
   {
     const double eta  = this->_eta;
     const double xi   = 4 * eta / ( 1 - eta );
     const double z    = eta * x;
-    const double lxi  = log(xi);
-    const double lxi2 = lxi * lxi;
     const double rho  = 1.3;
     const double eta0 = 2;
     const double fthr = 1 / ( 1 + pow(( 0.25 * xi * ( 1 - z ) / z - 1 ) / eta0, rho) );
     const double fasy = 1 - fthr;
-    const double m0   = _cm0L3ps_c.Regular(z) + lxi * _cm0L3ps_l.Regular(z) + lxi2 * _cm0L3ps_l2.Regular(z);
+    const double m0   = (x < _m0.GetGrid().GetJointGrid().xMin() ? HighScale(z) : _m0.Evaluate(x) / x);
     const double R    = _cllsx / _cllsx0;
     const double damp = 1 / pow(1 + 1 / xi, _damppow);
 
