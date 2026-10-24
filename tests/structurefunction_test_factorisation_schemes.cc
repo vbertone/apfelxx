@@ -41,7 +41,7 @@ int main()
 
   // Sets of input PDFs
   const apfel::Set<apfel::Distribution> SetLHToyPDFs{apfel::EvolutionBasisQCD{apfel::NF(mu0, Thresholds)}, DistributionMap(g, apfel::LHToyPDFs, mu0)};
-  const apfel::Set<apfel::Distribution> SetLHToyPDFsKrk = SetLHToyPDFs + as(mu0) / apfel::FourPi * ( KKrk.at(apfel::NF(mu0, Thresholds)).at(1) * SetLHToyPDFs );
+  const apfel::Set<apfel::Distribution> SetLHToyPDFsKrk = ChangeFactorisationSchemeMSbarToK(SetLHToyPDFs, KKrk, apfel::NF(mu0, Thresholds), as(mu0));
   const std::function<std::map<int, double>(double const&, double const&)> LHToyPDFsKrk = [=] (double const& x, double const&) -> std::map<int, double>
   {
     std::map<int, double> out;
