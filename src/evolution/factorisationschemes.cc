@@ -13,6 +13,8 @@
 #include "apfel/messages.h"
 #include "apfel/timer.h"
 
+#include <algorithm>
+
 namespace apfel
 {
   //_____________________________________________________________________________
@@ -477,6 +479,13 @@ namespace apfel
       // Get scheme-change kernels at the current nf
       const std::map<int, Operator> K1k = K.at(FOKQ.nf).at(1).GetObjects();
 
+      // F3-like objects (singlet skipped): CS acts on the valence,
+      // which does not mix with the gluon. CNS acts on the V's if T3
+      // is skipped.
+      const auto Skipped = [&] (int const& i) -> bool{ return std::find(FOKQ.skip.begin(), FOKQ.skip.end(), i) != FOKQ.skip.end(); };
+      const bool Valence = Skipped(DISNCBasis::SIGMA);
+      const int  KNS     = (Skipped(DISNCBasis::T3) ? EvolutionBasisQCD::PNSM : EvolutionBasisQCD::PNSP);
+
       // Modify single structure function components
       for (int k = 0; k <= 6; k++)
         {
@@ -487,9 +496,14 @@ namespace apfel
           // operand (e.g. CQ11 and CG11 of the fl11 contributions,
           // which vanish at LO) is left untouched.
           std::map<int, Operator> FOKC1k = FOKQC1k;
-          FOKC1k.at(DISNCBasis::CNS) = FOKQC1k.at(DISNCBasis::CNS) - FOKQC0k.at(DISNCBasis::CNS) * K1k.at(EvolutionBasisQCD::PNSP);
-          FOKC1k.at(DISNCBasis::CS)  = FOKQC1k.at(DISNCBasis::CS) - FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQQ) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGQ);
-          FOKC1k.at(DISNCBasis::CG)  = FOKQC1k.at(DISNCBasis::CG) - ( 1. / FOKQ.nf ) * FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQG) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGG);
+          FOKC1k.at(DISNCBasis::CNS) = FOKQC1k.at(DISNCBasis::CNS) - FOKQC0k.at(DISNCBasis::CNS) * K1k.at(KNS);
+          if (Valence)
+            FOKC1k.at(DISNCBasis::CS) = FOKQC1k.at(DISNCBasis::CS) - FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PNSV);
+          else
+            {
+              FOKC1k.at(DISNCBasis::CS) = FOKQC1k.at(DISNCBasis::CS) - FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQQ) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGQ);
+              FOKC1k.at(DISNCBasis::CG) = FOKQC1k.at(DISNCBasis::CG) - ( 1. / FOKQ.nf ) * FOKQC0k.at(DISNCBasis::CS) * K1k.at(EvolutionBasisQCD::PQG) - FOKQC0k.at(DISNCBasis::CG) * K1k.at(EvolutionBasisQCD::PGG);
+            }
           FOKQ.C1[k].SetObjects(FOKC1k);
         }
       return FOKQ;
