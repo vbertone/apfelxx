@@ -33,13 +33,14 @@ namespace apfel
   //_________________________________________________________________________
   double TwoBodyPhaseSpace::ZeroqTPhaseSpaceReduction(double Q, double y) const
   {
-    // Note: no support at the moment for asymemtric cuts in _pTmin1, _pTmin2
-    if (Q <= 2. * _pTmin1) return 0.;
+    // At qT = 0 both leptons have the same pT: only the harder cut matters
+    const double pTmin = std::max(_pTmin1, _pTmin2);
+    if (Q <= 2. * pTmin) return 0.;
 
     const double delta = std::min(y - _etamin, _etamax - y);
     if (delta <= 0.) return 0.;
 
-    const double rho = 2. * _pTmin1 / Q;
+    const double rho = 2. * pTmin / Q;
     const double t   = std::min(std::tanh(delta), std::sqrt(1. - rho*rho));
     return t * (3. + t * t) / 4.;
   }
@@ -57,12 +58,14 @@ namespace apfel
   std::pair<double, double> TwoBodyPhaseSpace::_get_x_bounds(double qT, double MT, double c, double y,
                                                              double eta) const
   {
+    // pT1 > pTmin1
     const double f1 = (MT * c - (MT * MT - qT * qT) / (2. * _pTmin1)) / qT;
+
+    // pT2 > pTmin2
     const double xbar = [&]() -> double
     {
-      const double den = 2. * qT * (MT * MT - _pTmin1 * _pTmin1);
-      const double num = c * MT * (MT * MT + qT * qT - 2 * _pTmin1 * _pTmin1) +
-      (qT * qT - MT * MT) * std::sqrt(_pTmin1 * _pTmin1 + MT * MT * (c * c - 1));
+      const double den = 2. * qT * (MT * MT - _pTmin2 * _pTmin2);
+      const double num = c * MT * (MT * MT + qT * qT - 2 * _pTmin2 * _pTmin2) + (qT * qT - MT * MT) * std::sqrt(_pTmin2 * _pTmin2 + MT * MT * (c * c - 1));
       return num / den;
     }();
 
@@ -74,8 +77,7 @@ namespace apfel
       return num / den;
     };
 
-    return {std::max(-1., f1),
-            std::min({1., xbar, Rinv(_etamin), Rinv(_etamax)})};
+    return {std::max(-1., f1), std::min({1., xbar, Rinv(_etamin), Rinv(_etamax)})};
   }
 
   //_________________________________________________________________________
@@ -90,18 +92,10 @@ namespace apfel
     const double z2 = z*z;
     const double k = u * u - qT2;
     const double k2 = k*k;
-
     const double sqrt_1_m_x2 = std::sqrt((1. - x) * (1. + x));
-    const double sqrt_pref   = (d / z2 - 5. * u * d / (2. * k * z) + 2. * qT2 * d / k2 +
-                                11 * d * u2 / (2. * k2) + 3) /
-                               (3. * k * z);
-
-    const double arctan_pref =
-      u * (2. * k2 + d * (3. * qT2 + 2. * u2)) / std::pow(u2 - qT2, 3.5);
-    const double arctan = -std::atan2(  //
-                            std::sqrt((u + qT) * (1. - x)), //
-                            std::sqrt((u - qT) * (1. + x))  //
-                          );
+    const double sqrt_pref   = (d / z2 - 5. * u * d / (2. * k * z) + 2. * qT2 * d / k2 + 11 * d * u2 / (2. * k2) + 3) / (3. * k * z);
+    const double arctan_pref = u * (2. * k2 + d * (3. * qT2 + 2. * u2)) / std::pow(u2 - qT2, 3.5);
+    const double arctan = -std::atan2(std::sqrt((u + qT) * (1. - x)), std::sqrt((u - qT) * (1. + x)));
     return qT * sqrt_1_m_x2 * sqrt_pref + arctan * arctan_pref;
   }
 
@@ -113,8 +107,8 @@ namespace apfel
 
     std::vector<double> points{_etamin, _etamax};
 
-    // No open region if MT <= 2h
-    if (MT <= 2. * _pTmin1) return points;
+    // No open region if MT <= pTmin1 + pTmin2
+    if (MT <= _pTmin1 + _pTmin2) return points;
 
     auto add = [&](double eta)
     {
@@ -132,32 +126,29 @@ namespace apfel
 
     add(y);
 
-    // lT1 = -qTCut at x = +/-1.
-    // Exchanging leptons also supplies lT2 = -qTCut at x = +/-1.
+    // pT1 = pTmin1 at x = +/-1.
+    // Exchanging leptons also supplies pT2 = pTmin2 at x = +/-1.
     for (double sign :
          {
            -1., 1.
          })
       {
-        const double c = (Q2 / (2. * _pTmin1) + sign * qT) / MT;
-        if (c < 1.) continue;
-
-        const double delta = std::acosh(c);
+        const double c1 = (Q2 / (2. * _pTmin1) + sign * qT) / MT;
+        const double c2 = (Q2 / (2. * _pTmin2) + sign * qT) / MT;
 
         for (double side :
              {
                -1., 1.
              })
           {
-            const double eta = y + side * delta;
-            add(eta);
-            add_partner(eta, _pTmin1);
+            if (c1 >= 1.) add(y + side * std::acosh(c1));
+            if (c2 >= 1.) add_partner(y + side * std::acosh(c2), _pTmin2);
           }
       }
 
     // Both transverse-momentum cuts saturated:
-    // eta1 + eta2 = 2y and MT = 2h cosh(eta1 - z).
-    const double delta_both = std::acosh(MT / (2. * _pTmin1));
+    // cosh(eta1 - y) = (MT^2 + pTmin1^2 - pTmin2^2) / (2 pTmin1 MT).
+    const double delta_both = std::acosh(MT / (2. * _pTmin1) + (_pTmin1 * _pTmin1 - _pTmin2 * _pTmin2) / (2. * _pTmin1 * MT));
     add(y - delta_both);
     add(y + delta_both);
 
@@ -166,11 +157,11 @@ namespace apfel
            _etamin, _etamax
          })
       {
-        // pT1 = h and eta2 = eta_bar.
+        // pT1 = pTmin1 and eta2 = eta_bar.
         add(eta_bar + std::asinh((MT / _pTmin1) * std::sinh(y - eta_bar)));
 
-        // pT2 = h and eta2 = eta_bar.
-        add_partner(eta_bar, _pTmin1);
+        // pT2 = pTmin2 and eta2 = eta_bar.
+        add_partner(eta_bar, _pTmin2);
 
         // eta2 = eta_bar at a collinear transverse configuration.
         // Parametrize the second lepton with cos(phi2) = +/-1.
@@ -240,8 +231,7 @@ namespace apfel
           }
         catch (...)
           {
-            std::cout << "TwoBodyPhaseSpace integral between " << points[i-1]
-               << " and " << points[i] << " failed to reach accuracy.\n";
+            std::cout << "TwoBodyPhaseSpace integral between " << points[i-1] << " and " << points[i] << " failed to reach accuracy.\n";
           }
       }
 

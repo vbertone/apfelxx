@@ -288,7 +288,7 @@ namespace apfel
         {
           const int upper = _nQg[iQ];
           const int node = NF(Q, _Thresholds) == NF(_Qg[upper - 1], _Thresholds)
-              ? upper - 1 : upper;
+                           ? upper - 1 : upper;
           std::get<1>(bounds) = node;
           std::get<2>(bounds) = node + 1;
           return bounds;

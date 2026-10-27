@@ -62,43 +62,19 @@ int main()
   t.stop();
 
   // Test behavior of qgrid for Q in the gap between thresholds
-  {
-    const std::vector<double> thresholds{0, 0, 0, 2., 4.5, 175.};
-
-    const auto count = [&thresholds](double const& Q) -> double
+  const std::vector<double> thresholds{0, 0, 0, 2., 4.5, 175.};
+  const auto count = [&thresholds](double const& Q) -> double { return apfel::NF(Q, thresholds); };
+  const apfel::TabulateObject<double> table{count, 100, 1., 10., 3, thresholds};
+  const auto& grid = table.GetQGrid();
+  for (const double threshold : {2., 4.5})
     {
-      return apfel::NF(Q, thresholds);
-    };
+      const auto upper = std::upper_bound(grid.begin(), grid.end(), threshold);
+      const double below = *(upper - 1);
+      const double above = *upper;
+      for (const double Q : {below, std::nextafter(threshold, 0.), threshold, std::nextafter(threshold, std::numeric_limits<double>::infinity()),above})
+	if (std::abs(table.Evaluate(Q) - count(Q)) > 1.e-12)
+	  throw std::runtime_error("QGrid threshold-gap evaluation disagrees with NF");
+    }
 
-    const apfel::TabulateObject<double> table{
-      count, 100, 1., 10., 3, thresholds
-    };
-
-    const auto& grid = table.GetQGrid();
-
-    for (const double threshold : {2., 4.5})
-      {
-        const auto upper = std::upper_bound(
-          grid.begin(), grid.end(), threshold);
-
-        const double below = *(upper - 1);
-        const double above = *upper;
-
-        for (const double Q : {
-               below,
-               std::nextafter(threshold, 0.),
-               threshold,
-               std::nextafter(
-                 threshold, std::numeric_limits<double>::infinity()),
-               above})
-          {
-            if (std::abs(table.Evaluate(Q) - count(Q)) > 1.e-12)
-              throw std::runtime_error(
-                "QGrid threshold-gap evaluation disagrees with NF");
-          }
-      }
-  }
-
-
-  return 0;
+    return 0;
 }
