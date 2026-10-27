@@ -5,6 +5,9 @@
 
 #pragma once
 
+#include <utility>
+#include <vector>
+
 namespace apfel
 {
   /**
@@ -85,5 +88,12 @@ namespace apfel
     double const _etamax;
     double const _eps;
     ///@}
+
+    double ZeroqTPhaseSpaceReduction(double Q, double y) const;
+    double _integrand(double eta, double qT, double y, double MT) const;
+    std::pair<double, double> _get_x_bounds(double qT, double MT, double c, double y,
+                                            double eta) const;
+    double _primitive(double x, double qT, double MT, double c) const;
+    std::vector<double> eta_breakpoints(double Q, double y, double qT) const;
   };
 }
