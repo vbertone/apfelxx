@@ -237,9 +237,6 @@ namespace apfel
         // the case of GPD evolution).
         expr.SetExternalVariable(xg[beta]);
 
-        // Define "kappa" variable
-        const double kappa = xi / xg[beta];
-
         // Loop over the index alpha
         for (int alpha = 0; alpha < (int) _Operator[0].size(1); alpha++)
           {
@@ -261,36 +258,29 @@ namespace apfel
             // interpolating function is different from zero.
             for (int j = 0; j <= std::min(alpha, k); j++)
               {
-                // Define "Integrator" object. IMPORTANT: the
-                // particular form of the subtraction term only
-                // applies to singular terms that behave as
-                // 1/(1-y). If other singular functions are used, this
-                // term has to be adjusted. The integral also contains
-                // a possible principal-valued contribution with
-                // singularity at y = 1 / kappa integrated between x
-                // and 1. Also in this case the procedure is specific
-                // for 1 / ( 1 - kappa y).
+                // Define "Integrator" object. The singular terms are
+                // subtracted at y = 1 and y = 1 / kappa over the
+                // support of the interpolating function and added
+                // back through "LocalPP" and "LocalPV".
                 const Integrator Ij{[&] (double const& y) -> double
                   {
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
-                    const double ky = kappa * y;
                     return expr.Regular(y) * wr
-                               + expr.Singular(y) * ( wr - ws * ( 1 + (y > 1 ? ( 1 - y ) / y : 0) ) )
-                               + expr.SingularPV(y) * ( wr - wspv * ( 1 + (ky > 1 ? ( 1 - ky ) / ky : 0) ) );
+                               + expr.Singular(y) * ( wr - ws )
+                               + expr.SingularPV(y) * ( wr - wspv );
                   }};
                 // Compute the integral
                 _Operator[0](beta, alpha) += Ij.integrate(xg[beta] / xg[alpha - j + 1], xg[beta] / xg[alpha - j], _eps);
               }
             // Add PV local part from the y = 1 / kappa singularity
-            _Operator[0](beta, alpha) += wspv * ( expr.LocalPV()
-                                                  + expr.LocalLogPV(xg[beta] / xg[alpha + 1]) - expr.LocalLogPV(xg[std::max(0, alpha - k)] / xg[beta] / pow(kappa, 2)) );
+            if (wspv != 0)
+              _Operator[0](beta, alpha) += wspv * expr.LocalPV(xg[beta] / xg[alpha + 1], xg[beta] / xg[std::max(0, alpha - k)]);
           }
         // Add the local parts: that from standard +-prescripted terms
         // ("Local") and that deriving from principal-valued integrals
         // at x = 1, i.e. from the ++-prescription ("LocalPP").
         _Operator[0](beta, beta) += expr.Local(xg[beta] / xg[beta + 1])
-                                    + expr.LocalPP(xg[beta] / xg[beta + 1])
-                                    - (beta == 0 ? 0 : expr.LocalPP(xg[std::max(0, beta - k)] / xg[beta]));
+                                    + expr.LocalPP(xg[beta] / xg[beta + 1], xg[beta] / xg[std::max(0, beta - k)]);
       }
   }
 

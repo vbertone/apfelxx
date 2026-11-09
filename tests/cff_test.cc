@@ -85,16 +85,16 @@ int main()
   const auto GPDs = [&] (double const& x, double const& Q) -> std::map<int, double> { return TabulatedGPDs.EvaluateMapxQ(x, Q); };
 
   // Initialize coefficient functions for CFFs
-  const auto ImF1Obj = InitializeImCFF1NCObjectsZM(g, Thresholds, xi);
-  const auto ReF1Obj = InitializeReCFF1NCObjectsZM(g, Thresholds, xi);
+  const auto ImF2Obj = InitializeImCFF2NCObjectsZMSpaceLike(g, Thresholds, xi);
+  const auto ReF2Obj = InitializeReCFF2NCObjectsZMSpaceLike(g, Thresholds, xi);
 
   // Initialize form factors
-  const auto ImF1 = BuildStructureFunctions(ImF1Obj, GPDs, PerturbativeOrder, as, fBq);
-  const auto ReF1 = BuildStructureFunctions(ReF1Obj, GPDs, PerturbativeOrder, as, fBq);
+  const auto ImF2 = BuildStructureFunctions(ImF2Obj, GPDs, PerturbativeOrder, as, fBq);
+  const auto ReF2 = BuildStructureFunctions(ReF2Obj, GPDs, PerturbativeOrder, as, fBq);
 
   // Tabulate Structure functions
-  const apfel::TabulateObject<apfel::Distribution> ImF1total {[&] (double const& Q) -> apfel::Distribution{ return ImF1.at(0).Evaluate(Q); }, 50, 1, 99, 3, Thresholds};
-  const apfel::TabulateObject<apfel::Distribution> ReF1total {[&] (double const& Q) -> apfel::Distribution{ return ReF1.at(0).Evaluate(Q); }, 50, 1, 99, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> ImF2total {[&] (double const& Q) -> apfel::Distribution{ return ImF2.at(0).Evaluate(Q); }, 50, 1, 99, 3, Thresholds};
+  const apfel::TabulateObject<apfel::Distribution> ReF2total {[&] (double const& Q) -> apfel::Distribution{ return ReF2.at(0).Evaluate(Q); }, 50, 1, 99, 3, Thresholds};
 
   apfel::Timer t;
 
@@ -110,23 +110,23 @@ int main()
   const std::vector<double> xlha = {1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 3e-1, 5e-1, 7e-1, 9e-1};
 
   std::cout << "     x    "
-            << "     ReF1tot    "
-            << "     ImF1tot    "
+            << "     ReF2tot    "
+            << "     ImF2tot    "
             << std::endl;
   for (double const& x : xlha)
     std::cout << std::setprecision(4) << x << "  " << std::setprecision(8)
-              << ReF1total.EvaluatexQ(x, Q) / x << "  "
-              << ImF1total.EvaluatexQ(x, Q) / x << "  "
+              << ReF2total.EvaluatexQ(x, Q) / x << "  "
+              << ImF2total.EvaluatexQ(x, Q) / x << "  "
               << std::endl;
   std::cout << std::endl;
 
   t.stop();
 
   const int k = 1000000;
-  std::cout << "Interpolating " << k << " times F1 on the grid... ";
+  std::cout << "Interpolating " << k << " times F2 on the grid... ";
   t.start();
   for (int i = 0; i < k; i++)
-    ReF1total.EvaluatexQ(0.05, Q);
+    ReF2total.EvaluatexQ(0.05, Q);
   t.stop();
 
   return 0;

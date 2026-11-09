@@ -25,61 +25,17 @@ namespace apfel
   ///@{
   /**
    * @brief O(&alpha;<SUB>s</SUB><SUP>0</SUP>) non-singlet real part of the
-   * coefficient function for F1.
+   * coefficient function for F2, identical for both signs of
+   * Q<SUP>2</SUP>. The imaginary part is proportional to the identity
+   * and the coefficient functions for FL vanish at this order.
    */
-  class ReCFF10ns: public Expression
+  class ReCFF20ns: public Expression
   {
   public:
-    ReCFF10ns();
+    ReCFF20ns();
     double Regular(double const& x)  const;
     double Singular(double const& x) const;
-    double LocalPP(double const& x)  const;
-  };
-  ///@}
-
-  /**
-   * @defgroup CFFNLOzm NLO zero-mass coefficient functions
-   * @ingroup CFFMassless
-   */
-  ///@{
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) non-singlet imaginary part of the
-   * coefficient function for F1.
-   */
-  class ImCFF11ns: public Expression
-  {
-  public:
-    ImCFF11ns();
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) non-singlet real part of the
-   * coefficient function for F1.
-   */
-  class ReCFF11ns: public Expression
-  {
-  public:
-    ReCFF11ns();
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) gluon imaginary part of the
-   * coefficient function for F1.
-   */
-  class ImCFF11g: public Expression
-  {
-  public:
-    ImCFF11g();
-  };
-
-  /**
-   * @brief O(&alpha;<SUB>s</SUB>) gluon real part of the
-   * coefficient function for F1.
-   */
-  class ReCFF11g: public Expression
-  {
-  public:
-    ReCFF11g();
+    double LocalPP(double const& c, double const& d) const;
   };
   ///@}
 }

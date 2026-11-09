@@ -56,7 +56,7 @@ namespace apfel
     Cgtmd1qgeUU(double const& xi);
     double Regular(double const& x)    const;
     double SingularPV(double const& x) const;
-    double LocalLogPV(double const& x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -81,7 +81,7 @@ namespace apfel
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalLogPV(double const& x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -92,7 +92,7 @@ namespace apfel
   {
   public:
     Cgtmd1qgoUU(double const& xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -103,7 +103,7 @@ namespace apfel
   {
   public:
     Cgtmd1ggoUU(double const& xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -117,7 +117,7 @@ namespace apfel
     Cgtmd1qgeUT(double const &xi);
     double Regular(double const &x) const;
     double SingularPV(double const &x) const;
-    double LocalLogPV(double const &x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -129,7 +129,7 @@ namespace apfel
   {
   public:
     Cgtmd1qgoUT(double const &xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -143,7 +143,7 @@ namespace apfel
     Cgtmd1ggeUT(double const &xi);
     double Regular(double const &x) const;
     double SingularPV(double const &x) const;
-    double LocalLogPV(double const &x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -155,7 +155,7 @@ namespace apfel
   {
   public:
     Cgtmd1ggoUT(double const &xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
   ///@}
 
@@ -198,7 +198,7 @@ namespace apfel
     Cgtmd1qgeLL(double const& xi);
     double Regular(double const& x)    const;
     double SingularPV(double const& x) const;
-    double LocalLogPV(double const& x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -209,7 +209,7 @@ namespace apfel
   {
   public:
     Cgtmd1qgoLL(double const &xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -234,7 +234,7 @@ namespace apfel
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalLogPV(double const& x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -245,7 +245,7 @@ namespace apfel
   {
   public:
     Cgtmd1ggoLL(double const &xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -259,7 +259,7 @@ namespace apfel
     Cgtmd1qgeLT(double const &xi);
     double Regular(double const &x) const;
     double SingularPV(double const &x) const;
-    double LocalLogPV(double const &x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -271,7 +271,7 @@ namespace apfel
   {
   public:
     Cgtmd1qgoLT(double const &xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -285,7 +285,7 @@ namespace apfel
     Cgtmd1ggeLT(double const &xi);
     double Regular(double const &x) const;
     double SingularPV(double const &x) const;
-    double LocalLogPV(double const &x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -297,7 +297,7 @@ namespace apfel
   {
   public:
     Cgtmd1ggoLT(double const &xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
   ///@}
 
@@ -317,7 +317,7 @@ namespace apfel
     double Regular(double const& x)    const;
     double Local(double const&)        const;
     double SingularPV(double const& x) const;
-    double LocalLogPV(double const& x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -328,7 +328,7 @@ namespace apfel
   {
   public:
     Cgtmd1ggoTT(double const& xi);
-    double LocalPV() const;
+    double LocalPV(double const& c, double const& d) const;
   };
   ///@}
 
@@ -358,7 +358,7 @@ namespace apfel
     Cgtmd1ggeTU(double const& xi);
     double Regular(double const& x)    const;
     double SingularPV(double const& x) const;
-    double LocalLogPV(double const& x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -369,7 +369,7 @@ namespace apfel
   {
   public:
     Cgtmd1ggoTU(double const& xi);
-    double LocalPV() const;;
+    double LocalPV(double const& c, double const& d) const;
   };
   ///@}
 
@@ -399,7 +399,7 @@ namespace apfel
     Cgtmd1ggeTL(double const& xi);
     double Regular(double const& x)    const;
     double SingularPV(double const& x) const;
-    double LocalLogPV(double const& x) const;
+    double LocalPV(double const& c, double const& d) const;
   };
 
   /**
@@ -410,7 +410,7 @@ namespace apfel
   {
   public:
     Cgtmd1ggoTL(double const& xi);
-    double LocalPV() const;;
+    double LocalPV(double const& c, double const& d) const;
   };
   ///@}
 }

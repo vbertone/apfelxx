@@ -1840,10 +1840,12 @@ I_{\beta\alpha}&=&\displaystyle
 &=&\displaystyle
     \int_c^{d}\frac{dy}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\right)\right]+\delta_{\beta\alpha}\left[\ln(1-c)-\ln\left(1-\frac{1}{d}\right)\right] \,,
 \end{array}
+\label{eq:plusplusinterp}
 \end{equation}
 with:
 \begin{equation}
 c = \frac{x_\beta}{x_{\alpha+1}}\quad\mbox{and}\quad d = \frac{x_\beta}{x_{\alpha-\rm{min}[\alpha,\kappa]}}=\frac{x_\beta}{x_{\rm{max}[0,\alpha-\kappa]}}\,,
+\label{eq:supportcd}
 \end{equation}
 and where we have used the fact that $d\geq 1$ for $\beta=\alpha$ and,
 according to the Cauchy principal-value prescription:
@@ -1851,6 +1853,122 @@ according to the Cauchy principal-value prescription:
 \int_{-a}^{a}\frac{dy}{y} = 0\,,
 \end{equation}
 where $a$ could also be $\infty$.
+
+\subsubsection{Logarithmically enhanced principal-valued integrals}
+
+Higher-order computations, such as the one-loop coefficient functions
+for (doubly) deeply-virtual Compton scattering, also involve
+principal-valued integrals of the kind:
+\begin{equation}
+I^{(k)}={\rm PV}\int_x^{\infty}dy\,\frac{\ln^k|1-y|}{1-y}f(y)\,,\qquad k=0,1,2,\dots\,,
+\end{equation}
+that reduce to the integral $I$ above for $k=0$. The corresponding
+$++$-distribution acts upon integration as follows:
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle\int_x^\infty dy\left(\frac{\ln^k|1-y|}{1-y}\right)_{++}f(y)&=&\displaystyle\int_x^\infty dy\frac{\ln^k|1-y|}{1-y}\left[f(y)-f(1)\left(1+\theta(y-1)\frac{1-y}{y}\frac{\ln^k y}{\ln^k|1-y|}\right)\right]\\
+    \\
+    &+&\displaystyle f(1)\frac{\ln^{k+1}(1-x)}{k+1}\,,
+  \end{array}
+\label{eq:pluplusprescriptionk}
+\end{equation}
+which coincides with Eq.~(\ref{eq:pluplusprescription}) for $k=0$.
+%For $y>1$, the subtraction term multiplying $f(1)$ is:
+%\begin{equation}
+%\frac{\ln^k(y-1)}{1-y}+\frac{\ln^k y}{y}\,,
+%\end{equation}
+%which is integrable at $y=1$ and behaves as $\mathcal{O}(\ln^ky/y^2)$
+%for $y\rightarrow\infty$, so that the integral in the r.h.s.\ of
+%Eq.~(\ref{eq:pluplusprescriptionk}) is finite. To prove that
+%Eq.~(\ref{eq:pluplusprescriptionk}) implements the principal-value
+%prescription, it suffices to show that the principal-valued integral
+%of the subtraction term equals the last term in the r.h.s. Using the
+%fact that:
+%\begin{equation}
+%\frac{d}{dy}\left[-\frac{\ln^{k+1}|1-y|}{k+1}\right]=\frac{\ln^k|1-y|}{1-y}\quad\mbox{and}\quad
+%\frac{d}{dy}\left[\frac{\ln^{k+1}y}{k+1}\right]=\frac{\ln^k y}{y}\,,
+%\end{equation}
+%one finds:
+%\begin{equation}
+%  \begin{array}{rcl}
+%    &&\displaystyle{\rm PV}\int_x^\infty dy\frac{\ln^k|1-y|}{1-y}\left(1+\theta(y-1)\frac{1-y}{y}\frac{\ln^k y}{\ln^k|1-y|}\right)\\
+%    \\
+%    &=&\displaystyle\lim_{\epsilon\rightarrow 0}\left[\int_x^{1-\epsilon}dy\,\frac{\ln^k(1-y)}{1-y}+\int_{1+\epsilon}^\infty dy\left(\frac{\ln^k(y-1)}{1-y}+\frac{\ln^k y}{y}\right)\right]\\
+%    \\
+%    &=&\displaystyle\lim_{\epsilon\rightarrow 0}\left[\frac{\ln^{k+1}(1-x)-\ln^{k+1}\epsilon}{k+1}+\frac{\ln^{k+1}\epsilon-\ln^{k+1}(1+\epsilon)}{k+1}\right]=\frac{\ln^{k+1}(1-x)}{k+1}\,,
+%  \end{array}
+%\end{equation}
+%where we have used the fact that
+%$\ln^{k+1}y-\ln^{k+1}(y-1)\rightarrow 0$ for $y\rightarrow\infty$.
+
+Within the interpolation framework, we need to compute integrals as
+this:
+\begin{equation}
+I_{\beta\alpha}^{(k)}=\int_{x_{\beta}}^{\infty}dy\,\left(\frac{\ln^k|1-y|}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\,.
+\end{equation}
+Following the same steps as in the case $k=0$, with $c$ and $d$
+defined in Eq.~(\ref{eq:supportcd}), we find:
+\begin{equation}
+  \small
+\begin{array}{rcl}
+I_{\beta\alpha}^{(k)}&=&\displaystyle
+                   \int_{c}^{\infty}dy\,\left(\frac{\ln^k|1-y|}{1-y}\right)_{++}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\\
+\\
+&=&\displaystyle
+    \int_c^{d}dy\frac{\ln^k|1-y|}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\frac{\ln^k y}{\ln^k|1-y|}\right)\right]\\
+\\
+&+&\displaystyle\delta_{\beta\alpha}\left[\frac{\ln^{k+1}(1-c)}{k+1}-\int_d^{\infty}dy\left(\frac{\ln^k(y-1)}{1-y}+\frac{\ln^ky}{y}\right)\right]\\
+\\
+&=&\displaystyle
+    \int_c^{d}dy\frac{\ln^k|1-y|}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\left(1+\theta(y-1)\frac{1-y}{y}\frac{\ln^k y}{\ln^k|1-y|}\right)\right]\\
+\\
+&+&\displaystyle\frac{\delta_{\beta\alpha}}{k+1}\left[\ln^{k+1}(1-c)-\ln^{k+1}(d-1)+\ln^{k+1}d\right]\,,
+\end{array}
+\label{eq:plusplusinterpk}
+\end{equation}
+where again we have used the fact that $d\geq 1$ for
+$\beta=\alpha$. For $k=0$, the local term reduces to
+$\ln(1-c)-\ln(1-1/d)$, reproducing
+Eq.~(\ref{eq:plusplusinterp}).
+
+Since the support of the interpolating functions is finite,
+Eq.~(\ref{eq:plusplusinterpk}) can be further simplified. Indeed, the
+term proportional to $\ln^{k+1}d$ exactly compensates the integral of
+the subtraction term proportional to $\theta(y-1)$, being:
+\begin{equation}
+\int_1^d dy\,\frac{\ln^ky}{y}=\frac{\ln^{k+1}d}{k+1}\,.
+\end{equation}
+Therefore, we can write:
+\begin{equation}
+I_{\beta\alpha}^{(k)}=\int_c^{d}dy\frac{\ln^k|1-y|}{1-y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-\delta_{\beta\alpha}\right]+\frac{\delta_{\beta\alpha}}{k+1}\left[\ln^{k+1}(1-c)-\ln^{k+1}(d-1)\right]\,.
+\label{eq:plusplusinterpkfinite}
+\end{equation}
+In this form, the subtraction at $y=1$ is proportional to the very
+function being integrated, independently of $k$, and the local term
+is the principal-valued integral of $\ln^k|1-y|/(1-y)$ over the
+support $[c,d]$. As a consequence, Eq.~(\ref{eq:plusplusinterpkfinite})
+also applies, term by term, to any linear combination of
+$++$-distributions with different values of $k$. Since $d\geq 1$,
+with $d=1$ only at the first node of the grid ($\beta=\alpha=0$), the
+support extends beyond $y=1$ in all other cases. At the first node,
+the principal value would be one-sided, and the term
+$\ln^{k+1}(d-1)$ is dropped. For $k=0$, the local term in
+Eq.~(\ref{eq:plusplusinterpkfinite}), $\ln(1-c)-\ln(d-1)$, differs
+from that in Eq.~(\ref{eq:plusplusinterp}), $\ln(1-c)-\ln(1-1/d)$, by
+$\ln d$. This is compensated by the different subtraction: the one in
+Eq.~(\ref{eq:plusplusinterp}) contains the extra term
+$\delta_{\beta\alpha}\theta(y-1)/y$, whose integral over $[1,d]$ is
+$\ln d$.
+
+%We finally observe that, for $k=0$, the local term can be written as
+%$g(c)-g(1/d)$, with $g(z)=\ln(1-z)$, \textit{i.e.} as the same
+%function evaluated at the lower and upper ends of the support of the
+%interpolating function. This is no longer true for $k\geq 1$ because:
+%\begin{equation}
+%\ln^{k+1}d-\ln^{k+1}(d-1)\neq-\left[\ln(d-1)-\ln d\right]^{k+1}=-\ln^{k+1}\left(1-\frac1d\right)\,.
+%\end{equation}
+%Therefore, for $k\geq 1$, the contributions from the two ends of the
+%support have to be computed separately.
 
 \subsubsection{Principal-valued integrals in the DGLAP region}
 
@@ -1963,7 +2081,57 @@ principal-value prescription in Eq.~(\ref{eq:PVprescriptionxi}), yielding:
                      w_{\alpha}\left(\xi\right)
                      \frac{1}{\kappa_\beta}\left[\ln\left(1-\kappa_\beta c\right)-\ln\left(1-\kappa_\beta\frac{1}{\kappa_\beta^2 d}\right)\right]\,.
 \end{array}
+\label{eq:PVinterp}
 \end{equation}
+
+Also in the DGLAP region, logarithmically enhanced principal-valued
+integrals of the kind:
+\begin{equation}
+  J^{(k)}={\rm PV}\int_x^{1}dy\,\frac{\ln^k|1-\kappa y|}{1-\kappa y}f(y)\,,\qquad k=0,1,2,\dots\,,
+\end{equation}
+may appear. As in the case of the singularity at $y=1$, the finiteness
+of the support of the interpolating functions allows us to compute the
+integrals:
+\begin{equation}
+J_{\beta\alpha}^{(k)}=\int_{x_{\beta}}^{1}dy\,\left(\frac{\ln^k|1-\kappa_\beta y|}{1-\kappa_\beta y}\right)_{\rm
+PV}w_{\alpha}\left(\frac{x_{\beta}}{y}\right)\,,
+\end{equation}
+by subtracting the singularity over the support only. Using the fact
+that:
+\begin{equation}
+\frac{d}{dy}\left[-\frac{\ln^{k+1}|1-\kappa y|}{\kappa(k+1)}\right]=\frac{\ln^k|1-\kappa y|}{1-\kappa y}\,,
+\end{equation}
+one finds:
+\begin{equation}
+  \begin{array}{rcl}
+    J_{\beta\alpha}^{(k)}&=&\displaystyle\int_c^{\overline{d}}dy\,\frac{\ln^k|1-\kappa_\beta y|}{1-\kappa_\beta y}\left[w_{\alpha}\left(\frac{x_{\beta}}{y}\right)-w_{\alpha}\left(\xi\right)\right]\\
+    \\
+    &+&\displaystyle\frac{w_{\alpha}\left(\xi\right)}{\kappa_\beta(k+1)}\left[\ln^{k+1}|1-\kappa_\beta c|-\ln^{k+1}|1-\kappa_\beta \overline{d}|\right]\,,
+  \end{array}
+\label{eq:PVinterpkfinite}
+\end{equation}
+with $c$ and $d$ defined in Eq.~(\ref{eq:supportcd}) and
+$\overline{d}={\rm min}[d,1]$. The upper bound $\overline{d}$ accounts
+for the fact that the integral extends up to $y=1$ only, so that the
+support of the interpolating function is effectively cut at $y=1$ when
+$d>1$. As above, Eq.~(\ref{eq:PVinterpkfinite}) applies term by term
+to linear combinations with different values of $k$. Terms
+proportional to $\delta(1-\kappa_\beta y)$ simply give $w_\alpha(\xi)/\kappa_\beta$
+times their coefficient.
+
+For $k=0$ and $d\leq 1$, Eq.~(\ref{eq:PVinterpkfinite}) reproduces
+Eq.~(\ref{eq:PVinterp}). Indeed, the subtraction terms in the two
+equations differ by
+$w_\alpha(\xi)\theta(\kappa_\beta y-1)/(\kappa_\beta y)$, whose
+integral between $1/\kappa_\beta$ and $d$, $w_\alpha(\xi)\ln(\kappa_\beta d)/\kappa_\beta$,
+compensates the difference between the local terms. We finally
+observe that Eq.~(\ref{eq:PVinterp}) assumes $d\leq 1$, \textit{i.e.}
+that the support of $w_\alpha(x_\beta/y)$ does not extend beyond the
+upper integration bound $y=1$. This is not the case for the external
+nodes just below $\xi$, specifically those for which
+$x_{{\rm max}[0,\alpha-\kappa]}<x_\beta<\xi<x_{\alpha+1}$, where $d>1$
+and the upper end of the support has to be replaced by 1, as done in
+Eq.~(\ref{eq:PVinterpkfinite}).
 
 \newpage
 \bibliographystyle{ieeetr}

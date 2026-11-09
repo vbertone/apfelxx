@@ -16,9 +16,9 @@ public:
   {
     return 1 / ( 1 - y );
   }
-  double LocalPP(double const& y) const
+  double LocalPP(double const& c, double const& d) const
   {
-    return log( 1 - y );
+    return log( 1 - c ) - (d > 1 ? log( d - 1 ) : 0);
   }
 };
 
@@ -36,11 +36,11 @@ public:
     else
       return 0;
   }
-  double LocalLogPV(double const& y) const
+  double LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return log( 1 - kappa * y ) / kappa;
+    if (kappa > 1)
+      return ( log( 1 - kappa * c ) - log( kappa * std::min(d, 1.) - 1 ) ) / kappa;
     else
       return 0;
   }

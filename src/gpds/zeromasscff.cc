@@ -11,44 +11,20 @@
 namespace apfel
 {
   //_________________________________________________________________________________
-  ReCFF10ns::ReCFF10ns():
+  ReCFF20ns::ReCFF20ns():
     Expression{}
   {
   }
-  double ReCFF10ns::Regular(double const& x)  const
+  double ReCFF20ns::Regular(double const& x)  const
   {
-    return - 1 / ( 1 + x );
+    return - 2 / ( 1 + x );
   }
-  double ReCFF10ns::Singular(double const& x) const
+  double ReCFF20ns::Singular(double const& x) const
   {
-    return - 1 / ( 1 - x );
+    return - 2 / ( 1 - x );
   }
-  double ReCFF10ns::LocalPP(double const& x)    const
+  double ReCFF20ns::LocalPP(double const& c, double const& d) const
   {
-    return - log(1 - x);
-  }
-
-  //_________________________________________________________________________________
-  ImCFF11ns::ImCFF11ns():
-    Expression{}
-  {
-  }
-
-  //_________________________________________________________________________________
-  ReCFF11ns::ReCFF11ns():
-    Expression{}
-  {
-  }
-
-  //_________________________________________________________________________________
-  ImCFF11g::ImCFF11g():
-    Expression{}
-  {
-  }
-
-  //_________________________________________________________________________________
-  ReCFF11g::ReCFF11g():
-    Expression{}
-  {
+    return - 2 * ( log(1 - c) - (d > 1 ? log(d - 1) : 0) );
   }
 }

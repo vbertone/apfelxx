@@ -8,6 +8,8 @@
 #include "apfel/gmatchingfunctions.h"
 #include "apfel/constants.h"
 
+#include <algorithm>
+
 /*
 * Structure of the matching functions. Columns correspond to GPDs and
 * rows to GTMDs:
@@ -81,11 +83,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1qgeUU::LocalLogPV(double const& y) const
+  double Cgtmd1qgeUU::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return 2 * TR / pow(kappa, 2) * log(1 - kappa * y);
+    if (kappa > 1)
+      return 2 * TR / pow(kappa, 2) * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) );
     else
       return 0;
   }
@@ -108,7 +110,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggeUU::Regular(double const& y) const // R2 and Rhat in different but equivalent form compared to the notes
+  double Cgtmd1ggeUU::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -130,11 +132,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1ggeUU::LocalLogPV(double const& y) const
+  double Cgtmd1ggeUU::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return - CA * ( 1 + pow(kappa, 2) ) / pow(kappa, 2) * log(1 - kappa * y);
+    if (kappa > 1)
+      return - CA * ( 1 + pow(kappa, 2) ) / pow(kappa, 2) * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) );
     else
       return 0;
   }
@@ -144,11 +146,11 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1qgoUU::LocalPV() const // From (3.11) master formula this includes: -\pi/\kappa. 'is' is kept externally
+  double Cgtmd1qgoUU::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
-      return -2 * TR / pow(kappa, 2) * M_PI;
+      return - 2 * TR / pow(kappa, 2) * M_PI;
     else
       return 0;
   }
@@ -158,7 +160,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggoUU::LocalPV() const // From (3.11) master formula this includes: -\pi/\kappa. 'is' is kept externally
+  double Cgtmd1ggoUU::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -190,11 +192,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1qgeUT::LocalLogPV(double const& y) const
+  double Cgtmd1qgeUT::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return 2 * TR / pow(kappa, 2) * log(1 - kappa * y);
+    if (kappa > 1)
+      return 2 * TR / pow(kappa, 2) * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) );
     else
       return 0;
   }
@@ -204,7 +206,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1qgoUT::LocalPV() const // From (3.11) master formula this includes: -\pi/\kappa. 'is' is kept externally
+  double Cgtmd1qgoUT::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -236,11 +238,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1ggeUT::LocalLogPV(double const& y) const
+  double Cgtmd1ggeUT::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return - CA * ( 1 + pow(kappa, 2) ) / pow(kappa, 2) * log(1 - kappa * y);
+    if (kappa > 1)
+      return - CA * ( 1 + pow(kappa, 2) ) / pow(kappa, 2) * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) );
     else
       return 0;
   }
@@ -250,7 +252,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggoUT::LocalPV() const // From (3.11) master formula this includes: -\pi/\kappa. 'is' is kept externally
+  double Cgtmd1ggoUT::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -316,11 +318,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1qgeLL::LocalLogPV(double const& y) const
+  double Cgtmd1qgeLL::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return 2 * TR * log(1 - kappa * y) / kappa;
+    if (kappa > 1)
+      return 2 * TR * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) ) / kappa;
     else
       return 0;
   }
@@ -365,11 +367,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1ggeLL::LocalLogPV(double const& y) const
+  double Cgtmd1ggeLL::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return - 2 * CA * log(1 - kappa * y) / kappa;
+    if (kappa > 1)
+      return - 2 * CA * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) ) / kappa;
     else
       return 0;
   }
@@ -379,7 +381,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1qgoLL::LocalPV() const
+  double Cgtmd1qgoLL::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -393,7 +395,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggoLL::LocalPV() const
+  double Cgtmd1ggoLL::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -425,11 +427,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1qgeLT::LocalLogPV(double const& y) const
+  double Cgtmd1qgeLT::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return 2 * TR * log(1 - kappa * y) / pow(kappa, 2);
+    if (kappa > 1)
+      return 2 * TR * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) ) / pow(kappa, 2);
     else
       return 0;
   }
@@ -457,11 +459,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1ggeLT::LocalLogPV(double const& y) const
+  double Cgtmd1ggeLT::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return - 2 * CA * log(1 - kappa * y) / pow(kappa, 2);
+    if (kappa > 1)
+      return - 2 * CA * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) ) / pow(kappa, 2);
     else
       return 0;
   }
@@ -471,7 +473,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1qgoLT::LocalPV() const
+  double Cgtmd1qgoLT::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -485,7 +487,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggoLT::LocalPV() const
+  double Cgtmd1ggoLT::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -521,11 +523,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1ggeTT::LocalLogPV(double const& y) const
+  double Cgtmd1ggeTT::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return - 2 * CA * log(1 - kappa * y);
+    if (kappa > 1)
+      return - 2 * CA * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) );
     else
       return 0;
   }
@@ -535,7 +537,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggoTT::LocalPV() const
+  double Cgtmd1ggoTT::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -580,11 +582,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1ggeTU::LocalLogPV(double const& y) const
+  double Cgtmd1ggeTU::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return - 2 * CA * log(1 - kappa * y);
+    if (kappa > 1)
+      return - 2 * CA * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) );
     else
       return 0;
   }
@@ -594,7 +596,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggoTU::LocalPV() const
+  double Cgtmd1ggoTU::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)
@@ -608,7 +610,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1gqeTL::Regular(double const& y) const // We changed the definitions from very first iteration, see tables in draft.
+  double Cgtmd1gqeTL::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky2   = pow(kappa * y, 2);
@@ -621,7 +623,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggeTL::Regular(double const& y) const // same as for gqeTL
+  double Cgtmd1ggeTL::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
     const double ky    = kappa * y;
@@ -639,11 +641,11 @@ namespace apfel
     else
       return 0;
   }
-  double Cgtmd1ggeTL::LocalLogPV(double const& y) const
+  double Cgtmd1ggeTL::LocalPV(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    if (kappa > 1 && y < 1 && kappa * y < 1)
-      return 2 * CA * log(1 - kappa * y) / kappa;
+    if (kappa > 1)
+      return 2 * CA * ( log(1 - kappa * c) - log(kappa * std::min(d, 1.) - 1) ) / kappa;
     else
       return 0;
   }
@@ -653,7 +655,7 @@ namespace apfel
     Expression(1/xi)
   {
   }
-  double Cgtmd1ggoTL::LocalPV() const
+  double Cgtmd1ggoTL::LocalPV(double const&, double const&) const
   {
     const double kappa = 1 / _eta / _extvar;
     if (kappa > 1)

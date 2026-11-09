@@ -31,10 +31,10 @@ namespace apfel
     const double kappa = 1 / _eta / _extvar;
     return 2 * CF * ( 2 * log(1 - y) + 3. / 2. - log(std::abs(1 - pow(kappa, 2))) );
   }
-  double Pgpd0ns::LocalPP(double const& y) const
+  double Pgpd0ns::LocalPP(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CF * ( - (kappa > 1 ? log(1 - y) : 0) );
+    return 2 * CF * ( - (kappa > 1 ? log(1 - c) - (d > 1 ? log(d - 1) : 0) : 0) );
   }
 
   //_________________________________________________________________________________
@@ -59,10 +59,10 @@ namespace apfel
     const double kappa = 1 / _eta / _extvar;
     return 2 * CF * ( 2 * log(1 - y) + 3. / 2. - log(std::abs(1 - pow(kappa, 2))) );
   }
-  double Pgpd0qq::LocalPP(double const& y) const
+  double Pgpd0qq::LocalPP(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CF * ( - (kappa > 1 ? log(1 - y) : 0) );
+    return 2 * CF * ( - (kappa > 1 ? log(1 - c) - (d > 1 ? log(d - 1) : 0) : 0) );
   }
 
   //_________________________________________________________________________________
@@ -117,9 +117,9 @@ namespace apfel
     const double kappa = 1 / _eta / _extvar;
     return 4 * CA * log(1 - y) + ( 11 * CA - 4 * _nf * TR ) / 3 - 2 * CA * log(std::abs(1 - pow(kappa, 2)));
   }
-  double Pgpd0gg::LocalPP(double const& y) const
+  double Pgpd0gg::LocalPP(double const& c, double const& d) const
   {
     const double kappa = 1 / _eta / _extvar;
-    return 2 * CA * ( - (kappa > 1 ? log(1 - y) : 0) );
+    return 2 * CA * ( - (kappa > 1 ? log(1 - c) - (d > 1 ? log(d - 1) : 0) : 0) );
   }
 }

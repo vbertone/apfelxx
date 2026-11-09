@@ -32,7 +32,7 @@ namespace apfel
     double Regular(double const& y)  const;
     double Singular(double const& y) const;
     double Local(double const& y)    const;
-    double LocalPP(double const& y)  const;
+    double LocalPP(double const& c, double const& d) const;
   };
 
   /**
@@ -46,7 +46,7 @@ namespace apfel
     double Regular(double const& y)  const;
     double Singular(double const& y) const;
     double Local(double const& y)    const;
-    double LocalPP(double const& y)  const;
+    double LocalPP(double const& c, double const& d) const;
   };
 
   /**
@@ -84,7 +84,7 @@ namespace apfel
     double Regular(double const& y)  const;
     double Singular(double const& y) const;
     double Local(double const& y)    const;
-    double LocalPP(double const& y)  const;
+    double LocalPP(double const& c, double const& d) const;
   private:
     int const _nf;
   };

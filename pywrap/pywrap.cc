@@ -414,21 +414,17 @@ PYBIND11_MODULE(apfelpy, m)
     {
       PYBIND11_OVERRIDE(double, Expression, Local, x);
     };
-    double LocalPP(double const& x) const override
+    double LocalPP(double const& c, double const& d) const override
     {
-      PYBIND11_OVERRIDE(double, Expression, LocalPP, x);
+      PYBIND11_OVERRIDE(double, Expression, LocalPP, c, d);
     };
     double SingularPV(double const& x) const override
     {
       PYBIND11_OVERRIDE(double, Expression, SingularPV, x);
     };
-    double LocalPV() const override
+    double LocalPV(double const& c, double const& d) const override
     {
-      PYBIND11_OVERRIDE(double, Expression, LocalPV);
-    };
-    double LocalLogPV(double const& x) const override
-    {
-      PYBIND11_OVERRIDE(double, Expression, LocalLogPV, x);
+      PYBIND11_OVERRIDE(double, Expression, LocalPV, c, d);
     };
   };
   py::class_<apfel::Expression, PyExpression>(m, "Expression", "Encapsulates a convolution kernel in terms of its regular, singular and local parts.")
@@ -436,10 +432,9 @@ PYBIND11_MODULE(apfelpy, m)
   .def("Regular", &apfel::Expression::Regular, "Regular term at x.", "x"_a)
   .def("Singular", &apfel::Expression::Singular, "Singular term at x.", "x"_a)
   .def("Local", &apfel::Expression::Local, "Local term at x.", "x"_a)
-  .def("LocalPP", &apfel::Expression::LocalPP, "Local term for ++-prescribed distributions at x.", "x"_a)
+  .def("LocalPP", &apfel::Expression::LocalPP, "Local term for ++-prescribed distributions over the support [c, d].", "c"_a, "d"_a)
   .def("SingularPV", &apfel::Expression::SingularPV, "Singular term for principal-valued distributions at x.", "x"_a)
-  .def("LocalPV", &apfel::Expression::LocalPV, "Local term for principal-valued distributions.")
-  .def("LocalLogPV", &apfel::Expression::LocalLogPV, "Log-dependent local term for principal-valued distributions at x.", "x"_a)
+  .def("LocalPV", &apfel::Expression::LocalPV, "Local term for principal-valued distributions over the support [c, d].", "c"_a, "d"_a)
   .def("SetExternalVariable", &apfel::Expression::SetExternalVariable, "Set the value of a possible external variable.", "extvar"_a)
   .def("eta", &apfel::Expression::eta, "Return the value of the scaling parameter eta.");
 
@@ -1062,8 +1057,14 @@ PYBIND11_MODULE(apfelpy, m)
   _initializers.def("InitializeFLNCObjectsMassiveZero", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, int const&, double const&, double const&, int const&, double const&>(&apfel::InitializeFLNCObjectsMassiveZero), "g"_a, "Masses"_a, "IntEps"_a = 1e-5, "nxi"_a = 150, "ximin"_a = 0.01, "ximax"_a = 10000, "intdeg"_a = 3, "lambda"_a = 0.0005);
 
   // Wrappers of "cffbuilder.h"
-  _initializers.def("InitializeImCFF1NCObjectsZM", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeImCFF1NCObjectsZM),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
-  _initializers.def("InitializeReCFF1NCObjectsZM", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeReCFF1NCObjectsZM),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeImCFF2NCObjectsZMSpaceLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeImCFF2NCObjectsZMSpaceLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeImCFF2NCObjectsZMTimeLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeImCFF2NCObjectsZMTimeLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeReCFF2NCObjectsZMSpaceLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeReCFF2NCObjectsZMSpaceLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeReCFF2NCObjectsZMTimeLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeReCFF2NCObjectsZMTimeLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeImCFFLNCObjectsZMSpaceLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeImCFFLNCObjectsZMSpaceLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeImCFFLNCObjectsZMTimeLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeImCFFLNCObjectsZMTimeLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeReCFFLNCObjectsZMSpaceLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeReCFFLNCObjectsZMSpaceLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
+  _initializers.def("InitializeReCFFLNCObjectsZMTimeLike", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, double const&>(&apfel::InitializeReCFFLNCObjectsZMTimeLike),"g"_a, "Thresholds"_a, "xi"_a, "IntEps"_a = 1e-5);
 
   // Wrappers of "gpdbuilder.h"
   _initializers.def("InitializeGpdObjects", py::overload_cast<apfel::Grid const&, std::vector<double> const&, double const&, bool const&, double const&>(&apfel::InitializeGpdObjects), "g"_a, "Thresholds"_a, "xi"_a, "OpEvol"_a = false, "IntEps"_a = 1e-5);
