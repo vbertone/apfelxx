@@ -13,7 +13,7 @@ int main()
   apfel::Banner();
 
   // x-space grid
-  const apfel::Grid g{{apfel::SubGrid{200, 1e-11, 3}, apfel::SubGrid{100, 1e-1, 3}, apfel::SubGrid{100, 6e-1, 3}, apfel::SubGrid{80, 8.5e-1, 5}}};
+  const apfel::Grid g{{apfel::SubGrid{30, 1e-5, 3}, apfel::SubGrid{20, 1e-1, 3}, apfel::SubGrid{10, 9e-1, 3}}};
 
   // Initial scale
   const double mu0 = sqrt(2);
