@@ -190,7 +190,7 @@ namespace apfel
                       - 2 * ( 1 + ( 1 - 2 * k2 ) * y * y ) / ( 1 + y ) / ( 1 - ky2 ) * lpy * lpy
                       - 2 * ( 3 + 2 * y - ( 4 - 3 * k2 ) * y * y ) / ( 1 + y ) / ( 1 - ky2 ) * lpy
                       + 2 / kappa / ( 1 + y ) / ( 1 - ky2 ) * ( ( 1 + y - kappa * y - kappa * k2 * y * y ) * lpk * lpk
-                                                                 - ( 1 + y + kappa * y + kappa * k2 * y * y ) * ( lmk * lmk - (kappa > 1 ? pi2 : 0) ) )
+                                                                - ( 1 + y + kappa * y + kappa * k2 * y * y ) * ( lmk * lmk - (kappa > 1 ? pi2 : 0) ) )
                       + 6 * ( 1 + 2 * y + ky2 ) / ( 1 + y ) / ( 1 - ky2 ) * log(std::abs(1 - k2))
                       + 18 / ( 1 + y ) );
   }
@@ -200,7 +200,7 @@ namespace apfel
     const double pi2   = M_PI * M_PI;
     const double l1y   = log(std::abs(1 - y));
     return CF / 2 * ( - 4 * l1y * l1y + 6 * l1y + (y < 1 ? 4 * pi2 : 0)
-                  + 2 * ( 9 - 3 * log(std::abs(1 - kappa * kappa)) + pow(log(1 + kappa), 2) + pow(log(std::abs(1 - kappa)), 2) - (kappa > 1 ? pi2 : 0) ) ) / ( 1 - y );
+                      + 2 * ( 9 - 3 * log(std::abs(1 - kappa * kappa)) + pow(log(1 + kappa), 2) + pow(log(std::abs(1 - kappa)), 2) - (kappa > 1 ? pi2 : 0) ) ) / ( 1 - y );
   }
   double ReCFF11nsSpaceLike::Local(double const& c) const
   {
@@ -280,7 +280,7 @@ namespace apfel
                       - 2 * ( 1 + ( 1 - 2 * k2 ) * y * y ) / ( 1 + y ) / ( 1 - ky2 ) * lpy * lpy
                       - 2 * ( 3 + 2 * y - ( 4 - 3 * k2 ) * y * y ) / ( 1 + y ) / ( 1 - ky2 ) * lpy
                       + 2 / kappa / ( 1 + y ) / ( 1 - ky2 ) * ( ( 1 + y - kappa * y - kappa * k2 * y * y ) * lpk * lpk
-                                                                 - ( 1 + y + kappa * y + kappa * k2 * y * y ) * ( lmk * lmk + (kappa > 1 ? pi2 : 0) ) )
+                                                                - ( 1 + y + kappa * y + kappa * k2 * y * y ) * ( lmk * lmk + (kappa > 1 ? pi2 : 0) ) )
                       + 6 * ( 1 + 2 * y + ky2 ) / ( 1 + y ) / ( 1 - ky2 ) * log(std::abs(1 - k2))
                       + 18 / ( 1 + y ) );
   }
@@ -290,7 +290,7 @@ namespace apfel
     const double pi2   = M_PI * M_PI;
     const double l1y   = log(std::abs(1 - y));
     return CF / 2 * ( - 4 * l1y * l1y + 6 * l1y - (y < 1 ? 4 * pi2 : 0)
-                  + 2 * ( 9 - 3 * log(std::abs(1 - kappa * kappa)) + pow(log(1 + kappa), 2) + pow(log(std::abs(1 - kappa)), 2) + (kappa > 1 ? pi2 : 0) ) ) / ( 1 - y );
+                      + 2 * ( 9 - 3 * log(std::abs(1 - kappa * kappa)) + pow(log(1 + kappa), 2) + pow(log(std::abs(1 - kappa)), 2) + (kappa > 1 ? pi2 : 0) ) ) / ( 1 - y );
   }
   double ReCFF11nsTimeLike::Local(double const& c) const
   {
