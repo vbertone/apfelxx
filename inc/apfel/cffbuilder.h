@@ -18,65 +18,65 @@ namespace apfel
    */
   ///@{
   /**
-   * @brief The InitializeImCFF2NCObjectsZMSpaceLike precomputes the
+   * @brief The InitializeImCFF1NCObjectsZMSpaceLike precomputes the
    * perturbative coefficients of coefficient functions for the NC
-   * imaginary part of F2 for Q<SUP>2</SUP> &gt; 0 in the ZM scheme and stores
-   * them in the 'StructureFunctionObjects' structure.
+   * imaginary part of F1 = ( F2 - FL ) / 2 for Q<SUP>2</SUP> &gt; 0 in the ZM
+   * scheme and stores them in the 'StructureFunctionObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A StructureFunctionObjects-valued function
    */
-  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeImCFF2NCObjectsZMSpaceLike(Grid                const& g,
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeImCFF1NCObjectsZMSpaceLike(Grid                const& g,
                                                                                                                           std::vector<double> const& Thresholds,
                                                                                                                           double              const& xi,
                                                                                                                           double              const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeImCFF2NCObjectsZMTimeLike precomputes the
+   * @brief The InitializeImCFF1NCObjectsZMTimeLike precomputes the
    * perturbative coefficients of coefficient functions for the NC
-   * imaginary part of F2 for Q<SUP>2</SUP> &lt; 0 in the ZM scheme and stores
-   * them in the 'StructureFunctionObjects' structure.
+   * imaginary part of F1 = ( F2 - FL ) / 2 for Q<SUP>2</SUP> &lt; 0 in the ZM
+   * scheme and stores them in the 'StructureFunctionObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A StructureFunctionObjects-valued function
    */
-  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeImCFF2NCObjectsZMTimeLike(Grid                const& g,
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeImCFF1NCObjectsZMTimeLike(Grid                const& g,
                                                                                                                          std::vector<double> const& Thresholds,
                                                                                                                          double              const& xi,
                                                                                                                          double              const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeReCFF2NCObjectsZMSpaceLike precomputes the
+   * @brief The InitializeReCFF1NCObjectsZMSpaceLike precomputes the
    * perturbative coefficients of coefficient functions for the NC
-   * real part of F2 for Q<SUP>2</SUP> &gt; 0 in the ZM scheme and stores
-   * them in the 'StructureFunctionObjects' structure.
+   * real part of F1 = ( F2 - FL ) / 2 for Q<SUP>2</SUP> &gt; 0 in the ZM
+   * scheme and stores them in the 'StructureFunctionObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A StructureFunctionObjects-valued function
    */
-  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeReCFF2NCObjectsZMSpaceLike(Grid                const& g,
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeReCFF1NCObjectsZMSpaceLike(Grid                const& g,
                                                                                                                           std::vector<double> const& Thresholds,
                                                                                                                           double              const& xi,
                                                                                                                           double              const& IntEps = 1e-5);
 
   /**
-   * @brief The InitializeReCFF2NCObjectsZMTimeLike precomputes the
+   * @brief The InitializeReCFF1NCObjectsZMTimeLike precomputes the
    * perturbative coefficients of coefficient functions for the NC
-   * real part of F2 for Q<SUP>2</SUP> &lt; 0 in the ZM scheme and stores
-   * them in the 'StructureFunctionObjects' structure.
+   * real part of F1 = ( F2 - FL ) / 2 for Q<SUP>2</SUP> &lt; 0 in the ZM
+   * scheme and stores them in the 'StructureFunctionObjects' structure.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
    * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
    * @return A StructureFunctionObjects-valued function
    */
-  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeReCFF2NCObjectsZMTimeLike(Grid                const& g,
+  std::function<StructureFunctionObjects(double const&, std::vector<double> const&)> InitializeReCFF1NCObjectsZMTimeLike(Grid                const& g,
                                                                                                                          std::vector<double> const& Thresholds,
                                                                                                                          double              const& xi,
                                                                                                                          double              const& IntEps = 1e-5);
