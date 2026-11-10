@@ -8,6 +8,7 @@
 #include "apfel/constants.h"
 
 #include <cmath>
+#include <algorithm>
 
 namespace apfel
 {
@@ -113,6 +114,16 @@ namespace apfel
   double ImCFFL1gTimeLike::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y > 1 ? 1 : 0);
@@ -131,6 +142,16 @@ namespace apfel
   double ReCFFL1gTimeLike::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     return 16 * TR / pow(1 - ky2, 2) * ( 2 * y * ( ( 1 + y ) * log(( 1 + y ) / y) - ( 1 - y ) * log(std::abs(1 - y) / y) )
@@ -366,6 +387,16 @@ namespace apfel
   double ImCFF11gTimeLike::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y > 1 ? 1 : 0);
@@ -388,6 +419,16 @@ namespace apfel
   double ReCFF11gTimeLike::Regular(double const& y) const
   {
     const double kappa = 1 / _eta / _extvar;
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y > 1 ? 1 : 0);
