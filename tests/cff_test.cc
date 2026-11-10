@@ -160,6 +160,29 @@ int main()
               << std::endl;
   std::cout << std::endl;
 
+  // Check against DIS at xi = 0, where Im F1 = pi (F2 - FL) and Im
+  // FL = 2 pi FL, using the same distributions
+  const auto ImF1SL0Obj = InitializeImCFF1NCObjectsZMSpaceLike(g, Thresholds, 0);
+  const auto ImFLSL0Obj = InitializeImCFFLNCObjectsZMSpaceLike(g, Thresholds, 0);
+  const auto F2Obj      = InitializeF2NCObjectsZM(g, Thresholds);
+  const auto FLObj      = InitializeFLNCObjectsZM(g, Thresholds);
+  const apfel::Distribution ImF1SL0 = BuildStructureFunctions(ImF1SL0Obj, ToyGPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+  const apfel::Distribution ImFLSL0 = BuildStructureFunctions(ImFLSL0Obj, ToyGPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+  const apfel::Distribution F2      = BuildStructureFunctions(F2Obj,      ToyGPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+  const apfel::Distribution FL      = BuildStructureFunctions(FLObj,      ToyGPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+
+  std::cout << "Q2 > 0, xi = 0 vs DIS:" << std::endl;
+  std::cout << "     x    "
+            << " ImF1/pi(F2-FL) "
+            << "   ImFL/2piFL   "
+            << std::endl;
+  for (double const& x : xlha)
+    std::cout << std::setprecision(4) << x << "  " << std::setprecision(8)
+              << ImF1SL0.Evaluate(x) / ( M_PI * ( F2.Evaluate(x) - FL.Evaluate(x) ) ) << "  "
+              << ImFLSL0.Evaluate(x) / ( 2 * M_PI * FL.Evaluate(x) ) << "  "
+              << std::endl;
+  std::cout << std::endl;
+
   t.stop();
 
   const int k = 1000000;

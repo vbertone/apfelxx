@@ -37,7 +37,7 @@ namespace apfel
   }
   double ImCFFL1nsSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 8 * M_PI * CF * y / ( 1 - pow(kappa * y, 2) ) * ( (y < 1 ? 1 : 0) - (kappa > 1 ? 1 / kappa / y : 0) );
   }
 
@@ -48,7 +48,7 @@ namespace apfel
   }
   double ReCFFL1nsSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 8 * CF * y / ( 1 - pow(kappa * y, 2) ) * ( log(std::abs(( 1 - kappa ) / ( 1 + kappa ))) / kappa / y - log(std::abs(( 1 - y ) / ( 1 + y ))) );
   }
 
@@ -59,7 +59,7 @@ namespace apfel
   }
   double ImCFFL1nsTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return - 8 * M_PI * CF * y / ( 1 - pow(kappa * y, 2) ) * ( (y < 1 ? 1 : 0) - (kappa > 1 ? 1 / kappa / y : 0) );
   }
 
@@ -70,7 +70,7 @@ namespace apfel
   }
   double ReCFFL1nsTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 8 * CF * y / ( 1 - pow(kappa * y, 2) ) * ( log(std::abs(( 1 - kappa ) / ( 1 + kappa ))) / kappa / y - log(std::abs(( 1 - y ) / ( 1 + y ))) );
   }
 
@@ -81,7 +81,7 @@ namespace apfel
   }
   double ImCFFL1gSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y < 1 ? 1 : 0);
@@ -99,7 +99,7 @@ namespace apfel
   }
   double ReCFFL1gSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     return 16 * TR / pow(1 - ky2, 2) * ( 2 * y * ( ( 1 + y ) * log(( 1 + y ) / y) - ( 1 - y ) * log(std::abs(1 - y) / y) )
@@ -113,7 +113,7 @@ namespace apfel
   }
   double ImCFFL1gTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     // Interpolate linearly across the double pole at y = 1 / kappa,
     // where the cancellation is numerically unstable
     const double eta = std::min(0.1, 2e-6 / kappa / kappa);
@@ -141,7 +141,7 @@ namespace apfel
   }
   double ReCFFL1gTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     // Interpolate linearly across the double pole at y = 1 / kappa,
     // where the cancellation is numerically unstable
     const double eta = std::min(0.1, 2e-6 / kappa / kappa);
@@ -165,7 +165,7 @@ namespace apfel
   }
   double ImCFF11nsSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     return 2 * M_PI * CF * ( (y < 1 ? ( 3 - ( 1 + y ) * log(1 - y) ) / ( 1 - ky2 ) - ( 1 + ( 1 - 2 * k2 ) * y * y ) / ( 1 - ky2 ) * log(y) / ( 1 - y ) : 0)
@@ -173,19 +173,19 @@ namespace apfel
   }
   double ImCFF11nsSpaceLike::Singular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 2 * M_PI * CF * ( (y < 1 ? 2 * log(1 - y) - 3. / 2. : 0) + (kappa > 1 ? 3. / 2. - log(kappa - 1) : 0) ) / ( 1 - y );
   }
   double ImCFF11nsSpaceLike::Local(double const& c) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 2 * M_PI * CF * ( pow(log(1 - c), 2) - 3 * log(1 - c) / 2
                              - ( 9. / 2. + M_PI * M_PI / 3 + pow(log(1 + kappa), 2) / 2 + pow(log(std::abs(1 - kappa)), 2) / 2
                                  - 3 * log(std::abs(1 - kappa * kappa)) / 2 - (kappa > 1 ? M_PI * M_PI / 2 : 0) ) );
   }
   double ImCFF11nsSpaceLike::LocalPP(double const& c, double const& d) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 2 * M_PI * CF * (kappa > 1 ? ( 3. / 2. - log(kappa - 1) ) * ( log(1 - c) - (d > 1 ? log(d - 1) : 0) ) : 0);
   }
 
@@ -196,7 +196,7 @@ namespace apfel
   }
   double ReCFF11nsSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double pi2   = M_PI * M_PI;
@@ -217,7 +217,7 @@ namespace apfel
   }
   double ReCFF11nsSpaceLike::Singular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double pi2   = M_PI * M_PI;
     const double l1y   = log(std::abs(1 - y));
     return CF / 2 * ( - 4 * l1y * l1y + 6 * l1y + (y < 1 ? 4 * pi2 : 0)
@@ -225,13 +225,13 @@ namespace apfel
   }
   double ReCFF11nsSpaceLike::Local(double const& c) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double pi2   = M_PI * M_PI;
     return CF / 2 * ( 4 * pi2 * log(1 - c) - pi2 * ( 3 + (kappa > 1 ? 4 * log(kappa - 1) - 6 : 0) ) );
   }
   double ReCFF11nsSpaceLike::LocalPP(double const& c, double const& d) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double lc    = log(1 - c);
     const double ld    = (d > 1 ? log(d - 1) : 0);
     const double b     = 9 - 3 * log(std::abs(1 - kappa * kappa)) + pow(log(1 + kappa), 2) + pow(log(std::abs(1 - kappa)), 2) - (kappa > 1 ? M_PI * M_PI : 0);
@@ -245,7 +245,7 @@ namespace apfel
   }
   double ImCFF11nsTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double lpk   = log(1 + kappa);
@@ -259,20 +259,20 @@ namespace apfel
   }
   double ImCFF11nsTimeLike::Singular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 2 * M_PI * CF * ( 2 * log(std::abs(1 - y)) + (y < 1 ? - 2 * log(1 - y) + 3. / 2. : 0)
                              + (kappa < 1 ? 3. / 2. - log(1 - kappa) : 0) - log(1 + kappa) ) / ( 1 - y );
   }
   double ImCFF11nsTimeLike::Local(double const& c) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     return 2 * M_PI * CF * ( - pow(log(1 - c), 2) + 3 * log(1 - c) / 2
                              + 9. / 2. - M_PI * M_PI / 6 + pow(log(1 + kappa), 2) / 2 + pow(log(std::abs(1 - kappa)), 2) / 2
                              - 3 * log(std::abs(1 - kappa * kappa)) / 2 - (kappa < 1 ? M_PI * M_PI / 2 : 0) );
   }
   double ImCFF11nsTimeLike::LocalPP(double const& c, double const& d) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double lc    = log(1 - c);
     const double ld    = (d > 1 ? log(d - 1) : 0);
     const double a     = (kappa < 1 ? 3. / 2. - log(1 - kappa) : 0) - log(1 + kappa);
@@ -286,7 +286,7 @@ namespace apfel
   }
   double ReCFF11nsTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double pi2   = M_PI * M_PI;
@@ -307,7 +307,7 @@ namespace apfel
   }
   double ReCFF11nsTimeLike::Singular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double pi2   = M_PI * M_PI;
     const double l1y   = log(std::abs(1 - y));
     return CF / 2 * ( - 4 * l1y * l1y + 6 * l1y - (y < 1 ? 4 * pi2 : 0)
@@ -315,13 +315,13 @@ namespace apfel
   }
   double ReCFF11nsTimeLike::Local(double const& c) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double pi2   = M_PI * M_PI;
     return CF / 2 * ( - 4 * pi2 * log(1 - c) + pi2 * ( 4 * log(1 + kappa) - 3 + (kappa < 1 ? 4 * log(1 - kappa) - 6 : 0) ) );
   }
   double ReCFF11nsTimeLike::LocalPP(double const& c, double const& d) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double lc    = log(1 - c);
     const double ld    = (d > 1 ? log(d - 1) : 0);
     const double b     = 9 - 3 * log(std::abs(1 - kappa * kappa)) + pow(log(1 + kappa), 2) + pow(log(std::abs(1 - kappa)), 2) + (kappa > 1 ? M_PI * M_PI : 0);
@@ -335,7 +335,7 @@ namespace apfel
   }
   double ImCFF11gSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y < 1 ? 1 : 0);
@@ -357,7 +357,7 @@ namespace apfel
   }
   double ReCFF11gSpaceLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y < 1 ? 1 : 0);
@@ -386,7 +386,7 @@ namespace apfel
   }
   double ImCFF11gTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     // Interpolate linearly across the double pole at y = 1 / kappa,
     // where the cancellation is numerically unstable
     const double eta = std::min(0.1, 2e-6 / kappa / kappa);
@@ -418,7 +418,7 @@ namespace apfel
   }
   double ReCFF11gTimeLike::Regular(double const& y) const
   {
-    const double kappa = 1 / _eta / _extvar;
+    const double kappa = std::max(1 / _eta / _extvar, eps8);
     // Interpolate linearly across the double pole at y = 1 / kappa,
     // where the cancellation is numerically unstable
     const double eta = std::min(0.1, 2e-6 / kappa / kappa);
