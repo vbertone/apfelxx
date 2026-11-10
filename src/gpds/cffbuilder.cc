@@ -22,12 +22,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
@@ -97,12 +97,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
@@ -172,12 +172,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
@@ -247,12 +247,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
@@ -322,12 +322,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
@@ -396,12 +396,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
@@ -470,12 +470,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
@@ -544,12 +544,12 @@ namespace apfel
     // Initalise DGLAP objects need for scale variations
     const auto PDFObj = InitializeGpdObjects(g, Thresholds, xi);
 
-    // Displace xi if it coincides with a node of the grid
+    // Displace xi if it is too close to a node of the grid
     double xid = xi;
     for (double x : g.GetJointGrid().GetGrid())
-      if (std::abs(x - xi) < eps12)
+      if (std::abs(x - xi) < eps6 * xi)
         {
-          xid += eps10;
+          xid = x * ( 1 + eps6 );
           break;
         }
 
