@@ -85,7 +85,7 @@ namespace apfel
     const std::vector<double>& xg = sg.GetGrid();
 
     // Return immediately 1 if "x" coincides with "xg[beta]"
-    if (std::abs(x - xg[beta]) < eps12)
+    if (x == xg[beta])
       return 1;
 
     // Get the interpolation degree
@@ -230,7 +230,7 @@ namespace apfel
     bounds[0] = low;
     bounds[1] = low;
 
-    if (std::abs(x - xsg[low]) <= eps12)
+    if (x == xsg[low])
       bounds[1] += 1;
     else
       {

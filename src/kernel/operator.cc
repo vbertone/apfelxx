@@ -264,6 +264,10 @@ namespace apfel
                 // back through "LocalPP" and "LocalPV".
                 const Integrator Ij{[&] (double const& y) -> double
                   {
+                    // The kernels may diverge at y = 1, which
+                    // bisection can reach by rounding
+                    if (y == 1)
+                      return 0;
                     const double wr = li.Interpolant(alpha, xg[beta] / y, jg);
                     return expr.Regular(y) * wr
                                + expr.Singular(y) * ( wr - ws )

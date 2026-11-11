@@ -9,6 +9,7 @@
 #include "apfel/messages.h"
 
 #include <algorithm>
+#include <cmath>
 
 namespace apfel
 {
@@ -46,10 +47,15 @@ namespace apfel
         // parts and intregrate the two intervals
         // separately. Eventually, the integrand will become smooth
         // over the the narrower intervals and the integration will
-        // converge. If the integration range becomes too narrow, stop
-        // the computation.
+        // converge. If the integration range becomes too narrow,
+        // return the best estimate (e.g. at an integrable endpoint
+        // singularity) or stop the computation if it is not finite.
         if (std::abs(( xmax - xmin ) / ( xmax + xmin )) < eps15)
-          throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
+          {
+            if (std::isfinite(integ.first))
+              return integ.first;
+            throw std::runtime_error(error("Integrator::integrate", "Too high accuracy required."));
+          }
 
         const double xmid = ( xmin + xmax ) / 2;
         return integrate(xmin, xmid, eps) + integrate(xmid, xmax, eps);

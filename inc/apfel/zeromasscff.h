@@ -232,5 +232,63 @@ namespace apfel
     ReCFF11gTimeLike(double const& xi);
     double Regular(double const& y) const;
   };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet imaginary part of the
+   * coefficient function for F1 for DVCS (&kappa; = 1), with hard
+   * scale Q<SUP>2</SUP> = -q<SUB>1</SUB><SUP>2</SUP>.
+   */
+  class ImCFF11nsDVCS: public Expression
+  {
+  public:
+    ImCFF11nsDVCS();
+    double Regular(double const& y)  const;
+    double Singular(double const& y) const;
+    double Local(double const& c)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) non-singlet real part of the
+   * coefficient function for F1 for DVCS (&kappa; = 1), with hard
+   * scale Q<SUP>2</SUP> = -q<SUB>1</SUB><SUP>2</SUP>.
+   */
+  class ReCFF11nsDVCS: public Expression
+  {
+  public:
+    ReCFF11nsDVCS();
+    double Regular(double const& y)                 const;
+    double Singular(double const& y)                const;
+    double Local(double const& c)                   const;
+    double LocalPP(double const& c, double const& d) const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) gluon imaginary part of the
+   * coefficient function for F1 for DVCS (&kappa; = 1), with hard
+   * scale Q<SUP>2</SUP> = -q<SUB>1</SUB><SUP>2</SUP>.
+   */
+  class ImCFF11gDVCS: public Expression
+  {
+  public:
+    ImCFF11gDVCS();
+    double Regular(double const& y)  const;
+    double Singular(double const& y) const;
+    double Local(double const& c)    const;
+  };
+
+  /**
+   * @brief O(&alpha;<SUB>s</SUB>) gluon real part of the
+   * coefficient function for F1 for DVCS (&kappa; = 1), with hard
+   * scale Q<SUP>2</SUP> = -q<SUB>1</SUB><SUP>2</SUP>.
+   */
+  class ReCFF11gDVCS: public Expression
+  {
+  public:
+    ReCFF11gDVCS();
+    double Regular(double const& y)                 const;
+    double Singular(double const& y)                const;
+    double Local(double const& c)                   const;
+    double LocalPP(double const& c, double const& d) const;
+  };
   ///@}
 }

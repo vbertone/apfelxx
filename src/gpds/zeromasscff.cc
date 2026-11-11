@@ -82,6 +82,16 @@ namespace apfel
   double ImCFFL1gSpaceLike::Regular(double const& y) const
   {
     const double kappa = std::max(1 / _eta / _extvar, eps8);
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y < 1 ? 1 : 0);
@@ -100,6 +110,16 @@ namespace apfel
   double ReCFFL1gSpaceLike::Regular(double const& y) const
   {
     const double kappa = std::max(1 / _eta / _extvar, eps8);
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     return 16 * TR / pow(1 - ky2, 2) * ( 2 * y * ( ( 1 + y ) * log(( 1 + y ) / y) - ( 1 - y ) * log(std::abs(1 - y) / y) )
@@ -336,6 +356,16 @@ namespace apfel
   double ImCFF11gSpaceLike::Regular(double const& y) const
   {
     const double kappa = std::max(1 / _eta / _extvar, eps8);
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y < 1 ? 1 : 0);
@@ -358,6 +388,16 @@ namespace apfel
   double ReCFF11gSpaceLike::Regular(double const& y) const
   {
     const double kappa = std::max(1 / _eta / _extvar, eps8);
+    // Interpolate linearly across the double pole at y = 1 / kappa,
+    // where the cancellation is numerically unstable
+    const double eta = std::min(0.1, 2e-6 / kappa / kappa);
+    if (std::abs(1 - kappa * y) < eta && std::abs(1 - kappa) > 4 * eta)
+      {
+        const double ym = ( 1 - 2 * eta ) / kappa;
+        const double yp = ( 1 + 2 * eta ) / kappa;
+        const double fm = Regular(ym);
+        return fm + ( Regular(yp) - fm ) * ( y - ym ) / ( yp - ym );
+      }
     const double k2    = kappa * kappa;
     const double ky2   = k2 * y * y;
     const double ts    = (y < 1 ? 1 : 0);
@@ -448,5 +488,106 @@ namespace apfel
                                             - 2 * ( 1 + kappa + ( 4 * kappa + 3 * k2 - kappa * k2 ) * y * y ) * lpk
                                             - ( 1 - kappa ) * ( 1 - ( 2 * kappa + k2 ) * y * y ) * ( lmk * lmk - pi2 * tq2 )
                                             + 2 * ( 1 - kappa - ( 4 * kappa - 3 * k2 - kappa * k2 ) * y * y ) * lmk ) / kappa );
+  }
+
+  //_________________________________________________________________________________
+  ImCFF11nsDVCS::ImCFF11nsDVCS():
+    Expression()
+  {
+  }
+  double ImCFF11nsDVCS::Regular(double const& y) const
+  {
+    if (y >= 1)
+      return 0;
+    return M_PI * CF * ( 3 / ( 1 + y ) + 2 * log1p(y - 1) / ( y - 1 ) );
+  }
+  double ImCFF11nsDVCS::Singular(double const& y) const
+  {
+    return (y < 1 ? 2 * M_PI * CF * log(( 1 - y ) / 2) / ( 1 - y ) : 0);
+  }
+  double ImCFF11nsDVCS::Local(double const& c) const
+  {
+    const double lc = log(1 - c);
+    const double l2 = log(2);
+    return M_PI * CF * ( lc * lc - 2 * l2 * lc - 9 - M_PI * M_PI / 3 + l2 * l2 );
+  }
+
+  //_________________________________________________________________________________
+  ReCFF11nsDVCS::ReCFF11nsDVCS():
+    Expression()
+  {
+  }
+  double ReCFF11nsDVCS::Regular(double const& y) const
+  {
+    const double l1y = log(std::abs(1 - y));
+    const double t   = ( 1 - y ) / 2 / y;
+    const double lp  = log1p(t);
+    const double lpo = (t == 0 ? 1 : lp / t) / 2 / y;
+    const double lyo = (y == 1 ? -1 : - log1p(y - 1) / ( y - 1 ));
+    return CF * ( ( 9 - 3 * log(std::abs(1 - y) / 2 / y) - lp * lp ) / ( 1 + y ) - 3 * lpo + ( 2 * l1y - log(4 * y) ) * lyo );
+  }
+  double ReCFF11nsDVCS::Singular(double const& y) const
+  {
+    const double l1y = log(std::abs(1 - y));
+    const double l2  = log(2);
+    return CF * ( - l1y * l1y + 2 * l2 * l1y + 9 - l2 * l2 + (y < 1 ? M_PI * M_PI : 0) ) / ( 1 - y );
+  }
+  double ReCFF11nsDVCS::Local(double const& c) const
+  {
+    return M_PI * M_PI * CF * ( log(1 - c) - log(2) );
+  }
+  double ReCFF11nsDVCS::LocalPP(double const& c, double const& d) const
+  {
+    const double lc = log(1 - c);
+    const double ld = (d > 1 ? log(d - 1) : 0);
+    const double l2 = log(2);
+    return CF * ( - ( pow(lc, 3) - pow(ld, 3) ) / 3 + l2 * ( lc * lc - ld * ld ) + ( 9 - l2 * l2 ) * ( lc - ld ) );
+  }
+
+  //_________________________________________________________________________________
+  ImCFF11gDVCS::ImCFF11gDVCS():
+    Expression()
+  {
+  }
+  double ImCFF11gDVCS::Regular(double const& y) const
+  {
+    return (y < 1 ? 2 * M_PI * TR * ( 2 * log(( 1 - y ) / 2 / y) - 3 + y ) / pow(1 + y, 2) : 0);
+  }
+  double ImCFF11gDVCS::Singular(double const& y) const
+  {
+    return (y < 1 ? 2 * M_PI * TR / ( 1 - y ) : 0);
+  }
+  double ImCFF11gDVCS::Local(double const& c) const
+  {
+    return 2 * M_PI * TR * ( log(1 - c) - 2 - log(2) );
+  }
+
+  //_________________________________________________________________________________
+  ReCFF11gDVCS::ReCFF11gDVCS():
+    Expression()
+  {
+  }
+  double ReCFF11gDVCS::Regular(double const& y) const
+  {
+    // The first term is 0/0 at y = 1: use its expansion there
+    const double t  = ( 1 - y ) / 2 / y;
+    const double lp = log1p(t);
+    const double r1 = (std::abs(1 - y) < 1e-3 ? - 0.25 - 2 * t / 3 : ( ( 2 * ( 1 + 3 * y ) - ( 1 + y ) * lp ) * lp / t / 2 / y / ( 1 + y ) - 2 + log(y) ) / ( 1 - y ));
+    const double mu = log(std::abs(1 - y) / 2 / y);
+    return 2 * TR * ( r1 + ( ( 3 - y ) * mu - mu * mu + (y < 1 ? M_PI * M_PI : 0) ) / pow(1 + y, 2) );
+  }
+  double ReCFF11gDVCS::Singular(double const& y) const
+  {
+    return 2 * TR * ( 2 + log(2) - log(std::abs(1 - y)) ) / ( 1 - y );
+  }
+  double ReCFF11gDVCS::Local(double const&) const
+  {
+    return M_PI * M_PI * TR;
+  }
+  double ReCFF11gDVCS::LocalPP(double const& c, double const& d) const
+  {
+    const double lc = log(1 - c);
+    const double ld = (d > 1 ? log(d - 1) : 0);
+    return 2 * TR * ( ( 2 + log(2) ) * ( lc - ld ) - ( lc * lc - ld * ld ) / 2 );
   }
 }

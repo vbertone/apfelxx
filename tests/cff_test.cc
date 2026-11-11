@@ -5,6 +5,7 @@
 //
 
 #include <apfel/apfelxx.h>
+#include <apfel/zeromasscff.h>
 
 #include <iomanip>
 
@@ -181,6 +182,72 @@ int main()
               << ImF1SL0.Evaluate(x) / ( M_PI * ( F2.Evaluate(x) - FL.Evaluate(x) ) ) << "  "
               << ImFLSL0.Evaluate(x) / ( 2 * M_PI * FL.Evaluate(x) ) << "  "
               << std::endl;
+  std::cout << std::endl;
+
+  // DVCS at x = xi, with hard scale Q2 = - q1^2
+  const apfel::Distribution ImF1DVCS = BuildStructureFunctions(InitializeImCFF1NCObjectsZMDVCS(g, Thresholds, xi), GPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+  const apfel::Distribution ReF1DVCS = BuildStructureFunctions(InitializeReCFF1NCObjectsZMDVCS(g, Thresholds, xi), GPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+
+  std::cout << "DVCS (x = xi):" << std::endl;
+  std::cout << "     ReF1tot    "
+            << "     ImF1tot    "
+            << std::endl;
+  std::cout << std::setprecision(8)
+            << ReF1DVCS.Evaluate(xi) / xi << "  "
+            << ImF1DVCS.Evaluate(xi) / xi << "  "
+            << std::endl;
+  std::cout << std::endl;
+
+  // Compare the NLO DVCS kernels with the kappa -> 1 limit of the
+  // DDVCS. The DDVCS kernels assume mu2 = Q2 / 2, hence the shift -
+  // ln(2) C0 x P0.
+  std::vector<double> nodes(g.GetJointGrid().GetGrid().begin(), g.GetJointGrid().GetGrid().begin() + g.GetJointGrid().nx() + 1);
+  nodes.push_back(xi);
+  std::sort(nodes.begin(), nodes.end());
+  const apfel::Grid gx{{apfel::SubGrid{nodes, 3}}};
+  const double xid = xi * ( 1 + apfel::eps6 );
+  const apfel::Distribution qd{gx, [&] (double const& x) -> double { return ToyGPDs(x, 0).at(1); }};
+  const apfel::Distribution gd{gx, [&] (double const& x) -> double { return ToyGPDs(x, 0).at(0); }};
+  const auto P0 = InitializeGpdObjects(gx, Thresholds, xi).at(3).SplittingFunctions.at(0).GetObjects();
+  const apfel::Distribution P0q = P0.at(apfel::EvolutionBasisQCD::PNSP) * qd;
+  const apfel::Distribution P0g = ( 1. / 3 ) * ( P0.at(apfel::EvolutionBasisQCD::PQG) * gd );
+  const apfel::Operator ReC0{gx, apfel::ReCFF10ns{}, apfel::eps5, true};
+  const std::vector<double> ReqDVCS  = {( apfel::Operator{gx, apfel::ReCFF11nsDVCS{}, apfel::eps5, true} * qd ).Evaluate(xi) / xi,
+                                        ( apfel::Operator{gx, apfel::ReCFF11nsSpaceLike{xid}, apfel::eps5, true} * qd ).Evaluate(xi) / xi - log(2) * ( ReC0 * P0q ).Evaluate(xi) / xi
+                                       };
+  const std::vector<double> ImqDVCS  = {( apfel::Operator{gx, apfel::ImCFF11nsDVCS{}, apfel::eps5, true} * qd ).Evaluate(xi) / xi,
+                                        ( apfel::Operator{gx, apfel::ImCFF11nsSpaceLike{xid}, apfel::eps5, true} * qd ).Evaluate(xi) / xi - log(2) * M_PI * P0q.Evaluate(xi) / xi
+                                       };
+  const std::vector<double> RegDVCS  = {( apfel::Operator{gx, apfel::ReCFF11gDVCS{}, apfel::eps5, true} * gd ).Evaluate(xi) / xi,
+                                        ( apfel::Operator{gx, apfel::ReCFF11gSpaceLike{xid}, apfel::eps5, true} * gd ).Evaluate(xi) / xi - log(2) * ( ReC0 * P0g ).Evaluate(xi) / xi
+                                       };
+  const std::vector<double> ImgDVCS  = {( apfel::Operator{gx, apfel::ImCFF11gDVCS{}, apfel::eps5, true} * gd ).Evaluate(xi) / xi,
+                                        ( apfel::Operator{gx, apfel::ImCFF11gSpaceLike{xid}, apfel::eps5, true} * gd ).Evaluate(xi) / xi - log(2) * M_PI * P0g.Evaluate(xi) / xi
+                                       };
+
+  std::cout << "NLO DVCS vs kappa -> 1 limit of DDVCS (x = xi):" << std::endl;
+  std::cout << "               DVCS          DDVCS(k->1)       ratio" << std::endl;
+  std::cout << std::setprecision(8)
+            << "Re quark: " << ReqDVCS[0] << "  " << ReqDVCS[1] << "  " << ReqDVCS[0] / ReqDVCS[1] << std::endl
+            << "Im quark: " << ImqDVCS[0] << "  " << ImqDVCS[1] << "  " << ImqDVCS[0] / ImqDVCS[1] << std::endl
+            << "Re gluon: " << RegDVCS[0] << "  " << RegDVCS[1] << "  " << RegDVCS[0] / RegDVCS[1] << std::endl
+            << "Im gluon: " << ImgDVCS[0] << "  " << ImgDVCS[1] << "  " << ImgDVCS[0] / ImgDVCS[1] << std::endl;
+  std::cout << std::endl;
+
+  // Compare F1 at x = xi from the DVCS and DDVCS initialisers. Since
+  // the DDVCS hard scale is - q1^2 / 2, DDVCS is computed at Q /
+  // sqrt(2) with renormalisation and factorisation scales sqrt(2)
+  // times larger, i.e. Q, so that the two coincide at fixed order.
+  const apfel::Distribution ReF1DVCSx  = BuildStructureFunctions(InitializeReCFF1NCObjectsZMDVCS(gx, Thresholds, xi), GPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+  const apfel::Distribution ImF1DVCSx  = BuildStructureFunctions(InitializeImCFF1NCObjectsZMDVCS(gx, Thresholds, xi), GPDs, PerturbativeOrder, as, fBq).at(0).Evaluate(Q);
+  const apfel::Distribution ReF1DDVCSx = BuildStructureFunctions(InitializeReCFF1NCObjectsZMSpaceLike(gx, Thresholds, xi), GPDs, PerturbativeOrder, as, fBq, sqrt(2), sqrt(2)).at(0).Evaluate(Q / sqrt(2));
+  const apfel::Distribution ImF1DDVCSx = BuildStructureFunctions(InitializeImCFF1NCObjectsZMSpaceLike(gx, Thresholds, xi), GPDs, PerturbativeOrder, as, fBq, sqrt(2), sqrt(2)).at(0).Evaluate(Q / sqrt(2));
+
+  std::cout << "F1 from DVCS vs DDVCS (x = xi):" << std::endl;
+  std::cout << "               DVCS          DDVCS(k->1)       ratio" << std::endl;
+  std::cout << std::setprecision(8)
+            << "Re F1:    " << ReF1DVCSx.Evaluate(xi) / xi << "  " << ReF1DDVCSx.Evaluate(xi) / xi << "  " << ReF1DVCSx.Evaluate(xi) / ReF1DDVCSx.Evaluate(xi) << std::endl
+            << "Im F1:    " << ImF1DVCSx.Evaluate(xi) / xi << "  " << ImF1DDVCSx.Evaluate(xi) / xi << "  " << ImF1DVCSx.Evaluate(xi) / ImF1DDVCSx.Evaluate(xi) << std::endl;
   std::cout << std::endl;
 
   t.stop();
