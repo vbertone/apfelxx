@@ -94,6 +94,45 @@ namespace apfel
         OpMapLO.insert({nf, OM});
       }
 
+    // ===============================================================
+    // NLO matching conditions. Not available for GPDs: they are set
+    // to zero, which is exact for thresholds equal to the heavy-quark
+    // masses and no intrinsic heavy quarks.
+    std::map<int, Operator> MatchNLO;
+    MatchNLO.insert({MatchingBasisQCD::M0,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M1,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M2,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M3,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M4,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M5,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M6,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M7,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M8,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M9,  Zero});
+    MatchNLO.insert({MatchingBasisQCD::M10, Zero});
+    MatchNLO.insert({MatchingBasisQCD::M11, Zero});
+
+    // ===============================================================
+    // NLO splitting function operators. Only the non-singlet kernels
+    // are available. The NLO singlet entries (pure-singlet qq, qg,
+    // gq, gg) are set to zero, so that singlet and gluon evolve at LO
+    // only.
+    std::map<int, std::map<int, Operator>> OpMapNLO;
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator O1nsp{g, Pgpd1nsp{nf, xid}, IntEps, true};
+        const Operator O1nsm{g, Pgpd1nsm{nf, xid}, IntEps, true};
+        std::map<int, Operator> OM;
+        OM.insert({EvolutionBasisQCD::PNSP, O1nsp});
+        OM.insert({EvolutionBasisQCD::PNSM, O1nsm});
+        OM.insert({EvolutionBasisQCD::PNSV, O1nsm});
+        OM.insert({EvolutionBasisQCD::PQQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PQG,  Zero});
+        OM.insert({EvolutionBasisQCD::PGQ,  Zero});
+        OM.insert({EvolutionBasisQCD::PGG,  Zero});
+        OpMapNLO.insert({nf, OM});
+      }
+
     // Define object of the structure containing the DglapObjects
     std::map<int, DglapObjects> DglapObj;
 
@@ -110,12 +149,16 @@ namespace apfel
               MapUnity.insert({coord.second, (coord.first.first == coord.first.second ? Id : Zero)});
             obj.UnitySet = Set<Operator> {EvolutionOperatorBasisQCD{nf}, MapUnity};
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO}});
           }
         else
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
+            obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
           }
         DglapObj.insert({nf,obj});
       }

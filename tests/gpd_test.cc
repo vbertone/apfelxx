@@ -19,7 +19,7 @@ int main()
   const std::vector<double> Thresholds = {0, 0, 0, sqrt(2), 4.5, 175};
 
   // Perturbative order
-  const int PerturbativeOrder = 0;
+  const int PerturbativeOrder = 1;
 
   // Skewness
   const double xi = 0.3;

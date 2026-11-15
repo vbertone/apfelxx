@@ -1,0 +1,18 @@
+Tabulating object...
+Initializing DglapObjects for GPD unpolarised evolution at xi = 0.000000...
+Initializing DglapObjects for space-like QCD unpolarised evolution...
+Tabulating object...
+Tabulating object...
+
+AlphaQCD(Q) = 1.770390e-01
+
+   x       u-ubar      d-dbar    2(ubr+dbr)    c+cbar       gluon   
+1.0e-05  9.9898e-01  9.9898e-01  6.0570e-01  5.2143e-01  1.0555e+00
+1.0e-04  9.9911e-01  9.9911e-01  6.6670e-01  5.5332e-01  1.0320e+00
+1.0e-03  9.9933e-01  9.9934e-01  7.5594e-01  6.0777e-01  1.0076e+00
+1.0e-02  9.9988e-01  9.9990e-01  8.7427e-01  7.1174e-01  9.8738e-01
+1.0e-01  9.9944e-01  9.9850e-01  1.0299e+00  1.1338e+00  9.9681e-01
+3.0e-01  9.9990e-01  9.9990e-01  1.4832e+00  4.6566e+00  1.0205e+00
+5.0e-01  9.9987e-01  1.0003e+00  3.9310e+00  3.2570e+01  1.0262e+00
+7.0e-01  1.0023e+00  1.0033e+00  2.5848e+01  4.0828e+02  9.9392e-01
+9.0e-01  1.0000e+00  9.9806e-01  1.5047e+03  -2.5523e+04  8.4317e-01
