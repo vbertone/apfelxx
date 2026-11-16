@@ -14,6 +14,8 @@
 #include "apfel/gpdsplittingfunctionsunp_sl.h"
 #include "apfel/gpdsplittingfunctionspol_sl.h"
 #include "apfel/gpdsplittingfunctionstrans_sl.h"
+#include "apfel/gpdmatchingconditionsunp_sl.h"
+#include "apfel/matchingconditions_sl.h"
 #include "apfel/evolutionbasisqcd.h"
 #include "apfel/matchingbasisqcd.h"
 
@@ -21,6 +23,7 @@ namespace apfel
 {
   //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeGpdObjects(Grid                const& g,
+                                                   std::vector<double> const& Masses,
                                                    std::vector<double> const& Thresholds,
                                                    double              const& xi,
                                                    bool                const& OpEvol,
@@ -37,6 +40,17 @@ namespace apfel
     for (auto const& v : Thresholds)
       if (v <= 0)
         nfi++;
+
+    // Compute logs of muth2 / m2 needed for the matching
+    // conditions. Push a zero at last to extend the vector but that
+    // entry will never be effectively used in the evolution.
+    std::vector<double> LogKth;
+    for (int im = 0; im < (int) Thresholds.size(); im++)
+      if (Thresholds[im] < eps12 || Masses[im] < eps12)
+        LogKth.push_back(0);
+      else
+        LogKth.push_back(2 * log( Thresholds[im] / Masses[im] ));
+    LogKth.push_back(0);
 
     // If xi happens to coincide with one of the nodes of the x-space
     // grid, numerical instabilities may prevent the integrals from
@@ -95,22 +109,36 @@ namespace apfel
       }
 
     // ===============================================================
-    // NLO matching conditions. Not available for GPDs: they are set
-    // to zero, which is exact for thresholds equal to the heavy-quark
-    // masses and no intrinsic heavy quarks.
-    std::map<int, Operator> MatchNLO;
-    MatchNLO.insert({MatchingBasisQCD::M0,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M1,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M2,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M3,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M4,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M5,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M6,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M7,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M8,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M9,  Zero});
-    MatchNLO.insert({MatchingBasisQCD::M10, Zero});
-    MatchNLO.insert({MatchingBasisQCD::M11, Zero});
+    // NLO matching conditions. The terms not multiplying
+    // ln(muth2 / m2) of M_gh and M_hh are only known for parton-level
+    // skewness smaller than one and are set to zero above.
+    std::map<int, std::map<int, Operator>> MatchNLO;
+    const Operator AS1HgL {g, Pgpd0qg{1, xid}, IntEps, true};
+    const Operator AS1ggHL{g, AS1ggH_L{},      IntEps, true};
+    const Operator AS1gH0 {g, AS1gpdgH_0{xid}, IntEps, true};
+    const Operator AS1HH0 {g, AS1gpdHH_0{xid}, IntEps, true};
+    const Operator AS1HHL {g, AS1gpdHH_L{xid}, IntEps, true};
+    for (int nf = nfi; nf <= nff; nf++)
+      {
+        const Operator AS1Hg  =          LogKth[nf] * AS1HgL;
+        const Operator AS1ggH =          LogKth[nf] * AS1ggHL;
+        const Operator AS1gH  = AS1gH0 + LogKth[nf] * O0gq;
+        const Operator AS1HH  = AS1HH0 + LogKth[nf] * AS1HHL;
+        std::map<int, Operator> OM;
+        OM.insert({MatchingBasisQCD::M0,  Zero});
+        OM.insert({MatchingBasisQCD::M1,  AS1ggH});
+        OM.insert({MatchingBasisQCD::M2,  AS1gH});
+        OM.insert({MatchingBasisQCD::M3,  AS1gH});
+        OM.insert({MatchingBasisQCD::M4,  AS1Hg});
+        OM.insert({MatchingBasisQCD::M5,  AS1HH});
+        OM.insert({MatchingBasisQCD::M6,  AS1HH});
+        OM.insert({MatchingBasisQCD::M7,  Zero});
+        OM.insert({MatchingBasisQCD::M8,  AS1Hg});
+        OM.insert({MatchingBasisQCD::M9,  AS1HH});
+        OM.insert({MatchingBasisQCD::M10, Zero});
+        OM.insert({MatchingBasisQCD::M11, Zero});
+        MatchNLO.insert({nf, OM});
+      }
 
     // ===============================================================
     // NLO splitting function operators. Only the non-singlet kernels
@@ -141,7 +169,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -151,14 +179,14 @@ namespace apfel
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionOperatorBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchLO}});
-            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingOperatorBasisQCD{nf},  MatchNLO.at(nf)}});
           }
         else
           {
             obj.SplittingFunctions.insert({0, Set<Operator>{EvolutionBasisQCD{nf}, OpMapLO.at(nf)}});
             obj.SplittingFunctions.insert({1, Set<Operator>{EvolutionBasisQCD{nf}, OpMapNLO.at(nf)}});
             obj.MatchingConditions.insert({0, Set<Operator>{MatchingBasisQCD{nf},  MatchLO}});
-            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO}});
+            obj.MatchingConditions.insert({1, Set<Operator>{MatchingBasisQCD{nf},  MatchNLO.at(nf)}});
           }
         DglapObj.insert({nf,obj});
       }
@@ -168,7 +196,18 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::map<int, DglapObjects> InitializeGpdObjects(Grid                const& g,
+                                                   std::vector<double> const& Thresholds,
+                                                   double              const& xi,
+                                                   bool                const& OpEvol,
+                                                   double              const& IntEps)
+  {
+    return InitializeGpdObjects(g, Thresholds, Thresholds, xi, OpEvol, IntEps);
+  }
+
+  //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeGpdObjectsPol(Grid                const& g,
+                                                      std::vector<double> const&, // masses not needed at LO
                                                       std::vector<double> const& Thresholds,
                                                       double              const& xi,
                                                       bool                const& OpEvol,
@@ -250,7 +289,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -273,7 +312,18 @@ namespace apfel
   }
 
   //_____________________________________________________________________________
+  std::map<int, DglapObjects> InitializeGpdObjectsPol(Grid                const& g,
+                                                      std::vector<double> const& Thresholds,
+                                                      double              const& xi,
+                                                      bool                const& OpEvol,
+                                                      double              const& IntEps)
+  {
+    return InitializeGpdObjectsPol(g, Thresholds, Thresholds, xi, OpEvol, IntEps);
+  }
+
+  //_____________________________________________________________________________
   std::map<int, DglapObjects> InitializeGpdObjectsTrans(Grid                const& g,
+                                                        std::vector<double> const&, // masses not needed at LO
                                                         std::vector<double> const& Thresholds,
                                                         double              const& xi,
                                                         bool                const& OpEvol,
@@ -353,7 +403,7 @@ namespace apfel
     for (int nf = nfi; nf <= nff; nf++)
       {
         DglapObjects obj;
-        obj.Threshold = Thresholds[nf-1];
+        obj.Threshold = (nf > 0 ? Thresholds[nf - 1] : 0);
         if (OpEvol)
           {
             std::map<int, Operator> MapUnity;
@@ -373,5 +423,15 @@ namespace apfel
     t.stop();
 
     return DglapObj;
+  }
+
+  //_____________________________________________________________________________
+  std::map<int, DglapObjects> InitializeGpdObjectsTrans(Grid                const& g,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        bool                const& OpEvol,
+                                                        double              const& IntEps)
+  {
+    return InitializeGpdObjectsTrans(g, Thresholds, Thresholds, xi, OpEvol, IntEps);
   }
 }

@@ -17,10 +17,30 @@ namespace apfel
    */
   ///@{
   /**
+   * @brief The InitializeGpdObjects function precomputes the
+   * perturbative coefficients of unpolarised GPD evolution kernels
+   * and matching conditions and store them into a 'DglapObjects'
+   * structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark thresholds
+   * @param xi: value of the skewness
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
+   */
+  std::map<int, DglapObjects> InitializeGpdObjects(Grid                const& g,
+                                                   std::vector<double> const& Masses,
+                                                   std::vector<double> const& Thresholds,
+                                                   double              const& xi,
+                                                   bool                const& OpEvol = false,
+                                                   double              const& IntEps = 1e-5);
+
+  /**
    * @brief The InitializeGPDObjects function precomputes the
    * perturbative coefficients of unpolarised GPD evolution kernels
-   * and store them into a 'DglapObjects' structure. GPDs are assumed
-   * to be continuous over heavy-quark thresholds.
+   * and store them into a 'DglapObjects' structure. Masses and
+   * thresholds are assumed to coincide.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
@@ -35,10 +55,30 @@ namespace apfel
                                                    double              const& IntEps = 1e-5);
 
   /**
+   * @brief The InitializeGpdObjectsPol function precomputes the
+   * perturbative coefficients of longitudinally polarised GPD evolution kernels
+   * and matching conditions and store them into a 'DglapObjects'
+   * structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark thresholds
+   * @param xi: value of the skewness
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
+   */
+  std::map<int, DglapObjects> InitializeGpdObjectsPol(Grid                const& g,
+                                                      std::vector<double> const& Masses,
+                                                      std::vector<double> const& Thresholds,
+                                                      double              const& xi,
+                                                      bool                const& OpEvol = false,
+                                                      double              const& IntEps = 1e-5);
+
+  /**
    * @brief The InitializeGPDObjectsPol function precomputes the
    * perturbative coefficients of polarised GPD evolution kernels
-   * and store them into a 'DglapObjects' structure. GPDs are assumed
-   * to be continuous over heavy-quark thresholds.
+   * and store them into a 'DglapObjects' structure. Masses and
+   * thresholds are assumed to coincide.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
@@ -53,10 +93,30 @@ namespace apfel
                                                       double              const& IntEps = 1e-5);
 
   /**
+   * @brief The InitializeGpdObjectsTrans function precomputes the
+   * perturbative coefficients of transversely polarised GPD evolution kernels
+   * and matching conditions and store them into a 'DglapObjects'
+   * structure.
+   * @param g: the x-space grid
+   * @param Masses: the heavy-quark masses
+   * @param Thresholds: the heavy-quark thresholds
+   * @param xi: value of the skewness
+   * @param OpEvol: the switch for the computation of the evolution operator (default: false)
+   * @param IntEps: the integration accuracy (default: 10<SUP>-5</SUP>)
+   * @return A map of DglapObject objects, one for each possible nf
+   */
+  std::map<int, DglapObjects> InitializeGpdObjectsTrans(Grid                const& g,
+                                                        std::vector<double> const& Masses,
+                                                        std::vector<double> const& Thresholds,
+                                                        double              const& xi,
+                                                        bool                const& OpEvol = false,
+                                                        double              const& IntEps = 1e-5);
+
+  /**
    * @brief The InitializeGPDObjectsTrans function precomputes the
    * perturbative coefficients of transversely polarised GPD evolution
-   * kernels and store them into a 'DglapObjects' structure. GPDs are
-   * assumed to be continuous over heavy-quark thresholds.
+   * kernels and store them into a 'DglapObjects' structure. Masses and
+   * thresholds are assumed to coincide.
    * @param g: the x-space grid
    * @param Thresholds: the heavy quark thresholds
    * @param xi: value of the skewness
